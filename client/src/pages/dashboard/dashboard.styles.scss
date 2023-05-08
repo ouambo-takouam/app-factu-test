@@ -1,0 +1,15 @@
+/**************************
+******** DASHBOARD ********
+**************************/
+
+.dashboard-wrapper {
+	display: flex;
+	height: 100vh;
+}
+
+.dashboard-content {
+	flex: 1;
+	position: relative;
+	margin-top: 50px;
+	margin-left: 220px;
+}

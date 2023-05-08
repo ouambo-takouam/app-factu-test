@@ -1,0 +1,24 @@
+.input-fieldset {
+	border: none;
+	margin-bottom: 8px;
+	padding: 0;
+
+	label {
+		color: #393a3d;
+		font-weight: 500;
+		line-height: 22px;
+		padding-bottom: 1px;
+		display: block;
+		text-align: left;
+		font-size: 15px;
+		font-weight: bold;
+	}
+}
+
+.input-field {
+	height: 36px;
+
+	&.fullwidth {
+		width: 100%;
+	}
+}

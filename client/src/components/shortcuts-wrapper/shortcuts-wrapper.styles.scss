@@ -1,0 +1,72 @@
+/**** SHORCUT WRAPPER ******/
+
+.shortcuts-wrapper {
+	width: 80%;
+	max-width: 700px;
+	margin: 20px;
+	padding: 18px;
+	box-shadow: 1px 1px 5px rgba(120, 120, 120, 0.347);
+	border-radius: 5px;
+
+	h3 {
+		letter-spacing: 0.5px;
+		line-height: 20px;
+		color: rgb(57, 58, 61);
+		text-transform: uppercase;
+		font-size: 14px;
+	}
+
+	.shortcuts-box {
+		display: flex;
+		flex-wrap: wrap;
+
+		button {
+			width: 140px;
+			height: 132px;
+			padding: 8px;
+			margin: 10px;
+			text-align: center;
+			border-radius: 8px;
+			background-color: initial;
+			font-size: inherit;
+			border: none;
+		}
+
+		button:hover {
+			background-color: rgb(236, 238, 241);
+		}
+
+		.shortcut-icon {
+			background-color: rgb(244, 245, 248);
+			background-size: 80px;
+			background-position: center center;
+			background-repeat: no-repeat;
+			width: 80px;
+			height: 80px;
+			margin: 0px auto 8px;
+			border-radius: 50%;
+			border: 2px solid rgb(212, 215, 220);
+		}
+
+		.shortcut-text {
+			font-size: 14px;
+			color: rgb(58, 58, 58);
+		}
+
+		.sc-fournisseur {
+			background-image: url('../../assets/images/svg/shorcut/sc-fournisseur.svg');
+		}
+
+		.sc-achat-comptant {
+			background-image: url('../../assets/images/svg/shorcut/sc-achat-comptant.svg');
+		}
+
+		.sc-client {
+			background-image: url('../../assets/images/svg/shorcut/sc-client.svg');
+		}
+
+		.sc-facture {
+			background-image: url('../../assets/images/svg/shorcut/sc-facture.svg');
+		}
+	}
+}

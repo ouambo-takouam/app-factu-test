@@ -1,0 +1,52 @@
+/**************************
+***** TOP NAVIGATION ******
+**************************/
+
+.top-navigation {
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	background-color: white;
+	position: fixed;
+	top: 0;
+	left: 220px;
+	right: 0;
+
+	.left-wrapper {
+		display: flex;
+		align-items: center;
+
+		.swipe-btn {
+			display: flex;
+			align-items: center;
+			padding: 14px;
+			cursor: pointer;
+		}
+
+		.swipe-btn:hover {
+			background-color: #eceef1;
+		}
+
+		.client-title {
+			margin-left: 2px;
+			text-transform: uppercase;
+			font-size: 14px;
+		}
+	}
+
+	.right-wrapper {
+		display: flex;
+		align-items: center;
+
+		.icon {
+			display: flex;
+			align-items: center;
+			padding: 12px;
+			cursor: pointer;
+		}
+
+		.icon:hover {
+			background-color: #eceef1;
+		}
+	}
+}

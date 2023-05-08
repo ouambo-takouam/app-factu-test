@@ -1,0 +1,66 @@
+.sign-in-up-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 800px;
+}
+
+.sign-wrapper {
+	padding: 25px;
+	max-width: 350px;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(186, 190, 197);
+	font-size: 14px;
+	margin: 0 auto;
+	text-align: center;
+
+	h2 {
+		font-size: 24px;
+		font-weight: 500;
+		line-height: 32px;
+		margin-bottom: 17px;
+		margin-top: 0px;
+		font-weight: bold;
+	}
+}
+
+.sign-or {
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: rgb(186, 190, 197);
+}
+
+.sign-or:before,
+.sign-or:after {
+	content: '';
+	flex: 1 1 0%;
+	border-bottom: 1px solid rgb(186, 190, 197);
+	margin: auto 5px;
+}
+
+.sign-email-btn {
+	height: 44px;
+	min-height: 44px;
+	margin-bottom: 0;
+	background: #2ca01c;
+	border: none;
+	color: #fff;
+}
+
+.sign-usage-terms,
+.sign-redirection-text {
+	margin-top: 8px;
+	letter-spacing: -0.02em;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.sign-separation-line {
+	display: flex;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	color: rgb(226, 225, 225);
+	border-bottom: 1px solid rgb(226, 225, 225);
+	flex: 1 1 0%;
+}

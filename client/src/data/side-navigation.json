@@ -1,0 +1,56 @@
+[
+	{
+		"title": "Mon entreprise",
+		"sections": [
+			{
+				"items": ["Mon entreprise", "Tresorerie", "Rapports"]
+			}
+		]
+	},
+	{
+		"title": "Ma gestion comptable",
+		"sections": [
+			{
+				"items": ["Operations"]
+			},
+			{ "subtitle": "Gestion" },
+			{
+				"items": ["Regles bancaires", "Plan comptable"]
+			},
+			{ "subtitle": "Expert" },
+			{
+				"items": ["Rapprochement bancaire"]
+			}
+		]
+	},
+	{
+		"title": "Ma gestion commerciale",
+		"sections": [
+			{ "subtitle": "Ventes" },
+			{
+				"items": ["Clients", "Suivi des heures", "Produits et services"]
+			},
+			{ "subtitle": "Depenses" },
+			{
+				"items": ["Fournisseurs"]
+			}
+		]
+	},
+	{
+		"title": "Clients et prospects",
+		"sections": [
+			{
+				"items": ["Clients", "Marketing"]
+			}
+		]
+	},
+	{
+		"title": "Mes employes",
+		"sections": [
+			{ "subtitle": "Heures travaillees" },
+			{
+				"items": ["Suivi des heures"]
+			}
+		]
+	}
+]

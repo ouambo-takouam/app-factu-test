@@ -1,0 +1,98 @@
+.client-modal {
+	position: absolute;
+	background-color: #fff;
+	top: 120px;
+	left: 320px;
+	padding: 25px;
+	font-size: 15px;
+	box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+		0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+/****** HEADER ******/
+
+.client-modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+
+	.client-modal-title {
+		font-weight: 600;
+		color: #000000;
+		font-size: 20px;
+		margin-bottom: 15px;
+	}
+
+	.client-modal-close-btn {
+		color: #999;
+		font-size: 20px;
+		cursor: pointer;
+	}
+}
+
+/****** CONTENT ******/
+
+.client-modal-content {
+	margin-bottom: 25px;
+}
+
+.client-modal-infos {
+	display: flex;
+	justify-content: space-between;
+
+	.client-infos-left-block {
+		margin-right: 10px;
+	}
+
+	.client-infos-right-block {
+		margin-left: 10px;
+	}
+	.line {
+		display: flex;
+	}
+}
+.client-modal-other-infos {
+	margin-top: 30px;
+
+	.client-other-infos-header {
+		.navigation {
+			display: flex;
+
+			li {
+				margin-right: 2px;
+				padding: 4px 8px;
+				border: 1px solid #babec5;
+				box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.05);
+				border-bottom: none;
+				border-radius: 2px 2px 0 0;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.client-other-infos-content {
+		border: 1px solid #babec5;
+		padding: 8px;
+
+		h2 {
+			font-size: 15px;
+			font-weight: bold;
+			margin-bottom: 6px;
+		}
+
+		.adresse-facturation {
+			width: 50%;
+		}
+	}
+}
+
+/******* FOOTER ******/
+.client-modal-footer {
+	border-top: 1px solid #babec5;
+
+	.footer-inner {
+		padding-top: 10px;
+		display: flex;
+		justify-content: space-between;
+	}
+}
