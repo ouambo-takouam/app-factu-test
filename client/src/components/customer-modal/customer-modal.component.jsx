@@ -4,9 +4,9 @@ import InputField from '../input-field/input-field.component';
 import SelectField from '../select-field/select-field.component';
 import TextArea from '../text-area/text-area.component';
 import { CustomButton } from '../custom-button/custom-button.component';
-import './client-modal.styles.scss';
+import './customer-modal.styles.scss';
 
-export default function ClientModal() {
+export default function CustomerModal({ toogleClientModal }) {
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
 		firstItemOpen: true,
@@ -16,7 +16,7 @@ export default function ClientModal() {
 		<div className="client-modal">
 			<div className="client-modal-header">
 				<span className="client-modal-title">Infos sur le client</span>
-				<span className="client-modal-close-btn">
+				<span className="client-modal-close-btn" onClick={toogleClientModal}>
 					<AiOutlineClose />
 				</span>
 			</div>
@@ -110,7 +110,9 @@ export default function ClientModal() {
 			</div>
 			<div className="client-modal-footer">
 				<div className="footer-inner">
-					<CustomButton $rounded>Annuler</CustomButton>
+					<CustomButton $rounded onClick={toogleClientModal}>
+						Annuler
+					</CustomButton>
 					<CustomButton $rounded $validate>
 						Enregistrer
 					</CustomButton>

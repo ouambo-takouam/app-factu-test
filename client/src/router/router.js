@@ -3,6 +3,7 @@ import SignIn from '../pages/sign-in/sign-in.component';
 import SignUp from '../pages/sign-up/sign-up.component';
 import Dashboard from '../pages/dashboard/dashboard.component';
 import ShortcutWrapper from '../components/shortcuts-wrapper/shortcuts-wrapper.component';
+import Customers from '../pages/customers/customers.component';
 
 export const router = createBrowserRouter([
 	{
@@ -61,7 +62,7 @@ export const router = createBrowserRouter([
 			/** ---- Ma gestion commerciale ---- */
 			{
 				path: 'clients',
-				element: <p>Clients</p>,
+				element: <Customers />,
 			},
 			{
 				path: 'suivi-des-heures',

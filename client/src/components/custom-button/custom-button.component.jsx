@@ -21,5 +21,10 @@ export const CustomButton = styled.button`
 			background: #2ca01c;
 			border: none;
 			color: #fff;
+
+			&:hover {
+				background: rgba(16, 128, 0, 0.9);
+				box-shadow: none;
+			}
 		`}
 `;

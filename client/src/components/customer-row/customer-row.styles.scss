@@ -1,0 +1,50 @@
+.customer-row {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+
+	&:hover {
+		background-color: #bdbdbd1d;
+	}
+
+	& > * {
+		padding: 15px;
+		flex: 1;
+	}
+
+	input[type='checkbox'] {
+		width: 20px;
+		height: 20px;
+		border: 1px solid #8d9096;
+		border-radius: 2px;
+	}
+
+	.field-check {
+		flex: 0.2;
+	}
+
+	.field-customer-info {
+		.name-info {
+			display: flex;
+			align-items: center;
+			color: #393a3d;
+
+			.display-name {
+				font-weight: bold;
+			}
+
+			.email-icon {
+				display: flex;
+				align-items: center;
+				margin-left: 15px;
+				color: #8d9096;
+			}
+		}
+
+		.display-company {
+			font-size: 12px;
+			color: #8d9096;
+			margin-top: 5px;
+		}
+	}
+}
