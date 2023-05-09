@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-// Ce hook prend un liste de valeurs et permet de modifier l'etat
-// de chacune d'elle
 export default function useToggleItems({ arr, firstItemOpen = false }) {
 	const initialState = arr.reduce((acc, current) => {
 		if (acc.length === 0 && firstItemOpen) {
@@ -22,7 +20,6 @@ export default function useToggleItems({ arr, firstItemOpen = false }) {
 				return { ...toogleItem, active: false };
 			})
 		);
-		console.log(toogleItems);
 	};
 
 	return [toogleItems, updateToogleItems];

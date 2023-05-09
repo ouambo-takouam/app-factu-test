@@ -1,10 +1,26 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Link } from 'react-router-dom';
 import { BsBookmark } from 'react-icons/bs';
 import './sub-side-navbar.styles.scss';
 
 export default function SubSideNavbar({ activeItem }) {
 	const { data } = activeItem || {};
 	const { title, sections } = data || {};
+
+	const generatePath = (string) => {
+		const arr = string.toLowerCase().split(' ');
+
+		if (arr.length > 1) {
+			return arr.reduce((acc, current) => {
+				if (acc === '') {
+					return current;
+				}
+
+				return `${acc}-${current}`;
+			}, '');
+		}
+
+		return string.toLowerCase();
+	};
 
 	return (
 		<div className={`l2-nav-bar ${activeItem && 'open'}`}>
@@ -15,9 +31,9 @@ export default function SubSideNavbar({ activeItem }) {
 						if (section.items) {
 							return section.items.map((item, idx) => (
 								<li key={idx} className="l3-nav-item">
-									<a href="" className="l3-nav-item-link">
+									<Link to={generatePath(item)} className="l3-nav-item-link">
 										{item}
-									</a>
+									</Link>
 									<div className="l3-nav-item-bookmark">
 										<BsBookmark />
 									</div>

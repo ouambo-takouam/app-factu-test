@@ -2,14 +2,15 @@
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	left: 60px;
+	left: 220px;
 	z-index: 2;
 	width: 0px;
 	background: rgb(57, 58, 61);
 	overflow: hidden;
-	transition: width 0.45s ease-out 0s;
+	transition: width 0.45s ease-out 0s, left 0.45s ease-out 0s;
 
 	&.open {
+		left: 60px;
 		width: 160px;
 	}
 }

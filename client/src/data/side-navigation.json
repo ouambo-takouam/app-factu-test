@@ -47,6 +47,9 @@
 	{
 		"title": "Mes employes",
 		"sections": [
+			{
+				"items": ["Employees"]
+			},
 			{ "subtitle": "Heures travaillees" },
 			{
 				"items": ["Suivi des heures"]

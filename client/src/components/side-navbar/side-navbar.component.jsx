@@ -17,7 +17,6 @@ export default function SideNavbar({
 	setActiveItem,
 	updateToogleItems,
 }) {
-	console.log(toogleItems);
 	return (
 		<nav className={`sidebar-navigation ${activeItem && 'open'}`}>
 			<div className="sidebar-header">
@@ -55,7 +54,7 @@ export default function SideNavbar({
 					<li className="nav-item">
 						<Link
 							className="nav-item-link"
-							to=""
+							to="tableau-de-bord"
 							onClick={() => setActiveItem(undefined)}
 						>
 							<div className="nav-item-icon-wrapper">
@@ -70,7 +69,7 @@ export default function SideNavbar({
 						className="nav-item"
 						onClick={() => updateToogleItems(toogleItems[0].id)}
 					>
-						<Link className="nav-item-link" to="">
+						<Link className="nav-item-link" to="mon-entreprise">
 							<div className="nav-item-icon-wrapper">
 								<span className="nav-item-icon-inner-wrapper">
 									<Scale />
@@ -83,22 +82,20 @@ export default function SideNavbar({
 						className="nav-item"
 						onClick={() => updateToogleItems(toogleItems[1].id)}
 					>
-						<Link className="nav-item-link" to="">
+						<Link className="nav-item-link" to="operations">
 							<div className="nav-item-icon-wrapper">
 								<span className="nav-item-icon-inner-wrapper">
 									<Calculator />
 								</span>
 							</div>
-							<span className="nav-item-link-label">
-								Ma gestion commerciale
-							</span>
+							<span className="nav-item-link-label">Ma gestion comptable</span>
 						</Link>
 					</li>
 					<li
 						className="nav-item"
 						onClick={() => updateToogleItems(toogleItems[2].id)}
 					>
-						<Link className="nav-item-link" to="">
+						<Link className="nav-item-link" to="suivi-des-heures">
 							<div className="nav-item-icon-wrapper">
 								<span className="nav-item-icon-inner-wrapper">
 									<Money />
@@ -113,7 +110,7 @@ export default function SideNavbar({
 						className="nav-item"
 						onClick={() => updateToogleItems(toogleItems[3].id)}
 					>
-						<Link className="nav-item-link" to="">
+						<Link className="nav-item-link" to="clients">
 							<div className="nav-item-icon-wrapper">
 								<span className="nav-item-icon-inner-wrapper">
 									<Client />
@@ -126,7 +123,7 @@ export default function SideNavbar({
 						className="nav-item"
 						onClick={() => updateToogleItems(toogleItems[4].id)}
 					>
-						<Link className="nav-item-link" to="">
+						<Link className="nav-item-link" to="employees">
 							<div className="nav-item-icon-wrapper">
 								<span className="nav-item-icon-inner-wrapper">
 									<Employees />

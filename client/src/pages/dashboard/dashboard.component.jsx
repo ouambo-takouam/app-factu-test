@@ -1,7 +1,6 @@
-import SidebarWrapper from '../../components/sidebar-wrapper/sidebar-wrapper.component';
+import { Outlet } from 'react-router-dom';
 import TopNavbar from '../../components/top-navbar/top-navbar.component';
-import ShortcutWrapper from '../../components/shortcuts-wrapper/shortcuts-wrapper.component';
-// import ClientModal from '../../components/client-modal/client-modal.component';
+import SidebarWrapper from '../../components/sidebar-wrapper/sidebar-wrapper.component';
 import './dashboard.styles.scss';
 
 export default function Dashboard() {
@@ -11,8 +10,7 @@ export default function Dashboard() {
 			<div className="dashboard-content">
 				<TopNavbar />
 				<div className="dashboard-main">
-					<ShortcutWrapper />
-					{/*<ClientModal />*/}
+					<Outlet />
 				</div>
 			</div>
 		</main>
