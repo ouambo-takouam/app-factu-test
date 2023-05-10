@@ -54,7 +54,7 @@ export default function Customers() {
 				</div>
 			</div>
 
-			{hideClientModal && (
+			{!hideClientModal && (
 				<CustomerModal toogleClientModal={toogleClientModal} />
 			)}
 		</Fragment>
