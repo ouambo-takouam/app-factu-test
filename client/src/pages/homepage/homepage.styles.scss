@@ -1,0 +1,15 @@
+.homepage {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+
+	a {
+		border: 1px solid gray;
+		font-size: 14px;
+		padding: 12px 25px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+}

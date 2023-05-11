@@ -41,7 +41,7 @@ export default function SignUp() {
 			<div className="sign-wrapper">
 				<h2>Creer un compte</h2>
 				<p className="sign-redirection-text">
-					Deja utilisateur ? <Link to="/app/sign-in">Se connecter</Link>.
+					Deja utilisateur ? <Link to="/sign-in">Se connecter</Link>.
 				</p>
 				<form onSubmit={handleSubmit}>
 					<InputField

@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import Homepage from '../pages/homepage/homepage.component';
 import SignIn from '../pages/sign-in/sign-in.component';
 import SignUp from '../pages/sign-up/sign-up.component';
 import Dashboard from '../pages/dashboard/dashboard.component';
@@ -7,11 +8,15 @@ import Customers from '../pages/customers/customers.component';
 
 export const router = createBrowserRouter([
 	{
-		path: '/app/sign-in',
+		path: '/',
+		element: <Homepage />,
+	},
+	{
+		path: '/sign-in',
 		element: <SignIn />,
 	},
 	{
-		path: '/app/sign-up',
+		path: '/sign-up',
 		element: <SignUp />,
 	},
 	{

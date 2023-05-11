@@ -74,8 +74,7 @@ export default function SignIn() {
 				</p>
 				<div className="sign-separation-line"></div>
 				<p className="sign-redirection-text">
-					Nouveau sur Videodecompta?{' '}
-					<Link to="/app/sign-up">Créer un compte</Link>.
+					Nouveau sur Videodecompta? <Link to="/sign-up">Créer un compte</Link>.
 				</p>
 			</div>
 		</div>
