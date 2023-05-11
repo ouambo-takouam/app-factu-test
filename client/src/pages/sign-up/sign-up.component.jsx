@@ -1,9 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
+import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../../components/input-field/input-field.component';
 import { CustomButton } from '../../components/custom-button/custom-button.component';
 
 export default function SignUp() {
+	const [fields, handleChange] = useManageInput();
+	const { first_name, last_name, email, password, password_confirm } = fields;
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		if (!first_name || !last_name || !email || !password || !password_confirm) {
+			return alert('All fields are required');
+		}
+
+		if (password !== password_confirm) {
+			return alert("Password aren't identicals");
+		}
+
+		const response = await fetch('http://localhost:4000/api/v1/auth/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ first_name, last_name, email, password }),
+		});
+
+		const data = await response.json();
+
+		console.log(data);
+	};
+
 	return (
 		<div className="sign-in-up-wrapper">
 			<div className="sign-wrapper">
@@ -11,14 +39,51 @@ export default function SignUp() {
 				<p className="sign-redirection-text">
 					Deja utilisateur ? <Link to="/app/sign-in">Se connecter</Link>.
 				</p>
-				<InputField type="text" label="Nom" fullwidth />
-				<InputField type="text" label="Prenom" fullwidth />
-				<InputField type="email" label="Email" fullwidth />
-				<InputField type="password" label="Mot de passe" fullwidth />
-				<InputField type="password" label="Confirmer mot de passe" fullwidth />
-				<CustomButton $validate $fullwidth>
-					Creer mon compte
-				</CustomButton>
+				<form onSubmit={handleSubmit}>
+					<InputField
+						type="text"
+						label="Nom"
+						name="first_name"
+						value={first_name}
+						onChangeHandler={handleChange}
+						fullwidth
+					/>
+					<InputField
+						type="text"
+						label="Prenom"
+						name="last_name"
+						value={last_name}
+						onChangeHandler={handleChange}
+						fullwidth
+					/>
+					<InputField
+						type="email"
+						label="Email"
+						name="email"
+						value={email}
+						onChangeHandler={handleChange}
+						fullwidth
+					/>
+					<InputField
+						type="password"
+						label="Mot de passe"
+						name="password"
+						value={password}
+						onChangeHandler={handleChange}
+						fullwidth
+					/>
+					<InputField
+						type="password"
+						label="Confirmer mot de passe"
+						name="password_confirm"
+						value={password_confirm}
+						onChangeHandler={handleChange}
+						fullwidth
+					/>
+					<CustomButton type="submit" $validate $fullwidth>
+						Creer mon compte
+					</CustomButton>
+				</form>
 				<p className="sign-usage-terms">
 					En sélectionnant Créer mon compte, vous acceptez nos{' '}
 					<a href="#">Conditions d'utilisation</a> et confirmez avoir lu et
