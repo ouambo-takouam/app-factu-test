@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { connect } from '../../redux/slices/user.slice';
 import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../../components/input-field/input-field.component';
 import google_logo from '../../assets/images/png/google-mini-logo.png';
@@ -9,6 +11,8 @@ import './sign-in.styles.scss';
 export default function SignIn() {
 	const [fields, handleChange] = useManageInput();
 	const { email, password } = fields;
+
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -25,9 +29,9 @@ export default function SignIn() {
 			body: JSON.stringify({ email, password }),
 		});
 
-		const data = await response.json();
+		const { user, token } = await response.json();
 
-		console.log(data);
+		dispatch(connect({ credentials: user, token }));
 	};
 
 	return (

@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { connect } from '../../redux/slices/user.slice';
 import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../../components/input-field/input-field.component';
 import { CustomButton } from '../../components/custom-button/custom-button.component';
@@ -7,6 +9,8 @@ import { CustomButton } from '../../components/custom-button/custom-button.compo
 export default function SignUp() {
 	const [fields, handleChange] = useManageInput();
 	const { first_name, last_name, email, password, password_confirm } = fields;
+
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -27,9 +31,9 @@ export default function SignUp() {
 			body: JSON.stringify({ first_name, last_name, email, password }),
 		});
 
-		const data = await response.json();
+		const { user, token } = await response.json();
 
-		console.log(data);
+		dispatch(connect({ credentials: user, token }));
 	};
 
 	return (
