@@ -1,5 +1,6 @@
-import useToggleItems from '../../hooks/toogle-items.hook';
 import { AiOutlineClose } from 'react-icons/ai';
+import useToggleItems from '../../hooks/toogle-items.hook';
+import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../input-field/input-field.component';
 import SelectField from '../select-field/select-field.component';
 import TextArea from '../text-area/text-area.component';
@@ -11,6 +12,27 @@ export default function CustomerModal({ toogleClientModal }) {
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
 		firstItemOpen: true,
 	});
+	const [fields, handleChange] = useManageInput();
+	const {
+		first_name,
+		last_name,
+		company,
+		display_name,
+		email,
+		phone1,
+		phone2,
+		website,
+		street,
+		town,
+		state,
+		po_box,
+		country,
+		notes,
+		payment_mode,
+		send_mode,
+		conditions,
+		attachment,
+	} = fields;
 
 	return (
 		<div className="client-modal">
@@ -24,10 +46,29 @@ export default function CustomerModal({ toogleClientModal }) {
 				<div className="client-modal-infos">
 					<div className="client-infos-left-block">
 						<div className="line">
-							<InputField type="text" label="Nom" />
-							<InputField type="text" label="Prenom" />
+							<InputField
+								type="text"
+								label="Nom"
+								name="first_name"
+								value={first_name}
+								onChangeHandler={handleChange}
+							/>
+							<InputField
+								type="text"
+								label="Prenom"
+								name="last_name"
+								value={last_name}
+								onChangeHandler={handleChange}
+							/>
 						</div>
-						<InputField type="text" label="Entreprise" fullwidth />
+						<InputField
+							type="text"
+							label="Entreprise"
+							name="company"
+							value={company}
+							onChangeHandler={handleChange}
+							fullwidth
+						/>
 						<SelectField
 							label="Nom a afficher"
 							data={['Albert', 'Thomas', 'Pierre']}
@@ -35,12 +76,38 @@ export default function CustomerModal({ toogleClientModal }) {
 						/>
 					</div>
 					<div className="client-infos-right-block">
-						<InputField type="email" label="Adresse Email" fullwidth />
+						<InputField
+							type="email"
+							label="Adresse Email"
+							name="email"
+							value={email}
+							onChangeHandler={handleChange}
+							fullwidth
+						/>
 						<div className="line">
-							<InputField type="text" label="Telephone 1" />
-							<InputField type="text" label="Telephone 2" />
+							<InputField
+								type="text"
+								label="Telephone 1"
+								name="phone1"
+								value={phone1}
+								onChangeHandler={handleChange}
+							/>
+							<InputField
+								type="text"
+								label="Telephone 2"
+								name="phone2"
+								value={phone2}
+								onChangeHandler={handleChange}
+							/>
 						</div>
-						<InputField type="text" label="Site web" fullwidth />
+						<InputField
+							type="text"
+							label="Site web"
+							name="website"
+							value={website}
+							onChangeHandler={handleChange}
+							fullwidth
+						/>
 					</div>
 				</div>
 				<div className="client-modal-other-infos">
@@ -64,12 +131,43 @@ export default function CustomerModal({ toogleClientModal }) {
 						{toogleItems[0].active && (
 							<div className="adresse-facturation">
 								<h2>Adresse de facturation</h2>
-								<InputField type="text" placeholder="Rue" fullwidth />
+								<InputField
+									type="text"
+									placeholder="Rue"
+									name="street"
+									value={street}
+									onChangeHandler={handleChange}
+									fullwidth
+								/>
 								<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-									<InputField type="text" placeholder="Ville" />
-									<InputField type="text" placeholder="Etat/province" />
-									<InputField type="text" placeholder="Code postal" />
-									<InputField type="text" placeholder="Pays" />
+									<InputField
+										type="text"
+										placeholder="Ville"
+										name="town"
+										value={town}
+										onChangeHandler={handleChange}
+									/>
+									<InputField
+										type="text"
+										placeholder="Etat/province"
+										name="state"
+										value={state}
+										onChangeHandler={handleChange}
+									/>
+									<InputField
+										type="text"
+										placeholder="Code postal"
+										name="po_box"
+										value={po_box}
+										onChangeHandler={handleChange}
+									/>
+									<InputField
+										type="text"
+										placeholder="Pays"
+										name="country"
+										value={country}
+										onChangeHandler={handleChange}
+									/>
 								</div>
 							</div>
 						)}
@@ -77,7 +175,12 @@ export default function CustomerModal({ toogleClientModal }) {
 						{toogleItems[1].active && (
 							<div className="notes">
 								<h2>Notes</h2>
-								<TextArea fullwidth />
+								<TextArea
+									name="notes"
+									value={notes}
+									onChangeHandler={handleChange}
+									fullwidth
+								/>
 							</div>
 						)}
 
@@ -102,7 +205,13 @@ export default function CustomerModal({ toogleClientModal }) {
 						{toogleItems[3].active && (
 							<div className="pieces-jointer">
 								<h2>Pieces jointes</h2>
-								<InputField type="file" fullwidth />
+								<InputField
+									type="file"
+									name="attachment"
+									value={attachment}
+									onChangeHandler={handleChange}
+									fullwidth
+								/>
 							</div>
 						)}
 					</div>
