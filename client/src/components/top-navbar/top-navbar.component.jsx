@@ -33,8 +33,8 @@ export default function TopNavbar() {
 					<li className="icon">
 						<Settings />
 					</li>
-					<li className="icon">
-						<span className='account-avatar' onClick={() => handleChange()}>{credentials.first_name.charAt(0).toUpperCase()}</span>
+					<li className="icon" onClick={() => handleChange()}>
+						<span className='account-avatar' >{credentials.first_name.charAt(0).toUpperCase()}</span>
 					</li>
 				</ul>
 			</nav>
