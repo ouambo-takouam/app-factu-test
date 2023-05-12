@@ -1,4 +1,5 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, useLocation, Navigate } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 import Homepage from '../pages/homepage/homepage.component';
 import SignIn from '../pages/sign-in/sign-in.component';
 import SignUp from '../pages/sign-up/sign-up.component';
@@ -6,22 +7,45 @@ import Dashboard from '../pages/dashboard/dashboard.component';
 import ShortcutWrapper from '../components/shortcuts-wrapper/shortcuts-wrapper.component';
 import Customers from '../pages/customers/customers.component';
 
+function RequireAuth({ children, redirectTo, inversed }) {
+	const token = useSelector(state => state.user.token)
+	const { pathname } = useLocation();
+
+	if (inversed) {
+		return token ? <Navigate to={redirectTo} state={pathname} /> : children  ;
+	}
+
+	return token ? children : <Navigate to={redirectTo} state={pathname} />;
+}
+
 export const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Homepage />,
 	},
 	{
-		path: '/sign-in',
-		element: <SignIn />,
+		path: '/sign-up',
+		element: (
+			<RequireAuth redirectTo='/app/tableau-de-bord' inversed>
+				<SignUp />
+			</RequireAuth>
+		),
 	},
 	{
-		path: '/sign-up',
-		element: <SignUp />,
+		path: '/sign-in',
+		element: (
+			<RequireAuth redirectTo='/app/tableau-de-bord' inversed>
+				<SignIn />
+			</RequireAuth>
+		),
 	},
 	{
 		path: '/app',
-		element: <Dashboard />,
+		element: (
+			<RequireAuth redirectTo='/sign-in'>
+				<Dashboard />
+			</RequireAuth>
+		),
 		children: [
 			{
 				path: 'tableau-de-bord',
