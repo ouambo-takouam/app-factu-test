@@ -1,5 +1,6 @@
 .select-fieldset {
 	margin-bottom: 8px;
+	position: relative;
 
 	h2 {
 		font-size: 15px;
@@ -27,5 +28,26 @@
 
 	.btn-inner:hover {
 		background-color: #eceef1;
+	}
+
+	.choice-wrapper {
+		position: absolute;
+		background-color: #fff;
+		border: 1px solid #babec5;
+		font-size: 14px;
+		left: 0;
+		right: 0;
+		z-index: 10;
+
+		.choice {
+			padding: 8px 16px;
+			color: #393a3d;
+			cursor: pointer;
+		}
+
+		.choice:hover {
+			color: #2ca01c;
+			background-color: #babec52e;
+		}
 	}
 }

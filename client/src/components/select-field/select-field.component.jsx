@@ -14,6 +14,11 @@ export default function SelectField({ label, fullwidth, data, ...otherProps }) {
 					<IoMdArrowDropdown size={22} />
 				</div>
 			</div>
+			<div className="choice-wrapper">
+				{data.map((item) => (
+					<div className="choice">{item}</div>
+				))}
+			</div>
 		</div>
 	);
 }
