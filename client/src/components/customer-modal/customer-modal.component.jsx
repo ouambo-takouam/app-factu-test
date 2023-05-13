@@ -72,6 +72,9 @@ export default function CustomerModal({ toogleClientModal }) {
 						<SelectField
 							label="Nom a afficher"
 							data={['Albert', 'Thomas', 'Pierre']}
+							name="display_name"
+							value={display_name}
+							onChangeHandler={handleChange}
 							fullwidth
 						/>
 					</div>
