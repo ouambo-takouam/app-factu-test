@@ -13,7 +13,7 @@ import './customer-modal.styles.scss';
 export default function CustomerModal({ toogleClientModal }) {
 	// react-redux usefull variables !
 	const dispatch = useDispatch();
-	const credentials = useSelector((state) => state.user.credentials);
+	const { credentials, token } = useSelector((state) => state.user);
 
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
@@ -88,6 +88,7 @@ export default function CustomerModal({ toogleClientModal }) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				'x-access-token': token,
 			},
 			body: JSON.stringify({ user_id: credentials._id, ...fields }),
 		});
