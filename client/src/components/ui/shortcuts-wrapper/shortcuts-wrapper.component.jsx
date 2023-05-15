@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './shortcuts-wrapper.styles.scss';
 
-export default function ShortcutWrapper() {
+export default function ShortcutsWrapper() {
 	return (
 		<div className="shortcuts-wrapper">
 			<h3>Raccourcis</h3>

@@ -1,11 +1,11 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import customerOptions from '../../data/customer-select-options.json';
-import useToggleItems from '../../hooks/toogle-items.hook';
-import useManageInput from '../../hooks/manage-input.hook';
-import InputField from '../input-field/input-field.component';
-import SelectField from '../select-field/select-field.component';
-import TextArea from '../text-area/text-area.component';
-import { CustomButton } from '../custom-button/custom-button.component';
+import customerOptions from '../../../data/customer-select-options.json';
+import useToggleItems from '../../../hooks/toggle-items.hook';
+import useManageInput from '../../../hooks/manage-input.hook';
+import InputField from '../../../components/form/input-field/input-field.component';
+import SelectField from '../../../components/form/select-field/select-field.component';
+import TextArea from '../../../components/form/text-area/text-area.component';
+import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import './customer-modal.styles.scss';
 
 export default function CustomerModal({ toogleClientModal }) {

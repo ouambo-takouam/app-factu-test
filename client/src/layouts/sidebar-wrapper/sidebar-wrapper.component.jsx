@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import navItems from '../../data/side-navigation.json';
-import useToggleItems from '../../hooks/toogle-items.hook';
-import SideNavbar from '../side-navbar/side-navbar.component';
-import SubSideNavbar from '../sub-side-navbar/sub-side-navbar.component';
+import useToggleItems from '../../hooks/toggle-items.hook';
+import SideNavbar from './side-navbar/side-navbar.component';
+import SubSideNavbar from './sub-side-navbar/sub-side-navbar.component';
 
 export default function SidebarWrapper() {
 	const [toogleItems, updateToogleItems] = useToggleItems({

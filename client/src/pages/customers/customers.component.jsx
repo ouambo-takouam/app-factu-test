@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
-import useHide from '../../hooks/hide-item.hook';
+import useHide from '../../hooks/hide.hook';
 import { BsCaretDownFill } from 'react-icons/bs';
-import CustomerRow from '../../components/customer-row/customer-row.component';
-import CustomerModal from '../../components/customer-modal/customer-modal.component';
+import CustomerRow from './customer-row/customer-row.component';
+import CustomerModal from './customer-modal/customer-modal.component';
 import './customers.styles.scss';
 
 export default function Customers() {

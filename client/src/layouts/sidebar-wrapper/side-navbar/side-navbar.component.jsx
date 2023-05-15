@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/images/svg/logo.svg';
-import { ReactComponent as LogoText } from '../../assets/images/svg/logo-text.svg';
-import { ReactComponent as Pen } from '../../assets/images/svg/pen.svg';
-import { ReactComponent as Home } from '../../assets/images/svg/home.svg';
-import { ReactComponent as Scale } from '../../assets/images/svg/scale.svg';
-import { ReactComponent as Calculator } from '../../assets/images/svg/calculator.svg';
-import { ReactComponent as Money } from '../../assets/images/svg/money.svg';
-import { ReactComponent as Client } from '../../assets/images/svg/clients.svg';
-import { ReactComponent as Employees } from '../../assets/images/svg/employees.svg';
+import { ReactComponent as Logo } from '../../../assets/images/svg/logo.svg';
+import { ReactComponent as LogoText } from '../../../assets/images/svg/logo-text.svg';
+import { ReactComponent as Pen } from '../../../assets/images/svg/pen.svg';
+import { ReactComponent as Home } from '../../../assets/images/svg/home.svg';
+import { ReactComponent as Scale } from '../../../assets/images/svg/scale.svg';
+import { ReactComponent as Calculator } from '../../../assets/images/svg/calculator.svg';
+import { ReactComponent as Money } from '../../../assets/images/svg/money.svg';
+import { ReactComponent as Client } from '../../../assets/images/svg/clients.svg';
+import { ReactComponent as Employees } from '../../../assets/images/svg/employees.svg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './side-navbar.styles.scss';
 

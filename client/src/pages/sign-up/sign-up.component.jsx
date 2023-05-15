@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect, toogleLoading } from '../../redux/slices/user.slice';
 import useManageInput from '../../hooks/manage-input.hook';
-import InputField from '../../components/input-field/input-field.component';
-import { CustomButton } from '../../components/custom-button/custom-button.component';
-import SpinnerLoader from '../../components/spinner-loader/spinner-loader.component';
+import InputField from '../../components/form/input-field/input-field.component';
+import { CustomButton } from '../../components/form/custom-button/custom-button.component';
+import SpinnerLoader from '../../components/ui/spinner-loader/spinner-loader.component';
 
 // sign-up page
 export default function SignUp() {

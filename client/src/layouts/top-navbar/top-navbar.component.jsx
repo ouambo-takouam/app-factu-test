@@ -1,16 +1,16 @@
 import { Fragment } from 'react';
-import useHide from '../../hooks/hide-item.hook'
-import {useSelector} from 'react-redux'
+import useHide from '../../hooks/hide.hook';
+import { useSelector } from 'react-redux';
 import { ReactComponent as Swipe } from '../../assets/images/svg/swipe.svg';
 import { ReactComponent as Search } from '../../assets/images/svg/search.svg';
 import { ReactComponent as Bell } from '../../assets/images/svg/bell.svg';
 import { ReactComponent as Settings } from '../../assets/images/svg/settings.svg';
-import AccountAvatarModal from '../account-avatar-modal/account-avatar-modal.components';
+import AccountAvatarModal from './account-avatar-modal/account-avatar-modal.components';
 import './top-navbar.styles.scss';
 
 export default function TopNavbar() {
-	const { hide, handleChange } = useHide()
-	const credentials = useSelector(state => state.user.credentials)
+	const { hide, handleChange } = useHide();
+	const credentials = useSelector((state) => state.user.credentials);
 
 	return (
 		<Fragment>
@@ -34,7 +34,9 @@ export default function TopNavbar() {
 						<Settings />
 					</li>
 					<li className="icon" onClick={() => handleChange()}>
-						<span className='account-avatar' >{credentials.first_name.charAt(0).toUpperCase()}</span>
+						<span className="account-avatar">
+							{credentials.first_name.charAt(0).toUpperCase()}
+						</span>
 					</li>
 				</ul>
 			</nav>

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import TopNavbar from '../../components/top-navbar/top-navbar.component';
-import SidebarWrapper from '../../components/sidebar-wrapper/sidebar-wrapper.component';
+import TopNavbar from '../../layouts/top-navbar/top-navbar.component';
+import SidebarWrapper from '../../layouts/sidebar-wrapper/sidebar-wrapper.component';
 import './dashboard.styles.scss';
 
 export default function Dashboard() {
