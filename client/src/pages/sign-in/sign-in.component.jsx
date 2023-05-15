@@ -9,20 +9,29 @@ import { CustomButton } from '../../components/custom-button/custom-button.compo
 import SpinnerLoader from '../../components/spinner-loader/spinner-loader.component';
 import './sign-in.styles.scss';
 
+// sign-in page
 export default function SignIn() {
+	// this custom hook will be is used to store and update user data
 	const [fields, handleChange] = useManageInput();
 	const { email, password } = fields;
 
+	/** getting from the store 'isLoading' data. 'dispatch' will be used to dispatch 
+	redux actions */
 	const isLoading = useSelector((state) => state.user.isLoading);
 	const dispatch = useDispatch();
 
+	// 'handleSubmit' function handles form submition
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
+		// checks if inputs are all set
 		if (!email || !password) {
 			return alert('All fields are required');
 		}
 
+		/** this action is for displaying the spinnerLoader by toogling the 'isLoading' redux store value
+		 *  from false to true
+		 */
 		dispatch(toogleLoading());
 
 		const response = await fetch('http://localhost:4000/api/v1/auth/login', {
@@ -35,6 +44,7 @@ export default function SignIn() {
 
 		const { user, token } = await response.json();
 
+		// store updated with credentials and token sent by server
 		dispatch(connect({ credentials: user, token }));
 	};
 

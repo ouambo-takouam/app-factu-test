@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
 
 			/** ---- Ma gestion commerciale ---- */
 			{
-				path: 'clients',
+				path: 'customers',
 				element: <Customers />,
 			},
 			{

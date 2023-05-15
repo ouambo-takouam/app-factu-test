@@ -6,8 +6,9 @@ import CustomerModal from '../../components/customer-modal/customer-modal.compon
 import './customers.styles.scss';
 
 export default function Customers() {
-	const { hide: hideImportBtn, handleChange: toogleImportBtn } = useHide();
-	const { hide: hideClientModal, handleChange: toogleClientModal } = useHide();
+	// custom hooks to choose whether to display or not a component on the dom
+	const { hide: hideImportBtn, handleHide: toogleImportBtn } = useHide();
+	const { hide: hideClientModal, handleHide: toogleClientModal } = useHide();
 
 	return (
 		<Fragment>

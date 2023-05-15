@@ -18,7 +18,7 @@ export default function SignUp() {
 	const isLoading = useSelector((state) => state.user.isLoading);
 	const dispatch = useDispatch();
 
-	// 'handleSubmit' function handles form submittion
+	// 'handleSubmit' function handles form submition
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
