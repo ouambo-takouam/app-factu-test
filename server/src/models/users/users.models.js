@@ -1,10 +1,10 @@
 const User = require('./users.mongo');
 
-async function getUser(email) {
+async function getOneUser(email) {
 	return await User.findOne({ email });
 }
 
-async function createUser(data) {
+async function addNewUser(data) {
 	const { first_name, last_name, email, password } = data;
 
 	return await User.create({
@@ -15,4 +15,4 @@ async function createUser(data) {
 	});
 }
 
-module.exports = { getUser, createUser };
+module.exports = { getOneUser, addNewUser };

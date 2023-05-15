@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { getUser, createUser } = require('../../models/users/users.models');
+const { getOneUser, addNewUser } = require('../../models/users/users.models');
 
 async function httpRegister(req, res) {
 	try {
@@ -15,7 +15,7 @@ async function httpRegister(req, res) {
 
 		// check if user already exist
 		// Validate if user exist in our database
-		const oldUser = await getUser(email);
+		const oldUser = await getOneUser(email);
 
 		if (oldUser) {
 			return res
@@ -27,7 +27,7 @@ async function httpRegister(req, res) {
 		encryptedPassword = await bcrypt.hash(password, 10);
 
 		// Create user in our database
-		const user = await createUser({
+		const user = await addNewUser({
 			first_name,
 			last_name,
 			email,
@@ -55,7 +55,7 @@ async function httpLogin(req, res) {
 		}
 
 		// Validate if credentials are correct
-		const user = await getUser(email);
+		const user = await getOneUser(email);
 
 		if (!user || !(await bcrypt.compare(password, user.password))) {
 			return res.status(400).json({ error: 'Invalid Credentials' });
