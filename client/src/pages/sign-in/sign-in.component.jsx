@@ -34,18 +34,23 @@ export default function SignIn() {
 		 */
 		dispatch(toogleLoading());
 
-		const response = await fetch('http://localhost:4000/api/v1/auth/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ email, password }),
-		});
+		try {
+			const response = await fetch('http://localhost:4000/api/v1/auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ email, password }),
+			});
 
-		const { user, token } = await response.json();
+			const { user, token } = await response.json();
 
-		// store updated with credentials and token sent by server
-		dispatch(connect({ credentials: user, token }));
+			// store updated with credentials and token sent by server
+			dispatch(connect({ credentials: user, token }));
+		} catch (error) {
+			dispatch(toogleLoading());
+			console.log(error.message);
+		}
 	};
 
 	return (

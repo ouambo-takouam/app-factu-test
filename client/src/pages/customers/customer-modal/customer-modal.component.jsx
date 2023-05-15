@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import customerOptions from '../../../data/customer-select-options.json';
 import useToggleItems from '../../../hooks/toggle-items.hook';
@@ -37,20 +38,40 @@ export default function CustomerModal({ toogleClientModal }) {
 	const { payment_modes, preferred_shipping_methods, conditions } =
 		customerOptions;
 
-	const generateDisplayName = () => {
-		if (first_name && last_name) {
-			return [
-				{
-					text: `${first_name} ${last_name}`,
-					value: `${first_name} ${last_name}`,
-				},
-				{
-					text: `${last_name} ${first_name}`,
-					value: `${last_name} ${first_name}`,
-				},
-			];
-		}
-	};
+	const [displayNames, setDisplayNames] = useState([]);
+
+	// generate display names options for the form
+	useEffect(() => {
+		const generateDisplayNames = () => {
+			if (first_name && !last_name) {
+				setDisplayNames([
+					{
+						text: first_name,
+						value: first_name,
+					},
+				]);
+			} else if (!first_name && last_name) {
+				setDisplayNames([
+					{
+						text: last_name,
+						value: last_name,
+					},
+				]);
+			} else {
+				setDisplayNames([
+					{
+						text: `${first_name} ${last_name}`,
+						value: `${first_name} ${last_name}`,
+					},
+					{
+						text: `${last_name} ${first_name}`,
+						value: `${last_name} ${first_name}`,
+					},
+				]);
+			}
+		};
+		generateDisplayNames();
+	}, [first_name, last_name]);
 
 	return (
 		<div className="client-modal">
@@ -89,7 +110,7 @@ export default function CustomerModal({ toogleClientModal }) {
 						/>
 						<SelectField
 							label="Nom a afficher"
-							data={generateDisplayName()}
+							data={displayNames}
 							name="display_name"
 							onChangeHandler={handleChange}
 							fullwidth

@@ -9,7 +9,7 @@ import AccountAvatarModal from './account-avatar-modal/account-avatar-modal.comp
 import './top-navbar.styles.scss';
 
 export default function TopNavbar() {
-	const { hide, handleChange } = useHide();
+	const { hide, handleHide } = useHide();
 	const credentials = useSelector((state) => state.user.credentials);
 
 	return (
@@ -33,14 +33,14 @@ export default function TopNavbar() {
 					<li className="icon">
 						<Settings />
 					</li>
-					<li className="icon" onClick={() => handleChange()}>
+					<li className="icon" onClick={() => handleHide()}>
 						<span className="account-avatar">
 							{credentials.first_name.charAt(0).toUpperCase()}
 						</span>
 					</li>
 				</ul>
 			</nav>
-			{!hide && <AccountAvatarModal handleChange={handleChange} />}
+			{!hide && <AccountAvatarModal handleChange={handleHide} />}
 		</Fragment>
 	);
 }
