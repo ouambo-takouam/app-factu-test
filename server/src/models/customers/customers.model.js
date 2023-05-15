@@ -4,6 +4,11 @@ async function getAllCustomers() {
 	return await Customer.findOne({});
 }
 
-async function addNewCustomer() {
-	return await Customer.findOne({});
+async function addNewCustomer(data) {
+	return await Customer.create(data);
 }
+
+module.exports = {
+	getAllCustomers,
+	addNewCustomer,
+};
