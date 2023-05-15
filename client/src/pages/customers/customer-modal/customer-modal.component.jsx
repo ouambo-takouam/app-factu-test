@@ -88,7 +88,7 @@ export default function CustomerModal({ toogleClientModal }) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'x-access-token': token,
+				Authorization: `Bearer ${token}`,
 			},
 			body: JSON.stringify({ user_id: credentials._id, ...fields }),
 		});
