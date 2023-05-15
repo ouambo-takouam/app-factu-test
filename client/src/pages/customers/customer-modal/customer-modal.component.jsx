@@ -40,6 +40,13 @@ export default function CustomerModal({ toogleClientModal }) {
 
 	const [displayNames, setDisplayNames] = useState([]);
 
+	/** Data that will be used if no other user choices are made. */
+	const defaultPaymentsData = {
+		payment_mode: payment_modes[0].value,
+		preferred_shipping_method: preferred_shipping_methods[0].value,
+		condition: conditions[0].value,
+	};
+
 	// generate display names options for the form
 	useEffect(() => {
 		const generateDisplayNames = () => {
@@ -57,7 +64,7 @@ export default function CustomerModal({ toogleClientModal }) {
 						value: last_name,
 					},
 				]);
-			} else {
+			} else if (first_name && last_name) {
 				setDisplayNames([
 					{
 						text: `${first_name} ${last_name}`,
@@ -72,6 +79,22 @@ export default function CustomerModal({ toogleClientModal }) {
 		};
 		generateDisplayNames();
 	}, [first_name, last_name]);
+
+	const handleSubmit = async () => {
+		if (!first_name && !last_name) {
+			return alert('first name and last name should be set !');
+		}
+
+		console.log({ ...defaultPaymentsData, ...fields });
+
+		// const response = await fetch('http://localhost:4000/api/v1/customers', {
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 		},
+		// 		body: JSON.stringify({}),
+		// 	});
+	};
 
 	return (
 		<div className="client-modal">
@@ -272,7 +295,7 @@ export default function CustomerModal({ toogleClientModal }) {
 					<CustomButton $rounded onClick={toogleClientModal}>
 						Annuler
 					</CustomButton>
-					<CustomButton $rounded $validate>
+					<CustomButton $rounded $validate onClick={handleSubmit}>
 						Enregistrer
 					</CustomButton>
 				</div>
