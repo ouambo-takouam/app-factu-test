@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
 import customerOptions from '../../../data/customer-select-options.json';
 import useToggleItems from '../../../hooks/toggle-items.hook';
 import useManageInput from '../../../hooks/manage-input.hook';
@@ -10,6 +11,10 @@ import { CustomButton } from '../../../components/form/custom-button/custom-butt
 import './customer-modal.styles.scss';
 
 export default function CustomerModal({ toogleClientModal }) {
+	// react-redux usefull variables !
+	const dispatch = useDispatch();
+	const credentials = useSelector((state) => state.user.credentials);
+
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
 		firstItemOpen: true,
@@ -73,18 +78,25 @@ export default function CustomerModal({ toogleClientModal }) {
 		generateDisplayNames();
 	}, [first_name, last_name]);
 
+	// Handles customer info submittion !
 	const handleSubmit = async () => {
 		if (!first_name && !last_name) {
 			return alert('first name and last name should be set !');
 		}
 
-		// const response = await fetch('http://localhost:4000/api/v1/customers', {
-		// 		method: 'POST',
-		// 		headers: {
-		// 			'Content-Type': 'application/json',
-		// 		},
-		// 		body: JSON.stringify({}),
-		// 	});
+		const response = await fetch('http://localhost:4000/api/v1/customers', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ user_id: credentials._id, ...fields }),
+		});
+
+		const created = await response.json();
+
+		console.log(created);
+
+		toogleClientModal();
 	};
 
 	return (
