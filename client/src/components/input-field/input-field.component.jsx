@@ -10,7 +10,7 @@ export default function InputField({
 		<fieldset className="input-fieldset">
 			{label && <label>{label}</label>}
 			<input
-				className={`input-field ${fullwidth ? 'fullwidth' : ''}`}
+				className={`${fullwidth ? 'fullwidth' : ''}`}
 				onChange={onChangeHandler}
 				{...otherProps}
 			/>

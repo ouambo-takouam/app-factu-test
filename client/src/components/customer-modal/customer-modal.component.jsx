@@ -1,4 +1,5 @@
 import { AiOutlineClose } from 'react-icons/ai';
+import customerOptions from '../../data/customer-select-options.json';
 import useToggleItems from '../../hooks/toogle-items.hook';
 import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../input-field/input-field.component';
@@ -17,7 +18,6 @@ export default function CustomerModal({ toogleClientModal }) {
 		first_name,
 		last_name,
 		company,
-		display_name,
 		email,
 		phone1,
 		phone2,
@@ -29,10 +29,28 @@ export default function CustomerModal({ toogleClientModal }) {
 		country,
 		notes,
 		payment_mode,
-		send_mode,
-		conditions,
+		preferred_shipping_method,
+		condition,
 		attachment,
 	} = fields;
+
+	const { payment_modes, preferred_shipping_methods, conditions } =
+		customerOptions;
+
+	const generateDisplayName = () => {
+		if (first_name && last_name) {
+			return [
+				{
+					text: `${first_name} ${last_name}`,
+					value: `${first_name} ${last_name}`,
+				},
+				{
+					text: `${last_name} ${first_name}`,
+					value: `${last_name} ${first_name}`,
+				},
+			];
+		}
+	};
 
 	return (
 		<div className="client-modal">
@@ -71,9 +89,8 @@ export default function CustomerModal({ toogleClientModal }) {
 						/>
 						<SelectField
 							label="Nom a afficher"
-							data={['Albert', 'Thomas', 'Pierre']}
+							data={generateDisplayName()}
 							name="display_name"
-							value={display_name}
 							onChangeHandler={handleChange}
 							fullwidth
 						/>
@@ -191,16 +208,25 @@ export default function CustomerModal({ toogleClientModal }) {
 							<div className="payment-facturation">
 								<SelectField
 									label="Mode de paiement par défaut"
-									data={['Cache', 'Cheque', 'Carte de credit']}
+									data={payment_modes}
+									name="payment_mode"
+									value={payment_mode}
+									onChangeHandler={handleChange}
 								/>
 								<SelectField
 									label="Mode d'envoi préféré"
-									data={['Aucun', 'Imprimer plus tard', 'Envoyer plus tard']}
+									data={preferred_shipping_methods}
+									name="preferred_shipping_method"
+									value={preferred_shipping_method}
+									onChangeHandler={handleChange}
 								/>
 
 								<SelectField
 									label="Conditions"
-									data={['Due on receipt', 'Net 15', 'Net 30', 'Net 60']}
+									data={conditions}
+									name="condition"
+									value={condition}
+									onChangeHandler={handleChange}
 								/>
 							</div>
 						)}

@@ -1,0 +1,18 @@
+{
+	"payment_modes": [
+		{ "text": "Cache", "value": "cash" },
+		{ "text": "Cheque", "value": "check" },
+		{ "text": "Carte de credit", "value": "credit_card" }
+	],
+	"preferred_shipping_methods": [
+		{ "text": "Aucun", "value": "none" },
+		{ "text": "Imprimer plus tard", "value": "print_later" },
+		{ "text": "Envoyer plus tard", "value": "send_later" }
+	],
+	"conditions": [
+		{ "text": "Due on receipt", "value": "Due_on_receipt" },
+		{ "text": "Net 15", "value": "net_15" },
+		{ "text": "Net 30", "value": "net_30" },
+		{ "text": "Net 60", "value": "net_60" }
+	]
+}
