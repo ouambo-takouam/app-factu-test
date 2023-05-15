@@ -7,24 +7,34 @@ import InputField from '../../components/input-field/input-field.component';
 import { CustomButton } from '../../components/custom-button/custom-button.component';
 import SpinnerLoader from '../../components/spinner-loader/spinner-loader.component';
 
+// sign-up page
 export default function SignUp() {
+	// this custom hook will be is used to store and update user data
 	const [fields, handleChange] = useManageInput();
 	const { first_name, last_name, email, password, password_confirm } = fields;
 
+	/** getting from the store 'isLoading' data. 'dispatch' will be used to dispatch 
+	redux actions */
 	const isLoading = useSelector((state) => state.user.isLoading);
 	const dispatch = useDispatch();
 
+	// 'handleSubmit' function handles form submittion
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
+		// checks if inputs are all set
 		if (!first_name || !last_name || !email || !password || !password_confirm) {
 			return alert('All fields are required');
 		}
 
+		// checks is password and password_confirm are the same
 		if (password !== password_confirm) {
 			return alert("Password aren't identicals");
 		}
 
+		/** this action is for displaying the spinnerLoader by toogling the 'isLoading' redux store value
+		 *  from false to true
+		 */
 		dispatch(toogleLoading());
 
 		const response = await fetch('http://localhost:4000/api/v1/auth/register', {
@@ -37,6 +47,7 @@ export default function SignUp() {
 
 		const { user, token } = await response.json();
 
+		// store updated with credentials and token sent by server
 		dispatch(connect({ credentials: user, token }));
 	};
 

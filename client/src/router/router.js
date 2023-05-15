@@ -1,5 +1,5 @@
 import { createBrowserRouter, useLocation, Navigate } from 'react-router-dom';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux';
 import Homepage from '../pages/homepage/homepage.component';
 import SignIn from '../pages/sign-in/sign-in.component';
 import SignUp from '../pages/sign-up/sign-up.component';
@@ -7,17 +7,21 @@ import Dashboard from '../pages/dashboard/dashboard.component';
 import ShortcutWrapper from '../components/shortcuts-wrapper/shortcuts-wrapper.component';
 import Customers from '../pages/customers/customers.component';
 
+/** Checks 'token value' to redirect or not user depending on
+ *  params passed to the function */
 function RequireAuth({ children, redirectTo, inversed }) {
-	const token = useSelector(state => state.user.token)
+	const token = useSelector((state) => state.user.token);
 	const { pathname } = useLocation();
 
 	if (inversed) {
-		return token ? <Navigate to={redirectTo} state={pathname} /> : children  ;
+		return token ? <Navigate to={redirectTo} state={pathname} /> : children;
 	}
 
 	return token ? children : <Navigate to={redirectTo} state={pathname} />;
 }
 
+/** Browses user on different paths ex: '/', '/sign-in', '/sign-up'
+ *  or '/app/mon-entreprise' */
 export const router = createBrowserRouter([
 	{
 		path: '/',
@@ -26,7 +30,7 @@ export const router = createBrowserRouter([
 	{
 		path: '/sign-up',
 		element: (
-			<RequireAuth redirectTo='/app/tableau-de-bord' inversed>
+			<RequireAuth redirectTo="/app/tableau-de-bord" inversed>
 				<SignUp />
 			</RequireAuth>
 		),
@@ -34,7 +38,7 @@ export const router = createBrowserRouter([
 	{
 		path: '/sign-in',
 		element: (
-			<RequireAuth redirectTo='/app/tableau-de-bord' inversed>
+			<RequireAuth redirectTo="/app/tableau-de-bord" inversed>
 				<SignIn />
 			</RequireAuth>
 		),
@@ -42,7 +46,7 @@ export const router = createBrowserRouter([
 	{
 		path: '/app',
 		element: (
-			<RequireAuth redirectTo='/sign-in'>
+			<RequireAuth redirectTo="/sign-in">
 				<Dashboard />
 			</RequireAuth>
 		),
