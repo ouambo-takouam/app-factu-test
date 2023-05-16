@@ -1,4 +1,6 @@
 export const userTypes = {
-	userSubscribed: 'user/subscribed',
-	userUnSubscribed: 'user/unsubscribed',
+	USER_FETCH_ASYNC: 'USER_FETCH_ASYNC',
+	USER_FETCH_REQUESTED: 'USER_FETCH_REQUESTED',
+	USER_FETCH_SUCCEDED: 'USER_FETCH_SUCCEDED',
+	USER_FETCH_FAILED: 'USER_FETCH_FAILED',
 };

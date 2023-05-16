@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { postData } from '../../utils/fetch.utils';
 import { useDispatch, useSelector } from 'react-redux';
+import { userFetchAsync } from '../../redux/user/user.actions';
 import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../../components/form/input-field/input-field.component';
 import google_logo from '../../assets/images/png/google-mini-logo.png';
@@ -17,8 +18,7 @@ export default function SignIn() {
 
 	/** getting from the store 'isLoading' data. 'dispatch' will be used to dispatch 
 	redux actions */
-	// const isLoading = useSelector((state) => state.user.isLoading);
-	const isLoading = false;
+	const isLoading = useSelector((state) => state.user.isLoading);
 	const dispatch = useDispatch();
 
 	// 'handleSubmit' function handles form submition
@@ -33,25 +33,15 @@ export default function SignIn() {
 		/** this action is for displaying the spinnerLoader by toogling the 'isLoading' redux store value
 		 *  from false to true
 		 */
-		// dispatch(toogleLoading());
-
-		try {
-			// perform fetch 'POST' type to the server
-			const { user, token } = await postData('auth/login', {
-				email,
-				password,
-			});
-
-			// store updated with credentials and token sent by server
-			dispatch({
-				type: 'user/subscribed',
-				payload: { credentials: user, token },
-			});
-		} catch (error) {
-			// dispatch(toogleLoading());
-			console.log(error.message);
-		}
-	};
+		dispatch(
+			userFetchAsync({
+				path: 'auth/login',
+				credentials: {
+					email,
+					password,
+				},
+			})
+		);
 
 	return (
 		<Fragment>
