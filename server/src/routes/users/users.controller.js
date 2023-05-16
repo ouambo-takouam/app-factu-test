@@ -38,7 +38,7 @@ async function httpRegister(req, res) {
 		const token = generateToken({ user_id: user._id, email });
 
 		// return new user
-		return res.status(201).json({ user, token });
+		return res.status(201).json({ credentials: user, token });
 	} catch (err) {
 		console.log(err);
 	}
@@ -63,7 +63,7 @@ async function httpLogin(req, res) {
 
 		const token = generateToken({ user_id: user._id, email });
 
-		return res.status(200).json({ user, token });
+		return res.status(200).json({ credentials: user, token });
 	} catch (err) {
 		console.log(err);
 	}

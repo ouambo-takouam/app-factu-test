@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { postData } from '../../utils/fetch.utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { userFetchAsync } from '../../redux/user/user.actions';
 import useManageInput from '../../hooks/manage-input.hook';
@@ -42,6 +41,7 @@ export default function SignIn() {
 				},
 			})
 		);
+	};
 
 	return (
 		<Fragment>

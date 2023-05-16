@@ -1,18 +1,18 @@
 import { takeEvery, all, call, put } from 'redux-saga/effects';
+import { postData } from '../../utils/fetch.utils.js';
 import { userTypes } from './user.types.js';
 import {
 	userFetchRequested,
 	userFetchSucceded,
 	userFetchFailed,
 } from './user.actions.js';
-import { postData } from '../../utils/fetch.utils.js';
 
 function* fetchUserDataAsync({ payload }) {
 	const { path, credentials } = payload;
 
 	try {
 		yield put(userFetchRequested());
-		const data = yield call(() => postData(path, credentials));
+		const data = yield call(() => postData(path, credentials)); // {credentials, token}
 		yield put(userFetchSucceded(data));
 	} catch (error) {
 		yield put(userFetchFailed());
@@ -24,5 +24,5 @@ function* watchUserFetchRequest() {
 }
 
 export default function* userSaga() {
-	yield all([watchUserFetchRequest]);
+	yield all([call(watchUserFetchRequest)]);
 }

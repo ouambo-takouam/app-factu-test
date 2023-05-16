@@ -1,19 +1,19 @@
 import { userTypes } from './user.types';
 
-function userFetchAsync() {
-	return { type: userTypes.USER_FETCH_ASYNC };
+function userFetchAsync(payload) {
+	return { type: userTypes.USER_FETCH_ASYNC, payload };
 }
 
 function userFetchRequested() {
 	return { type: userTypes.USER_FETCH_REQUESTED };
 }
 
-function userFetchSucceded() {
-	return { type: userTypes.USER_FETCH_SUCCEDED };
+function userFetchSucceded(payload) {
+	return { type: userTypes.USER_FETCH_SUCCEDED, payload };
 }
 
-function userFetchFailed() {
-	return { type: userTypes.USER_FETCH_FAILED };
+function userFetchFailed(payload) {
+	return { type: userTypes.USER_FETCH_FAILED, payload };
 }
 
 export {

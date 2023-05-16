@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { postData } from '../../utils/fetch.utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { subscribeUser } from '../../redux/user/user.actions';
+import { userFetchAsync } from '../../redux/user/user.actions';
 import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../../components/form/input-field/input-field.component';
 import { CustomButton } from '../../components/form/custom-button/custom-button.component';
@@ -36,18 +36,17 @@ export default function SignUp() {
 		/** this action is for displaying the spinnerLoader by toogling the 'isLoading' redux store value
 		 *  from false to true
 		 */
-		// dispatch(toogleLoading());
-
-		// perform fetch 'POST' type to the server
-		const { user, token } = await postData('auth/register', {
-			first_name,
-			last_name,
-			email,
-			password,
-		});
-
-		// store updated with credentials and token sent by server
-		dispatch(subscribeUser({ credentials: user, token }));
+		dispatch(
+			userFetchAsync({
+				path: 'auth/register',
+				credentials: {
+					first_name,
+					last_name,
+					email,
+					password,
+				},
+			})
+		);
 	};
 
 	return (
