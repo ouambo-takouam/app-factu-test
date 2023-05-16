@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { postData } from '../../../utils/fetch.utils';
 import { useDispatch, useSelector } from 'react-redux';
 import customerOptions from '../../../data/customer-select-options.json';
 import useToggleItems from '../../../hooks/toggle-items.hook';
@@ -84,16 +85,12 @@ export default function CustomerModal({ toogleClientModal }) {
 			return alert('first name and last name should be set !');
 		}
 
-		const response = await fetch('http://localhost:4000/api/v1/customers', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({ user_id: credentials._id, ...fields }),
-		});
-
-		const created = await response.json();
+		// postData: perform fetch 'POST' type to the server
+		const created = await postData(
+			'customers',
+			{ user_id: credentials._id, ...fields },
+			token
+		);
 
 		console.log(created);
 

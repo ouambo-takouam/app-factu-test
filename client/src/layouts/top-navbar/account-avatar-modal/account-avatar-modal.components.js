@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { disconnect } from '../../../redux/slices/user.slice';
 import './account-avatar-modal.styles.scss';
 
 export default function AccountAvatarModal({ handleChange }) {
@@ -8,7 +7,7 @@ export default function AccountAvatarModal({ handleChange }) {
 	const { first_name, last_name, email } = credentials;
 
 	const handleClick = () => {
-		dispatch(disconnect());
+		dispatch({ type: 'user/unsubscribed' });
 		handleChange();
 	};
 
