@@ -2,6 +2,11 @@
 	display: flex;
 	align-items: center;
 	font-size: 14px;
+	border-bottom: 1px solid #5c5c5c1d;
+
+	a:hover {
+		text-decoration: underline;
+	}
 
 	&:hover {
 		background-color: #bdbdbd1d;
@@ -29,15 +34,12 @@
 			align-items: center;
 			color: #393a3d;
 
-			.display-name {
-				font-weight: bold;
-			}
-
 			.email-icon {
 				display: flex;
 				align-items: center;
 				margin-left: 15px;
 				color: #8d9096;
+				cursor: pointer;
 			}
 		}
 
@@ -45,6 +47,18 @@
 			font-size: 12px;
 			color: #8d9096;
 			margin-top: 5px;
+		}
+	}
+
+	.field-action {
+		display: flex;
+		align-items: center;
+
+		.other-actions {
+			display: flex;
+			align-items: center;
+			margin-left: 5px;
+			cursor: pointer;
 		}
 	}
 }

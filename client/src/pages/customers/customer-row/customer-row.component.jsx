@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import { FiMail } from 'react-icons/fi';
+import { MdArrowDropDown } from 'react-icons/md';
 import './customer-row.styles.scss';
 
 export default function CustomerRow({ customer }) {
-	const { first_name, last_name, company, address, town, phone1, email } =
-		customer;
+	const { company, display_name, email, phone1, street, town } = customer;
 
 	return (
 		<div className="customer-row">
@@ -12,9 +13,7 @@ export default function CustomerRow({ customer }) {
 			</div>
 			<div className="field-customer-info">
 				<div className="name-info">
-					<span className="display-name">
-						{first_name} {last_name}
-					</span>
+					<Link className="display-name">{display_name}</Link>
 					<span className="email-icon">
 						<FiMail size={18} />
 					</span>
@@ -22,13 +21,18 @@ export default function CustomerRow({ customer }) {
 				<div className="display-company">{company}</div>
 			</div>
 			<div className="field-adress">
-				<div>{address}</div>
+				<div>{street}</div>
 				<span>{town}</span>
 			</div>
 			<div className="field-phone">{phone1}</div>
 			<div className="field-email">{email}</div>
 			<div className="field-solde-sortant">XAF0.00</div>
-			<div className="field-action">Action</div>
+			<div className="field-action">
+				<Link className="create-invoice-link">Creer une facture</Link>
+				<span className="other-actions">
+					<MdArrowDropDown size={24} />
+				</span>
+			</div>
 		</div>
 	);
 }
