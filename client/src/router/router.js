@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
 
 			/** ---- Ma gestion commerciale ---- */
 			{
-				path: 'customers',
+				path: 'clients',
 				element: <Customers />,
 			},
 			{
@@ -111,10 +111,6 @@ export const router = createBrowserRouter([
 			},
 
 			/** ---- Clients et prospects ---- */
-			{
-				path: 'clients',
-				element: <p>Clients</p>,
-			},
 			{
 				path: 'marketing',
 				element: <p>Boost business with Mailchimp</p>,

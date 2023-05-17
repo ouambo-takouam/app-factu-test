@@ -18,7 +18,7 @@ export default function ShortcutsWrapper() {
 						<div className="shortcut-text">Enregistrer un achat comptable</div>
 					</button>
 				</Link>
-				<Link to="/app/customers">
+				<Link to="/app/clients">
 					<button>
 						<div className="shortcut-icon sc-client"></div>
 						<div className="shortcut-text">Ajouter un client</div>
