@@ -16,9 +16,14 @@ function dataFetchFailed(payload) {
 	return { type: dataTypes.DATA_FETCH_FAILED, payload };
 }
 
+function dataAddItem(payload) {
+	return { type: dataTypes.DATA_ADD_ITEM, payload };
+}
+
 export {
 	dataFetchAsync,
 	dataFetchRequested,
 	dataFetchSucceded,
 	dataFetchFailed,
+	dataAddItem,
 };

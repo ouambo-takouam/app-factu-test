@@ -7,7 +7,10 @@ const initialState = {
 	error: null,
 };
 
-// payload: {type: 'invoices', value: []}
+// add new entry to state data. It can be customers, invoices, etc...
+function addItem(itemToAdd, itemsArray) {
+	return [...itemsArray, itemToAdd];
+}
 
 function dataReducer(state = initialState, action) {
 	const { type, payload } = action;
@@ -18,6 +21,7 @@ function dataReducer(state = initialState, action) {
 				...state,
 				isLoading: true,
 			};
+		// ex: payload: {type: 'invoices', value: []}
 		case dataTypes.DATA_FETCH_SUCCEDED:
 			return {
 				...state,
@@ -29,6 +33,12 @@ function dataReducer(state = initialState, action) {
 				...state,
 				isLoading: false,
 				error: payload,
+			};
+		// ex: payload: {type: 'customers', value: {}}
+		case dataTypes.DATA_ADD_ITEM:
+			return {
+				...state,
+				[payload.type]: addItem(payload.value, state[payload.type]),
 			};
 		default:
 			return state;

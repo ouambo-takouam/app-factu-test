@@ -1,11 +1,11 @@
 const Customer = require('./customers.mongo');
 
-async function getAllCustomers() {
-	return await Customer.find({});
+async function getAllCustomers(user_id) {
+	return await Customer.find({ user_id }).exec();
 }
 
-async function addNewCustomer(data) {
-	return await Customer.create(data);
+async function addNewCustomer(user_id, data) {
+	return await Customer.create({ user_id, ...data });
 }
 
 module.exports = {

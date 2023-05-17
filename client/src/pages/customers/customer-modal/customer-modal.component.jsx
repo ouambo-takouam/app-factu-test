@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import { postData } from '../../../utils/fetch.utils';
 import { useDispatch, useSelector } from 'react-redux';
+import { dataAddItem } from '../../../redux/data/data.actions';
+import { postData } from '../../../utils/fetch.utils';
 import customerOptions from '../../../data/customer-select-options.json';
 import useToggleItems from '../../../hooks/toggle-items.hook';
 import useManageInput from '../../../hooks/manage-input.hook';
@@ -14,7 +15,7 @@ import './customer-modal.styles.scss';
 export default function CustomerModal({ toogleClientModal }) {
 	// react-redux usefull variables !
 	const dispatch = useDispatch();
-	const { credentials, token } = useSelector((state) => state.user);
+	const { token } = useSelector((state) => state.user);
 
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
@@ -87,12 +88,12 @@ export default function CustomerModal({ toogleClientModal }) {
 
 		// postData: perform fetch 'POST' type to the server
 		const created = await postData(
-			'customers',
-			{ user_id: credentials._id, ...fields },
-			token
+			'customers', // path
+			fields, // data
+			token // token
 		);
 
-		console.log(created);
+		dispatch(dataAddItem({ type: 'customers', value: created }));
 
 		toogleClientModal();
 	};
