@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import CustomerRow from '../customer-row/customer-row.component';
+import './customers-list.styles.scss';
 
 export default function CustomersList() {
 	const customers = useSelector((state) => state.data.customers);
