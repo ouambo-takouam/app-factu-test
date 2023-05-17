@@ -29,6 +29,12 @@ function userReducer(state = initialState, action) {
 				isLoading: false,
 				error: payload,
 			};
+		case userTypes.USER_DISCONNECTED:
+			return {
+				...state,
+				credentials: null,
+				token: null,
+			};
 		default:
 			return state;
 	}

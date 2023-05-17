@@ -7,13 +7,17 @@ import {
 	userFetchFailed,
 } from './user.actions.js';
 
+/** Async code build to manage user connection.
+ *  I'm also thinking about browsing some data from the server
+ *  that can be usefull on the front-end !
+ */
 function* fetchUserDataAsync({ payload }) {
 	const { path, credentials } = payload;
 
 	try {
 		yield put(userFetchRequested());
-		const data = yield call(() => postData(path, credentials)); // {credentials, token}
-		yield put(userFetchSucceded(data));
+		const userInfo = yield call(() => postData(path, credentials)); // {credentials, token}
+		yield put(userFetchSucceded(userInfo));
 	} catch (error) {
 		yield put(userFetchFailed());
 	}

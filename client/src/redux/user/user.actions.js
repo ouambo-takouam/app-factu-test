@@ -16,9 +16,14 @@ function userFetchFailed(payload) {
 	return { type: userTypes.USER_FETCH_FAILED, payload };
 }
 
+function userDisconnected() {
+	return { type: userTypes.USER_DISCONNECTED };
+}
+
 export {
 	userFetchAsync,
 	userFetchRequested,
 	userFetchSucceded,
 	userFetchFailed,
+	userDisconnected,
 };
