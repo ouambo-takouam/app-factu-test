@@ -1,17 +1,13 @@
 import OptionsBtn from '../options-btn/options-btn.component';
 import './options-btn-wrapper.styles.scss';
 
-export default function OptionsBtnWrapper({ items }) {
+export default function OptionsBtnWrapper({ options }) {
 	return (
 		<div className={`options-btn-wrapper`}>
-			{items.map((item, idx) => {
-				const { path, title } = item;
+			{options.map((option, idx) => {
+				const { path, title } = option;
 
-				return (
-					<OptionsBtn key={idx} path={path}>
-						{title}
-					</OptionsBtn>
-				);
+				return <OptionsBtn key={idx} /* path={path} */>{title}</OptionsBtn>;
 			})}
 		</div>
 	);

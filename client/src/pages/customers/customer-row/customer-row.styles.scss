@@ -53,12 +53,19 @@
 	.field-action {
 		display: flex;
 		align-items: center;
+		position: relative;
 
 		.other-actions {
 			display: flex;
 			align-items: center;
 			margin-left: 5px;
 			cursor: pointer;
+		}
+
+		.field-action-options {
+			position: absolute;
+			top: 40px;
+			z-index: 4;
 		}
 	}
 }

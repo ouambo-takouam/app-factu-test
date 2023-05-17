@@ -2,10 +2,12 @@
 	background-color: #fff;
 	color: #393a3d;
 	padding: 5px 12px;
+	font-size: 14px;
 	width: 100%;
 
 	&:hover {
 		color: #2ca01c;
-		background-color: #b4b4b425;
+		background-color: #f0f0f0;
+		text-decoration: none !important;
 	}
 }

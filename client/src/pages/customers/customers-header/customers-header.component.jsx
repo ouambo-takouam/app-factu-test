@@ -1,6 +1,5 @@
 import useHide from '../../../hooks/hide.hook';
 import { BsCaretDownFill } from 'react-icons/bs';
-import OptionsBtnWrapper from '../../../components/ui/options-btn-wrapper/options-btn-wrapper.component';
 import './customers-header.styles.scss';
 
 export default function CustomersHeader({ toogleClientModal }) {
@@ -38,12 +37,6 @@ export default function CustomersHeader({ toogleClientModal }) {
 					</div>
 					<div className="table-cell unpaid-tab"></div>
 					<div className="table-cell paid-tab"></div>
-					<OptionsBtnWrapper
-						items={[
-							{ path: 'customers', title: 'Customers' },
-							{ path: 'invoices', title: 'Invoices' },
-						]}
-					/>
 				</div>
 			</div>
 		</div>
