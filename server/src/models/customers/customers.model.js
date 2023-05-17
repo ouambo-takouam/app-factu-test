@@ -1,7 +1,7 @@
 const Customer = require('./customers.mongo');
 
 async function getAllCustomers() {
-	return await Customer.findOne({});
+	return await Customer.find({});
 }
 
 async function addNewCustomer(data) {

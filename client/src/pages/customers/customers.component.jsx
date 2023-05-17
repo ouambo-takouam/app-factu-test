@@ -1,11 +1,13 @@
 import { Fragment } from 'react';
 import useHide from '../../hooks/hide.hook';
 import { BsCaretDownFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 import CustomerRow from './customer-row/customer-row.component';
 import CustomerModal from './customer-modal/customer-modal.component';
 import './customers.styles.scss';
 
 export default function Customers() {
+	const customers = useSelector((state) => state.data.customers);
 	// custom hooks to choose whether to display or not a component on the dom
 	const { hide: hideImportBtn, handleHide: toogleImportBtn } = useHide();
 	const { hide: hideClientModal, handleHide: toogleClientModal } = useHide();
@@ -49,8 +51,12 @@ export default function Customers() {
 				<div className="customers-list-wrapper">
 					<div className="customers-list-header"></div>
 					<div className="customers-list-data">
-						<CustomerRow />
-						{/** Here are listed other customers */}
+						{customers
+							.slice(0)
+							.reverse()
+							.map((customer, idx) => (
+								<CustomerRow key={idx} customer={customer} />
+							))}
 					</div>
 				</div>
 			</div>

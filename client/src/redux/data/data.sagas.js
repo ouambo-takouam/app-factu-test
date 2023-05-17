@@ -11,12 +11,13 @@ import {
  *  update redux store. These data will be used on frond-end.
  */
 function* fetchDataAsync({ payload }) {
+	// data passed by dashboard component. They will be used to make server GET request
 	const { path, token } = payload;
 
 	try {
-		yield put(dataFetchRequested());
-		const data = yield call(() => getData(path, token));
-		yield put(dataFetchSucceded({ type: 'customers', value: data }));
+		yield put(dataFetchRequested()); // for optional spinner loader (isLoading === true)
+		const data = yield call(() => getData(path, token)); // getting data
+		yield put(dataFetchSucceded({ type: 'customers', value: data })); // passing data to redux reducer
 	} catch (error) {
 		yield put(dataFetchFailed(error));
 	}

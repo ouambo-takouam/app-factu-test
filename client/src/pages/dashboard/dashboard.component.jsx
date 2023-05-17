@@ -9,6 +9,10 @@ export default function Dashboard() {
 	const token = useSelector((state) => state.user.token);
 
 	const dispatch = useDispatch();
+	/** Loading customers list from remote server
+	 *  The saga logic need to know the 'path' and 'token' in order
+	 *  to properly make request to server.
+	 */
 	dispatch(dataFetchAsync({ path: 'customers', token }));
 
 	return (
