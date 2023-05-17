@@ -1,32 +1,34 @@
 import { takeEvery, all, call, put } from 'redux-saga/effects';
-import { postData } from '../../utils/fetch.utils.js';
-import { userTypes } from './user.types.js';
+import { getData } from '../../utils/fetch.utils.js';
+import { dataTypes } from './data.types.js';
 import {
-	userFetchRequested,
-	userFetchSucceded,
-	userFetchFailed,
-} from './user.actions.js';
+	dataFetchRequested,
+	dataFetchSucceded,
+	dataFetchFailed,
+} from './data.actions.js';
 
-/** Async code build to manage user connection.
- *  I'm also thinking about browsing some data from the server
- *  that can be usefull on the front-end !
+/** Saga logic used to fetch company data fom remote server and
+ *  update redux store. These data will be used on frond-end.
  */
-function* fetchUserDataAsync({ payload }) {
-	const { path, credentials } = payload;
+function* fetchDataAsync({ payload }) {
+	const { path, token } = payload;
 
 	try {
-		yield put(userFetchRequested());
-		const userInfo = yield call(() => postData(path, credentials)); // {credentials, token}
-		yield put(userFetchSucceded(userInfo));
+		yield put(dataFetchRequested());
+		const data = yield call(() => getData(path, token));
+		yield put(dataFetchSucceded(data));
 	} catch (error) {
-		yield put(userFetchFailed());
+		yield put(dataFetchFailed(error));
 	}
 }
 
-function* watchUserFetchRequest() {
-	yield takeEvery(userTypes.USER_FETCH_ASYNC, fetchUserDataAsync);
+/** Watcher which gets called everytime the 'DATA_FETCH_ASYNC' action type is
+ *  triggered !
+ */
+function* watchDataFetchRequest() {
+	yield takeEvery(dataTypes.DATA_FETCH_ASYNC, fetchDataAsync);
 }
 
-export default function* userSaga() {
-	yield all([call(watchUserFetchRequest)]);
+export default function* dataSaga() {
+	yield all([call(watchDataFetchRequest)]);
 }

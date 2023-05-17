@@ -7,9 +7,8 @@ import {
 	userFetchFailed,
 } from './user.actions.js';
 
-/** Async code build to manage user connection.
- *  I'm also thinking about browsing some data from the server
- *  that can be usefull on the front-end !
+/** Saga logic used to fetch user credentials fom remote server and
+ *  update redux store
  */
 function* fetchUserDataAsync({ payload }) {
 	const { path, credentials } = payload;
@@ -19,10 +18,13 @@ function* fetchUserDataAsync({ payload }) {
 		const userInfo = yield call(() => postData(path, credentials)); // {credentials, token}
 		yield put(userFetchSucceded(userInfo));
 	} catch (error) {
-		yield put(userFetchFailed());
+		yield put(userFetchFailed(error));
 	}
 }
 
+/** Watcher which gets called everytime the 'USER_FETCH_ASYNC' action type is
+ *  triggered !
+ */
 function* watchUserFetchRequest() {
 	yield takeEvery(userTypes.USER_FETCH_ASYNC, fetchUserDataAsync);
 }
