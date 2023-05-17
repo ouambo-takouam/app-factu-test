@@ -16,7 +16,7 @@ function* fetchDataAsync({ payload }) {
 	try {
 		yield put(dataFetchRequested());
 		const data = yield call(() => getData(path, token));
-		yield put(dataFetchSucceded(data));
+		yield put(dataFetchSucceded({ type: 'customers', value: data }));
 	} catch (error) {
 		yield put(dataFetchFailed(error));
 	}

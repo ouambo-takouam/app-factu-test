@@ -21,7 +21,7 @@ function dataReducer(state = initialState, action) {
 		case dataTypes.DATA_FETCH_SUCCEDED:
 			return {
 				...state,
-				[payload.type]: payload.value,
+				[payload.type]: [payload.value],
 				isLoading: false,
 			};
 		case dataTypes.DATA_FETCH_FAILED:
