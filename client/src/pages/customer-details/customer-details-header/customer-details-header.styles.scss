@@ -30,6 +30,13 @@
 		}
 	}
 
+	.field-action-options {
+		position: absolute;
+		top: 70px;
+		right: 20px;
+		z-index: 4;
+	}
+
 	.second-line {
 		display: flex;
 		flex-direction: column;

@@ -37,8 +37,8 @@ export default function CustomerRow({ customer }) {
 				<span className="other-actions">
 					<MdArrowDropDown size={24} onClick={handleHide} />
 				</span>
-				<div className="field-action-options">
-					{!hide && (
+				{!hide && (
+					<div className="field-action-options">
 						<OptionsBtnWrapper
 							options={[
 								{ path: '/', title: 'Creer un recu de vente' },
@@ -47,8 +47,8 @@ export default function CustomerRow({ customer }) {
 								{ path: '/', title: 'Creer un releve de situation' },
 							]}
 						/>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

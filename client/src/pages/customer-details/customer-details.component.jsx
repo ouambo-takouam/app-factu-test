@@ -1,7 +1,7 @@
 import { IoIosArrowBack } from 'react-icons/io';
 import { RxPlus } from 'react-icons/rx';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import InputField from '../../components/form/input-field/input-field.component';
 import CustomerDetailsContent from './customer-details-content/customer-details-content.component';
@@ -9,6 +9,7 @@ import './customer-details.styles.scss';
 
 export default function CustomerDetails() {
 	const navigate = useNavigate();
+	const { clientId } = useParams();
 	const customers = useSelector((state) => state.data.customers);
 
 	return (
