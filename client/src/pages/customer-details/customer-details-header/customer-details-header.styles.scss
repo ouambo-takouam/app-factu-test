@@ -1,60 +1,68 @@
-.customers-header-wrapper {
-	height: 230px;
-	padding: 24px 30px 0 20px;
+.customer-details-header-wrapper {
+	padding: 15px 30px;
+	height: 175px;
 	background-color: #f4f5f8;
 
-	.stage-header {
+	.first-line {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 
-		.page-title {
-			font-size: 24px;
-			font-weight: 500;
-			font-style: normal;
-			color: #393a3d;
-			padding-top: 5px;
+		& > * {
+			display: inherit;
+			align-items: center;
 		}
 
-		.new-customer-btn-wrapper {
+		.page-title {
+			margin-right: 20px;
+		}
+
+		.email-icon {
 			display: flex;
 			align-items: center;
-			position: relative;
+			cursor: pointer;
+		}
 
+		.right {
 			button {
-				border: none;
-				color: #fff;
-				background: #2ca01c;
-				height: 36px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+				margin-left: 10px;
+			}
+		}
+	}
+
+	.second-line {
+		display: flex;
+		flex-direction: column;
+		align-items: end;
+
+		.top,
+		.bottom {
+			width: 150px;
+			padding: 1px 15px;
+			margin-bottom: 8px;
+
+			.balance {
+				font-size: 18px;
+				color: #000;
+				line-height: 0.85;
 			}
 
-			.left-btn {
-				padding: 12px 22px;
-				border-radius: 36px 0 0 36px;
+			.subtitle {
+				letter-spacing: 1px;
+				color: #6e8ba8;
+				text-transform: uppercase;
+				font-size: 12px;
+				margin-top: 4px;
+				line-height: 0.8;
 			}
+		}
 
-			.right-btn {
-				margin-left: 1px;
-				padding: 13px;
-				border-radius: 0 36px 36px 0;
-			}
+		.top {
+			border-left: 5px solid #f2b835;
+		}
 
-			.left-btn:hover,
-			.right-btn:hover {
-				background: rgba(16, 128, 0, 0.9);
-			}
-
-			.import-btn {
-				position: absolute;
-				top: 45px;
-				width: 100%;
-				background-color: #fff;
-				color: #393a3d;
-				border: 1px solid #8e8e8e;
-			}
+		.bottom {
+			border-left: 5px solid #ce5133;
 		}
 	}
 }
