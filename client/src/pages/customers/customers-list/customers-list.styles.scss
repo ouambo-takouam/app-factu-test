@@ -9,10 +9,13 @@
 			justify-content: space-between;
 
 			.options-left {
-				width: 400px;
 				display: flex;
-				justify-content: space-between;
 				align-items: center;
+				margin-left: 20px;
+
+				& > * {
+					margin-right: 15px !important;
+				}
 
 				.input-fieldset {
 					margin: 0;

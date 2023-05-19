@@ -294,7 +294,11 @@ export default function CustomerModal({ toogleClientModal }) {
 			</div>
 			<div className="client-modal-footer">
 				<div className="footer-inner">
-					<CustomButton $rounded onClick={toogleClientModal}>
+					<CustomButton
+						$rounded
+						$hshadow="inset 0 0 0 1px #8D9096"
+						onClick={toogleClientModal}
+					>
 						Annuler
 					</CustomButton>
 					<CustomButton $rounded $validate onClick={handleSubmit}>

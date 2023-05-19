@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { BsArrow90DegDown } from 'react-icons/bs';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import InputField from '../../../components/form/input-field/input-field.component';
 import CustomerRow from '../customer-row/customer-row.component';
@@ -12,6 +13,7 @@ export default function CustomersList() {
 			<div className="customers-list-header">
 				<div className="header-options">
 					<div className="options-left">
+						<BsArrow90DegDown />
 						<CustomButton
 							$rounded
 							$padding="8px 25px"

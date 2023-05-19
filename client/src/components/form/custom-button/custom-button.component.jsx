@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const CustomButton = styled.button`
+	padding: 8px 20px;
 	padding: ${({ $padding }) => $padding};
 	width: ${({ $width }) => $width};
 	border: 2px solid rgb(141, 144, 150);
@@ -17,6 +18,7 @@ export const CustomButton = styled.button`
 
 	&:hover {
 		background: ${({ $hcolor }) => $hcolor};
+		box-shadow: ${({ $hshadow }) => $hshadow};
 	}
 
 	${(props) =>
