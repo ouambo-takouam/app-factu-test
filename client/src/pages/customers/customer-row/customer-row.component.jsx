@@ -7,7 +7,7 @@ import './customer-row.styles.scss';
 
 export default function CustomerRow({ customer }) {
 	const { hide, handleHide } = useHide();
-	const { company, display_name, email, phone1, street, town } = customer;
+	const { _id, company, display_name, email, phone1, street, town } = customer;
 
 	return (
 		<div className="customer-row">
@@ -16,7 +16,9 @@ export default function CustomerRow({ customer }) {
 			</div>
 			<div className="field-customer-info">
 				<div className="name-info">
-					<Link className="display-name">{display_name}</Link>
+					<Link to={_id} className="display-name">
+						{display_name}
+					</Link>
 					<span className="email-icon">
 						<FiMail size={18} />
 					</span>
