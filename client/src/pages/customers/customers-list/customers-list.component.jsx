@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
+import InputField from '../../../components/form/input-field/input-field.component';
 import CustomerRow from '../customer-row/customer-row.component';
 import './customers-list.styles.scss';
 
@@ -7,7 +9,33 @@ export default function CustomersList() {
 
 	return (
 		<div className="customers-list-wrapper">
-			<div className="customers-list-header"></div>
+			<div className="customers-list-header">
+				<div className="header-options">
+					<div className="options-left">
+						<CustomButton
+							$rounded
+							$padding="8px 25px"
+							$bcolor="#000"
+							$hcolor="rgba(107,108,114,.25)"
+						>
+							Actions groupees
+						</CustomButton>
+						<InputField placeholder="Rechercher" />
+					</div>
+					<div className="options-right"></div>
+				</div>
+				<div className="header-titles">
+					<div className="field-check">
+						<input type="checkbox" />
+					</div>
+					<span>CLIENT / ENTREPRISE</span>
+					<span>ADRESSE</span>
+					<span>TÉLÉPHONE</span>
+					<span>E-MAIL</span>
+					<span>SOLDE COURANT</span>
+					<span>ACTION</span>
+				</div>
+			</div>
 			<div className="customers-list-data">
 				{customers
 					.slice(0)

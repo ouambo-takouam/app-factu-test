@@ -1,19 +1,23 @@
 import styled, { css } from 'styled-components';
 
 export const CustomButton = styled.button`
-	padding: 5px 25px;
-	height: 44px;
-	min-height: 44px;
-	width: ${(props) => props.$fullwidth && '100%'};
+	padding: ${({ $padding }) => $padding};
+	width: ${({ $width }) => $width};
 	border: 2px solid rgb(141, 144, 150);
+	border-color: ${({ $bcolor }) => $bcolor};
 	border-radius: ${(props) => (props.$rounded ? '50px' : '2px')};
 	margin-top: 15px;
 	margin-bottom: 15px;
 	font-size: 15px;
+	font-weight: ${({ $weight }) => $weight};
 	background: #fff;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	&:hover {
+		background: ${({ $hcolor }) => $hcolor};
+	}
 
 	${(props) =>
 		props.$validate &&

@@ -101,7 +101,12 @@ export default function SignUp() {
 								onChangeHandler={handleChange}
 								fullwidth
 							/>
-							<CustomButton type="submit" $validate $fullwidth>
+							<CustomButton
+								type="submit"
+								$validate
+								$width="100%"
+								$padding="10px 20px"
+							>
 								Creer mon compte
 							</CustomButton>
 						</form>

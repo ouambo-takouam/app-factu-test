@@ -29,7 +29,7 @@ export default function CustomerRow({ customer }) {
 			</div>
 			<div className="field-phone">{phone1}</div>
 			<div className="field-email">{email}</div>
-			<div className="field-solde-sortant">XAF0.00</div>
+			<div className="field-solde-courant">XAF0.00</div>
 			<div className="field-action">
 				<Link className="create-invoice-link">Creer une facture</Link>
 				<span className="other-actions">

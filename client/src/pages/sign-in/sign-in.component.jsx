@@ -51,7 +51,7 @@ export default function SignIn() {
 				<div className="sign-in-up-wrapper">
 					<div className="sign-wrapper">
 						<h2>Connexion</h2>
-						<CustomButton $fullwidth>
+						<CustomButton $width="100%">
 							<img src={google_logo} alt="" />
 							Se connecter avec Google
 						</CustomButton>
@@ -75,7 +75,12 @@ export default function SignIn() {
 								onChangeHandler={handleChange}
 								fullwidth
 							/>
-							<CustomButton type="submit" $validate $fullwidth>
+							<CustomButton
+								type="submit"
+								$validate
+								$width="100%"
+								$padding="10px 20px"
+							>
 								Se connecter
 							</CustomButton>
 						</form>
