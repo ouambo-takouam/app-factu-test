@@ -5,7 +5,7 @@ import SignIn from '../pages/sign-in/sign-in.component';
 import SignUp from '../pages/sign-up/sign-up.component';
 import Dashboard from '../pages/dashboard/dashboard.component';
 import Customers from '../pages/customers/customers.component';
-import CustomerDetails from '../pages/customers/customer-details/customer-details.component';
+import CustomerDetails from '../pages/customer-details/customer-details.component';
 import ShortcutsWrapper from '../components/ui/shortcuts-wrapper/shortcuts-wrapper.component';
 
 /** Checks 'token value' to redirect or not user depending on
