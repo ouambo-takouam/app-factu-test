@@ -20,10 +20,15 @@ function dataAddItem(payload) {
 	return { type: dataTypes.DATA_ADD_ITEM, payload };
 }
 
+function dataUpdateItem(payload) {
+	return { type: dataTypes.DATA_UPDATE_ITEM, payload };
+}
+
 export {
 	dataFetchAsync,
 	dataFetchRequested,
 	dataFetchSucceded,
 	dataFetchFailed,
 	dataAddItem,
+	dataUpdateItem,
 };

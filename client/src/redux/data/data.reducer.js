@@ -1,4 +1,5 @@
 import { dataTypes } from './data.types';
+import { addItem, updateItem } from './data.utils';
 
 const initialState = {
 	customers: [],
@@ -6,11 +7,6 @@ const initialState = {
 	isLoading: false,
 	error: null,
 };
-
-// add new entry to state data. It can be customers, invoices, etc...
-function addItem(itemToAdd, itemsArray) {
-	return [...itemsArray, itemToAdd];
-}
 
 function dataReducer(state = initialState, action) {
 	const { type, payload } = action;
@@ -39,6 +35,11 @@ function dataReducer(state = initialState, action) {
 			return {
 				...state,
 				[payload.type]: addItem(payload.value, state[payload.type]),
+			};
+		case dataTypes.DATA_UPDATE_ITEM:
+			return {
+				...state,
+				[payload.type]: updateItem(payload.value, state[payload.type]),
 			};
 		default:
 			return state;

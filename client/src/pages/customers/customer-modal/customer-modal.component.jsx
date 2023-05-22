@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { dataAddItem } from '../../../redux/data/data.actions';
+import { dataAddItem, dataUpdateItem } from '../../../redux/data/data.actions';
 import { postData } from '../../../utils/fetch.utils';
 import customerOptions from '../../../data/customer-select-options.json';
 import useToggleItems from '../../../hooks/toggle-items.hook';
@@ -106,12 +106,16 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 
 	const handleUpdate = async () => {
 		// Here we're performing a fetch 'PATCH' type to the server
-		const created = await postData(
+		const updated = await postData(
 			'PATCH', // method
 			'customers', // path
 			fields, // data
 			token // token
 		);
+
+		dispatch(dataUpdateItem({ type: 'customers', value: updated }));
+
+		toogleClientModal();
 	};
 
 	return (
