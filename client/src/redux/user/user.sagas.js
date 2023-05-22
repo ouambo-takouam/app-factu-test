@@ -15,7 +15,7 @@ function* fetchUserDataAsync({ payload }) {
 
 	try {
 		yield put(userFetchRequested());
-		const userInfo = yield call(() => postData(path, credentials)); // {credentials, token}
+		const userInfo = yield call(() => postData('POST', path, credentials)); // {credentials, token}
 		yield put(userFetchSucceded(userInfo));
 	} catch (error) {
 		yield put(userFetchFailed(error));

@@ -11,9 +11,9 @@ async function getData(path, token) {
 	return await response.json();
 }
 
-async function postData(path, data, token) {
+async function postData(method, path, data, token) {
 	const response = await fetch(`${BASE_URL}/${path}`, {
-		method: 'POST',
+		method,
 		headers: {
 			'Content-Type': 'application/json',
 			...(token && { Authorization: `Bearer ${token}` }),

@@ -93,6 +93,7 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 
 		// postData: perform fetch 'POST' type to the server
 		const created = await postData(
+			'POST',
 			'customers', // path
 			fields, // data
 			token // token
@@ -104,7 +105,13 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 	};
 
 	const handleUpdate = async () => {
-		console.log(fields);
+		// Here we're performing a fetch 'PATCH' type to the server
+		const created = await postData(
+			'PATCH', // method
+			'customers', // path
+			fields, // data
+			token // token
+		);
 	};
 
 	return (
