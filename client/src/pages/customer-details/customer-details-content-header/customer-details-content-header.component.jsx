@@ -2,10 +2,13 @@ import useHide from '../../../hooks/hide.hook';
 import { FaRegEnvelope } from 'react-icons/fa';
 import OptionsBtnWrapper from '../../../components/ui/options-btn-wrapper/options-btn-wrapper.component';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
+import CustomerModal from '../../customers/customer-modal/customer-modal.component';
 import './customer-details-content-header.styles.scss';
 
 export default function CustomerDetailsContentHeader({ customer }) {
-	const { hide, handleHide } = useHide();
+	const { hide: optionsHide, handleHide: handleOptionsHide } = useHide();
+	const { hide: customerModalHide, handleHide: handleCustomerModalHide } =
+		useHide();
 
 	return (
 		<div className="customer-details-header-wrapper">
@@ -17,13 +20,17 @@ export default function CustomerDetailsContentHeader({ customer }) {
 					</span>
 				</div>
 				<div className="right">
-					<CustomButton $rounded $hshadow="inset 0 0 0 1px #8D9096">
+					<CustomButton
+						onClick={handleCustomerModalHide}
+						$rounded
+						$hshadow="inset 0 0 0 1px #8D9096"
+					>
 						Modifier
 					</CustomButton>
-					<CustomButton $rounded $validate onClick={handleHide}>
+					<CustomButton $rounded $validate onClick={handleOptionsHide}>
 						Nouvelle operation
 					</CustomButton>
-					{!hide && (
+					{!optionsHide && (
 						<div className="field-action-options">
 							<OptionsBtnWrapper
 								options={[
@@ -50,6 +57,13 @@ export default function CustomerDetailsContentHeader({ customer }) {
 					<div className="subtitle">EN RETARD</div>
 				</div>
 			</div>
+
+			{!customerModalHide && (
+				<CustomerModal
+					prevData={customer}
+					toogleClientModal={handleCustomerModalHide}
+				/>
+			)}
 		</div>
 	);
 }

@@ -12,7 +12,7 @@ import TextArea from '../../../components/form/text-area/text-area.component';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import './customer-modal.styles.scss';
 
-export default function CustomerModal({ toogleClientModal }) {
+export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 	// react-redux usefull variables !
 	const dispatch = useDispatch();
 	const { token } = useSelector((state) => state.user);
@@ -21,7 +21,7 @@ export default function CustomerModal({ toogleClientModal }) {
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
 		firstItemOpen: true,
 	});
-	const [fields, handleChange] = useManageInput();
+	const [fields, handleChange] = useManageInput(prevData);
 	const {
 		first_name,
 		last_name,
@@ -101,6 +101,10 @@ export default function CustomerModal({ toogleClientModal }) {
 		dispatch(dataAddItem({ type: 'customers', value: created }));
 
 		toogleClientModal();
+	};
+
+	const handleUpdate = async () => {
+		console.log(fields);
 	};
 
 	return (
@@ -306,9 +310,15 @@ export default function CustomerModal({ toogleClientModal }) {
 					>
 						Annuler
 					</CustomButton>
-					<CustomButton $rounded $validate onClick={handleSubmit}>
-						Enregistrer
-					</CustomButton>
+					{!Object.keys(prevData).length ? (
+						<CustomButton $rounded $validate onClick={handleSubmit}>
+							Enregistrer
+						</CustomButton>
+					) : (
+						<CustomButton $rounded $validate onClick={handleUpdate}>
+							Mettre a jour
+						</CustomButton>
+					)}
 				</div>
 			</div>
 		</div>
