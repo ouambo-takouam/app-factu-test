@@ -4,7 +4,7 @@ export const CustomButton = styled.button`
 	padding: 8px 20px;
 	padding: ${({ $padding }) => $padding};
 	width: ${({ $width }) => $width};
-	border: 2px solid rgb(141, 144, 150);
+	border: 1px solid rgb(141, 144, 150);
 	border-color: ${({ $bcolor }) => $bcolor};
 	border-radius: ${(props) => (props.$rounded ? '50px' : '2px')};
 	margin-top: 15px;
