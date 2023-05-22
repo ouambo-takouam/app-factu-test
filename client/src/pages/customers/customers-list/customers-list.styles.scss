@@ -21,6 +21,21 @@
 					margin: 0;
 				}
 			}
+
+			.options-right {
+				display: flex;
+				align-items: center;
+				color: #babec5;
+
+				& > * {
+					margin-left: 10px;
+					cursor: pointer;
+
+					&:hover {
+						color: #929292;
+					}
+				}
+			}
 		}
 
 		.header-titles {
