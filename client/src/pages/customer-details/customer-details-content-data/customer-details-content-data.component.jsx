@@ -2,7 +2,10 @@ import useToggleItems from '../../../hooks/toggle-items.hook';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import './customer-details-content-data.styles.scss';
 
-export default function CustomerDetailsContentData({ customer }) {
+export default function CustomerDetailsContentData({
+	customer,
+	toogleClientModal,
+}) {
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: [
 			'toogle_list_operations',
@@ -50,7 +53,11 @@ export default function CustomerDetailsContentData({ customer }) {
 				{toogleItems[2].active && (
 					<div className="content-customer">
 						<div className="content-customer-header">
-							<CustomButton $rounded $hshadow="inset 0 0 0 1px #8D9096">
+							<CustomButton
+								onClick={toogleClientModal}
+								$rounded
+								$hshadow="inset 0 0 0 1px #8D9096"
+							>
 								Modifier
 							</CustomButton>
 						</div>

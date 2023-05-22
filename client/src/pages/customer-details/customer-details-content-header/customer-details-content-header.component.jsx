@@ -2,13 +2,13 @@ import useHide from '../../../hooks/hide.hook';
 import { FaRegEnvelope } from 'react-icons/fa';
 import OptionsBtnWrapper from '../../../components/ui/options-btn-wrapper/options-btn-wrapper.component';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
-import CustomerModal from '../../customers/customer-modal/customer-modal.component';
 import './customer-details-content-header.styles.scss';
 
-export default function CustomerDetailsContentHeader({ customer }) {
+export default function CustomerDetailsContentHeader({
+	customer,
+	toogleClientModal,
+}) {
 	const { hide: optionsHide, handleHide: handleOptionsHide } = useHide();
-	const { hide: customerModalHide, handleHide: handleCustomerModalHide } =
-		useHide();
 
 	return (
 		<div className="customer-details-header-wrapper">
@@ -21,7 +21,7 @@ export default function CustomerDetailsContentHeader({ customer }) {
 				</div>
 				<div className="right">
 					<CustomButton
-						onClick={handleCustomerModalHide}
+						onClick={toogleClientModal}
 						$rounded
 						$hshadow="inset 0 0 0 1px #8D9096"
 					>
@@ -57,13 +57,6 @@ export default function CustomerDetailsContentHeader({ customer }) {
 					<div className="subtitle">EN RETARD</div>
 				</div>
 			</div>
-
-			{!customerModalHide && (
-				<CustomerModal
-					prevData={customer}
-					toogleClientModal={handleCustomerModalHide}
-				/>
-			)}
 		</div>
 	);
 }
