@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { BsArrow90DegDown } from 'react-icons/bs';
+import useFilterList from '../../../hooks/filter-list.hook';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import InputField from '../../../components/form/input-field/input-field.component';
 import CustomerRow from '../customer-row/customer-row.component';
@@ -7,6 +8,8 @@ import './customers-list.styles.scss';
 
 export default function CustomersList() {
 	const customers = useSelector((state) => state.data.customers);
+
+	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
 
 	return (
 		<div className="customers-list-wrapper">
@@ -22,7 +25,11 @@ export default function CustomersList() {
 						>
 							Actions groupees
 						</CustomButton>
-						<InputField placeholder="Rechercher" />
+						<InputField
+							type="search"
+							onChangeHandler={handleChange}
+							placeholder="Rechercher"
+						/>
 					</div>
 					<div className="options-right"></div>
 				</div>
@@ -39,7 +46,7 @@ export default function CustomersList() {
 				</div>
 			</div>
 			<div className="customers-list-data">
-				{customers
+				{filteredList
 					.slice(0)
 					.reverse()
 					.map((customer, idx) => (

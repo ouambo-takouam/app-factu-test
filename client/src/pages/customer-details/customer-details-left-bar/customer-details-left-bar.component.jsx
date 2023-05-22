@@ -12,9 +12,7 @@ export default function CustomerDetailsLeftBar() {
 	const navigate = useNavigate();
 	const customers = useSelector((state) => state.data.customers);
 
-	const [filteredList, handleChange] = useFilterList(
-		customers.map((customer) => customer.display_name)
-	);
+	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
 
 	return (
 		<div className="customer-details-left-bar">
@@ -36,6 +34,7 @@ export default function CustomerDetailsLeftBar() {
 				</div>
 				<div className="filter">
 					<InputField
+						type="search"
 						onChangeHandler={handleChange}
 						fullwidth
 						placeholder="Filtrer par nom"
@@ -43,12 +42,15 @@ export default function CustomerDetailsLeftBar() {
 				</div>
 			</div>
 			<div className="left-bar-customers-list">
-				{filteredList.map((name, idx) => (
-					<div className="customer-preview" key={idx}>
-						<div className="display-name">{name}</div>
-						<div className="balance">XAF0.00</div>
-					</div>
-				))}
+				{filteredList
+					.slice(0)
+					.reverse()
+					.map((customer) => (
+						<div className="customer-preview" key={customer._id}>
+							<div className="display-name">{customer.display_name}</div>
+							<div className="balance">XAF0.00</div>
+						</div>
+					))}
 			</div>
 		</div>
 	);
