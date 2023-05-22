@@ -2,9 +2,9 @@ import useHide from '../../../hooks/hide.hook';
 import { FaRegEnvelope } from 'react-icons/fa';
 import OptionsBtnWrapper from '../../../components/ui/options-btn-wrapper/options-btn-wrapper.component';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
-import './customer-details-header.styles.scss';
+import './customer-details-content-header.styles.scss';
 
-export default function CustomerDetailsHeader() {
+export default function CustomerDetailsContentHeader() {
 	const { hide, handleHide } = useHide();
 
 	return (
