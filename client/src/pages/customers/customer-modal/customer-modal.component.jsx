@@ -25,6 +25,7 @@ export default function CustomerModal({ toogleClientModal }) {
 	const {
 		first_name,
 		last_name,
+		display_name,
 		company,
 		email,
 		phone1,
@@ -84,6 +85,10 @@ export default function CustomerModal({ toogleClientModal }) {
 	const handleSubmit = async () => {
 		if (!first_name && !last_name) {
 			return alert('first name and last name should be set !');
+		}
+
+		if (!display_name) {
+			fields.display_name = `${first_name} ${last_name}`;
 		}
 
 		// postData: perform fetch 'POST' type to the server
