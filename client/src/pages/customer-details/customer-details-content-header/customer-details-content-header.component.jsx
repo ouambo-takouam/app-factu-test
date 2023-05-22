@@ -1,17 +1,21 @@
 import useHide from '../../../hooks/hide.hook';
 import { FaRegEnvelope } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import OptionsBtnWrapper from '../../../components/ui/options-btn-wrapper/options-btn-wrapper.component';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import './customer-details-content-header.styles.scss';
 
-export default function CustomerDetailsContentHeader() {
+export default function CustomerDetailsContentHeader({ customerId }) {
 	const { hide, handleHide } = useHide();
+
+	const customers = useSelector((state) => state.data.customers);
+	const customer = customers.find((customer) => customer._id === customerId);
 
 	return (
 		<div className="customer-details-header-wrapper">
 			<div className="first-line">
 				<div className="left">
-					<h2 className="page-title">Vangah jean Tcheraud</h2>
+					<h2 className="page-title">{customer.display_name}</h2>
 					<span className="email-icon">
 						<FaRegEnvelope />
 					</span>

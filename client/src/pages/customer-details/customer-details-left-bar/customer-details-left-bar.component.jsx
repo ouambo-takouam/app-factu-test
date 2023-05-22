@@ -8,7 +8,7 @@ import useFilterList from '../../../hooks/filter-list.hook';
 import InputField from '../../../components/form/input-field/input-field.component';
 import './customer-details-left-bar.styles.scss';
 
-export default function CustomerDetailsLeftBar() {
+export default function CustomerDetailsLeftBar({ setCustomerId }) {
 	const navigate = useNavigate();
 	const customers = useSelector((state) => state.data.customers);
 
@@ -46,7 +46,11 @@ export default function CustomerDetailsLeftBar() {
 					.slice(0)
 					.reverse()
 					.map((customer) => (
-						<div className="customer-preview" key={customer._id}>
+						<div
+							className="customer-preview"
+							key={customer._id}
+							onClick={() => setCustomerId(customer._id)}
+						>
 							<div className="display-name">{customer.display_name}</div>
 							<div className="balance">XAF0.00</div>
 						</div>
