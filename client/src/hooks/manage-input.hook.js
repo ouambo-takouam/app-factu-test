@@ -3,7 +3,7 @@ import { useState } from 'react';
 /** Custom Hook created to store and update data like user input
  *  ex: username, email, password...
  */
-export default function useManageInput(initialData) {
+export default function useManageInput(initialData = {}) {
 	const [fields, setFields] = useState(initialData);
 
 	const handleChange = (event) => {

@@ -20,6 +20,7 @@ export default function CustomerDetailsContentData({
 		phone1,
 		phone2,
 		website,
+		notes,
 		payment_mode,
 		preferred_shipping_method,
 		condition,
@@ -82,6 +83,10 @@ export default function CustomerDetailsContentData({
 								<div className="line">
 									<strong>Site web</strong>
 									<span>{website}</span>
+								</div>
+								<div className="line">
+									<strong>Notes</strong>
+									<span>{notes}</span>
 								</div>
 							</div>
 							<div className="right-block">
