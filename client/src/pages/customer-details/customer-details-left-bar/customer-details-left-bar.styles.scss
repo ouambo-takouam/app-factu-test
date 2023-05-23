@@ -3,7 +3,9 @@
 	border-right: 1px solid #c7c7c7;
 
 	.left-bar-header {
-		padding: 12px;
+		padding-left: 12px;
+		padding-right: 12px;
+		background-color: #fff;
 
 		.row {
 			display: flex;
