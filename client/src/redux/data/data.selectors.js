@@ -2,6 +2,22 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export const selectCustomers = (state) => state.data.customers;
 
+export const selectCustomersToExport = createSelector(
+	selectCustomers,
+	(customers) =>
+		customers.map((customer) => ({
+			Nom: customer.first_name,
+			Prenom: customer.last_name,
+			Entreprise: customer.company,
+			Email: customer.email,
+			Telephone: customer.phone1,
+			Site_web: customer.website,
+			Notes: customer.notes,
+			Mode_payment: customer.payment_mode,
+			Mode_d_envoie_prefere: customer.preferred_shipping_method,
+		}))
+);
+
 // sorting customers list alphabetically
 export const selectOrderedCustomers = createSelector(
 	selectCustomers,
