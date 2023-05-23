@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { selectCustomers } from '../../../redux/data/data.selectors';
 import { BsArrow90DegDown } from 'react-icons/bs';
 import { BiPrinter, BiExport } from 'react-icons/bi';
 import useFilterList from '../../../hooks/filter-list.hook';
@@ -9,7 +10,7 @@ import CustomerRow from '../customer-row/customer-row.component';
 import './customers-list.styles.scss';
 
 export default function CustomersList() {
-	const customers = useSelector((state) => state.data.customers);
+	const customers = useSelector(selectCustomers);
 	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
 
 	// Filename for the exported file

@@ -12,7 +12,7 @@ export default function CustomerDetailsContentData({
 			'toogle_statements',
 			'toogle_infos_clients',
 		],
-		firstItemOpen: true,
+		openItem: 2,
 	});
 	const {
 		display_name,

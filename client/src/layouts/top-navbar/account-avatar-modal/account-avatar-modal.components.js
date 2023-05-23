@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { selectUserCredentials } from '../../../redux/user/user.selectors';
 import { userDisconnected } from '../../../redux/user/user.actions';
 import './account-avatar-modal.styles.scss';
 
 export default function AccountAvatarModal({ handleChange }) {
 	const dispatch = useDispatch();
-	const credentials = useSelector((state) => state.user.credentials);
+	const credentials = useSelector(selectUserCredentials);
+
 	const { first_name, last_name, email } = credentials;
 
 	const handleClick = () => {

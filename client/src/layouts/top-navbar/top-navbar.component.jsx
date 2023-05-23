@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import useHide from '../../hooks/hide.hook';
 import { useSelector } from 'react-redux';
+import { selectUserCredentials } from '../../redux/user/user.selectors';
 import { ReactComponent as Swipe } from '../../assets/images/svg/swipe.svg';
 import { ReactComponent as Search } from '../../assets/images/svg/search.svg';
 import { ReactComponent as Bell } from '../../assets/images/svg/bell.svg';
@@ -10,7 +11,7 @@ import './top-navbar.styles.scss';
 
 export default function TopNavbar() {
 	const { hide, handleHide } = useHide();
-	const credentials = useSelector((state) => state.user.credentials);
+	const credentials = useSelector(selectUserCredentials);
 
 	return (
 		<Fragment>

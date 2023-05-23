@@ -19,7 +19,7 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
-		firstItemOpen: true,
+		openItem: 0,
 	});
 	const [fields, handleChange] = useManageInput(prevData);
 	const {
