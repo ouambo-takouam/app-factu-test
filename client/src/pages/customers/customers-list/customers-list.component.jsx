@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectCustomers } from '../../../redux/data/data.selectors';
+import { selectOrderedCustomers } from '../../../redux/data/data.selectors';
 import { BsArrow90DegDown } from 'react-icons/bs';
 import { BiPrinter, BiExport } from 'react-icons/bi';
 import useFilterList from '../../../hooks/filter-list.hook';
@@ -10,7 +10,7 @@ import CustomerRow from '../customer-row/customer-row.component';
 import './customers-list.styles.scss';
 
 export default function CustomersList() {
-	const customers = useSelector(selectCustomers);
+	const customers = useSelector(selectOrderedCustomers);
 	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
 
 	// Filename for the exported file
@@ -57,12 +57,9 @@ export default function CustomersList() {
 				</div>
 			</div>
 			<div className="customers-list-data">
-				{filteredList
-					.slice(0)
-					.reverse()
-					.map((customer, idx) => (
-						<CustomerRow key={idx} customer={customer} />
-					))}
+				{filteredList.map((customer, idx) => (
+					<CustomerRow key={idx} customer={customer} />
+				))}
 			</div>
 		</div>
 	);

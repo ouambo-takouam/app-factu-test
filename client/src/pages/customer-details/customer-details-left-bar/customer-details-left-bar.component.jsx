@@ -1,19 +1,27 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from 'react-icons/io';
 import { RxPlus } from 'react-icons/rx';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCustomers } from '../../../redux/data/data.selectors';
+import { selectOrderedCustomers } from '../../../redux/data/data.selectors';
 import useFilterList from '../../../hooks/filter-list.hook';
 import InputField from '../../../components/form/input-field/input-field.component';
 import './customer-details-left-bar.styles.scss';
 
-export default function CustomerDetailsLeftBar({ setCustomerId }) {
+export default function CustomerDetailsLeftBar({ customerId, setCustomerId }) {
+	const [activePreviewId, setActivePreviewId] = useState(customerId);
+
 	const navigate = useNavigate();
-	const customers = useSelector(selectCustomers);
+	const customers = useSelector(selectOrderedCustomers);
 
 	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
+
+	const handlePreviewClick = (id) => {
+		setCustomerId(id);
+		setActivePreviewId(id);
+	};
 
 	return (
 		<div className="customer-details-left-bar">
@@ -43,19 +51,18 @@ export default function CustomerDetailsLeftBar({ setCustomerId }) {
 				</div>
 			</div>
 			<div className="left-bar-customers-list">
-				{filteredList
-					.slice(0)
-					.reverse()
-					.map((customer) => (
-						<div
-							className="customer-preview"
-							key={customer._id}
-							onClick={() => setCustomerId(customer._id)}
-						>
-							<div className="display-name">{customer.display_name}</div>
-							<div className="balance">XAF0.00</div>
-						</div>
-					))}
+				{filteredList.map((customer) => (
+					<div
+						className={`customer-preview ${
+							customer._id === activePreviewId ? 'active' : ''
+						} `}
+						key={customer._id}
+						onClick={() => handlePreviewClick(customer._id)}
+					>
+						<div className="display-name">{customer.display_name}</div>
+						<div className="balance">XAF0.00</div>
+					</div>
+				))}
 			</div>
 		</div>
 	);

@@ -2,6 +2,24 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export const selectCustomers = (state) => state.data.customers;
 
+// sorting customers list alphabetically
+export const selectOrderedCustomers = createSelector(
+	selectCustomers,
+	(customers) =>
+		customers.sort((a, b) => {
+			const display_name_A = a.display_name.toLowerCase();
+			const display_name_B = b.display_name.toLowerCase();
+
+			if (display_name_A < display_name_B) {
+				return -1;
+			}
+			if (display_name_A > display_name_B) {
+				return 1;
+			}
+			return 0;
+		})
+);
+
 export const selectOneCustomer = (customerId) =>
 	createSelector(selectCustomers, (customers) =>
 		customers.find((customer) => customer._id === customerId)

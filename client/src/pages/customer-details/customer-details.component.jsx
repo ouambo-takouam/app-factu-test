@@ -9,7 +9,10 @@ export default function CustomerDetails() {
 
 	return (
 		<div className="customers-details">
-			<CustomerDetailsLeftBar setCustomerId={setCustomerId} />
+			<CustomerDetailsLeftBar
+				customerId={customerId}
+				setCustomerId={setCustomerId}
+			/>
 			<CustomerDetailsContent customerId={customerId} />
 		</div>
 	);
