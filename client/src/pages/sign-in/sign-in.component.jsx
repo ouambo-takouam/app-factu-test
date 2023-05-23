@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectUserIsLoading } from '../../redux/user/user.selectors';
 import { userFetchAsync } from '../../redux/user/user.actions';
 import useManageInput from '../../hooks/manage-input.hook';
 import InputField from '../../components/form/input-field/input-field.component';
@@ -17,7 +18,7 @@ export default function SignIn() {
 
 	/** getting from the store 'isLoading' data. 'dispatch' will be used to dispatch 
 	redux actions */
-	const isLoading = useSelector((state) => state.user.isLoading);
+	const isLoading = useSelector(selectUserIsLoading);
 	const dispatch = useDispatch();
 
 	// 'handleSubmit' function handles form submition

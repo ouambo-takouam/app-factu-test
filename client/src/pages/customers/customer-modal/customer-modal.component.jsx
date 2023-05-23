@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectUserToken } from '../../../redux/user/user.selectors';
 import { dataAddItem, dataUpdateItem } from '../../../redux/data/data.actions';
 import { postData } from '../../../utils/fetch.utils';
 import customerOptions from '../../../data/customer-select-options.json';
@@ -15,7 +16,7 @@ import './customer-modal.styles.scss';
 export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 	// react-redux usefull variables !
 	const dispatch = useDispatch();
-	const { token } = useSelector((state) => state.user);
+	const token = useSelector(selectUserToken);
 
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],

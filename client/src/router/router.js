@@ -1,5 +1,6 @@
 import { createBrowserRouter, useLocation, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectUserToken } from '../redux/user/user.selectors';
 import Homepage from '../pages/homepage/homepage.component';
 import SignIn from '../pages/sign-in/sign-in.component';
 import SignUp from '../pages/sign-up/sign-up.component';
@@ -11,7 +12,7 @@ import ShortcutsWrapper from '../components/ui/shortcuts-wrapper/shortcuts-wrapp
 /** Checks 'token value' to redirect or not user depending on
  *  params passed to the function */
 function RequireAuth({ children, redirectTo, inversed }) {
-	const token = useSelector((state) => state.user.token);
+	const token = useSelector(selectUserToken);
 	const { pathname } = useLocation();
 
 	if (inversed) {
