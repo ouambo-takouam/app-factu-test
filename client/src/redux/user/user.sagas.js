@@ -17,6 +17,7 @@ function* fetchUserDataAsync({ payload }) {
 		yield put(userFetchRequested());
 
 		const company = yield call(() => postData('POST', 'companies'));
+		console.log(company);
 		const userInfo = yield call(() =>
 			postData('POST', path, { company_id: company._id, ...credentials })
 		); // {credentials, token}

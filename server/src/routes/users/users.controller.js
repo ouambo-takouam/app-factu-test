@@ -9,7 +9,7 @@ async function httpRegister(req, res) {
 		const { company_id, first_name, last_name, email, password } = req.body;
 
 		// Validate user input
-		if (!first_name || !last_name || !email || !password) {
+		if (!company_id || !first_name || !last_name || !email || !password) {
 			return res.status(400).json({ error: 'All input are required' });
 		}
 
@@ -38,7 +38,6 @@ async function httpRegister(req, res) {
 		// Create token
 		const token = generateToken({
 			company_id: user.company_id,
-			user_id: user._id,
 			email,
 		});
 
@@ -68,7 +67,6 @@ async function httpLogin(req, res) {
 
 		const token = generateToken({
 			company_id: user.company_id,
-			user_id: user._id,
 			email,
 		});
 

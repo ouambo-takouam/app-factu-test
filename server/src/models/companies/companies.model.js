@@ -1,7 +1,7 @@
 const Company = require('./companies.mongo');
 
 async function addNewCompany() {
-	return await Company.create({ name: generateCompanyName(5) });
+	return await Company.create({ name: generateCompanyName(8) });
 }
 
 function generateCompanyName(length) {

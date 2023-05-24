@@ -8,9 +8,9 @@ const companiesRouter = require('./companies/companies.router');
 const rootRouter = Router();
 
 rootRouter.use('/auth', userRouter);
+rootRouter.use('/companies', companiesRouter);
 
 rootRouter.use(authMiddleware);
 rootRouter.use('/customers', customersRouter);
-rootRouter.use('/companies', companiesRouter);
 
 module.exports = rootRouter;

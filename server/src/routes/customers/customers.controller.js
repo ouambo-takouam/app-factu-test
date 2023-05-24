@@ -20,7 +20,7 @@ async function httpAddNewCustomer(req, res) {
 	const data = req.body;
 
 	try {
-		const created = await addNewCustomer(company_id, data);
+		const created = await addNewCustomer({ company_id, ...data });
 		return res.status(201).json(created);
 	} catch (error) {
 		return res.status(400).json({ error });
