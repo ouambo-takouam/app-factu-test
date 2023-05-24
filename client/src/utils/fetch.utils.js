@@ -11,14 +11,15 @@ async function getData(path, token) {
 	return await response.json();
 }
 
+// handle POST or PATCH requests methods !
 async function postData(method, path, data, token) {
 	const response = await fetch(`${BASE_URL}/${path}`, {
 		method,
 		headers: {
-			'Content-Type': 'application/json',
+			...(data && { 'Content-Type': 'application/json' }),
 			...(token && { Authorization: `Bearer ${token}` }),
 		},
-		body: JSON.stringify(data),
+		...(data && { body: JSON.stringify(data) }),
 	});
 
 	return await response.json();

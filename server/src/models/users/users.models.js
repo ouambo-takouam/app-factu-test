@@ -5,14 +5,7 @@ async function getOneUser(email) {
 }
 
 async function addNewUser(data) {
-	const { first_name, last_name, email, password } = data;
-
-	return await User.create({
-		first_name,
-		last_name,
-		email,
-		password,
-	});
+	return await User.create(data);
 }
 
 module.exports = { getOneUser, addNewUser };

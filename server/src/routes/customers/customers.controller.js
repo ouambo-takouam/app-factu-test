@@ -5,10 +5,10 @@ const {
 } = require('../../models/customers/customers.model');
 
 async function httpGetAllCustomers(req, res) {
-	const { user_id } = req.user;
+	const { company_id } = req.user;
 
 	try {
-		const customers = await getAllCustomers(user_id);
+		const customers = await getAllCustomers(company_id);
 		return res.status(200).json(customers);
 	} catch (error) {
 		return res.status(400).json({ error });
@@ -16,11 +16,11 @@ async function httpGetAllCustomers(req, res) {
 }
 
 async function httpAddNewCustomer(req, res) {
-	const { user_id } = req.user;
+	const { company_id } = req.user;
 	const data = req.body;
 
 	try {
-		const created = await addNewCustomer(user_id, data);
+		const created = await addNewCustomer(company_id, data);
 		return res.status(201).json(created);
 	} catch (error) {
 		return res.status(400).json({ error });

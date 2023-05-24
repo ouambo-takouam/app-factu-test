@@ -6,7 +6,7 @@ const { getOneUser, addNewUser } = require('../../models/users/users.models');
 async function httpRegister(req, res) {
 	try {
 		// Get user input
-		const { first_name, last_name, email, password } = req.body;
+		const { company_id, first_name, last_name, email, password } = req.body;
 
 		// Validate user input
 		if (!first_name || !last_name || !email || !password) {
@@ -28,6 +28,7 @@ async function httpRegister(req, res) {
 
 		// Create user in our database
 		const user = await addNewUser({
+			company_id,
 			first_name,
 			last_name,
 			email,
@@ -35,7 +36,11 @@ async function httpRegister(req, res) {
 		});
 
 		// Create token
-		const token = generateToken({ user_id: user._id, email });
+		const token = generateToken({
+			company_id: user.company_id,
+			user_id: user._id,
+			email,
+		});
 
 		// return new user
 		return res.status(201).json({ credentials: user, token });
@@ -61,7 +66,11 @@ async function httpLogin(req, res) {
 			return res.status(400).json({ error: 'Invalid Credentials' });
 		}
 
-		const token = generateToken({ user_id: user._id, email });
+		const token = generateToken({
+			company_id: user.company_id,
+			user_id: user._id,
+			email,
+		});
 
 		return res.status(200).json({ credentials: user, token });
 	} catch (err) {

@@ -4,12 +4,12 @@ async function getOneCustomer(id) {
 	return await Customer.findById(id).exec();
 }
 
-async function getAllCustomers(user_id) {
-	return await Customer.find({ user_id }).exec();
+async function getAllCustomers(company_id) {
+	return await Customer.find({ company_id }).exec();
 }
 
-async function addNewCustomer(user_id, data) {
-	return await Customer.create({ user_id, ...data });
+async function addNewCustomer(company_id, data) {
+	return await Customer.create({ company_id, ...data });
 }
 
 async function updateOneCustomer(data) {
