@@ -15,7 +15,9 @@ const middlewares = [sagaMiddleware, logger];
 const store = configureStore({
 	reducer,
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(middlewares),
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}).concat(middlewares),
 });
 
 sagaMiddleware.run(rootSaga);
