@@ -104,10 +104,6 @@ export const router = createBrowserRouter([
 				element: <CustomerDetails />,
 			},
 			{
-				path: 'suivi-des-heures',
-				element: <p>Suivi des heures</p>,
-			},
-			{
 				path: 'produits-et-services',
 				element: <p>Produits et services</p>,
 			},

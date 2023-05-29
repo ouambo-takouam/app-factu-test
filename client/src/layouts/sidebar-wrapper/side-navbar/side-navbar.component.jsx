@@ -95,7 +95,7 @@ export default function SideNavbar({
 						className="nav-item"
 						onClick={() => updateToogleItems(toogleItems[2].id)}
 					>
-						<Link className="nav-item-link" to="suivi-des-heures">
+						<Link className="nav-item-link" to="produits-et-services">
 							<div className="nav-item-icon-wrapper">
 								<span className="nav-item-icon-inner-wrapper">
 									<Money />

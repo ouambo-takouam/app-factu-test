@@ -28,7 +28,7 @@
 		"sections": [
 			{ "subtitle": "Ventes" },
 			{
-				"items": ["Clients", "Suivi des heures", "Produits et services"]
+				"items": ["Clients", "Produits et services"]
 			},
 			{ "subtitle": "Depenses" },
 			{
