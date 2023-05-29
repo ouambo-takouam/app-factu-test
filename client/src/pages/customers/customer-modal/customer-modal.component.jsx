@@ -120,217 +120,225 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 	};
 
 	return (
-		<div className="client-modal">
-			<div className="client-modal-header">
-				<span className="client-modal-title">Infos sur le client</span>
-				<span className="client-modal-close-btn" onClick={toogleClientModal}>
-					<AiOutlineClose />
-				</span>
-			</div>
-			<div className="client-modal-content">
-				<div className="client-modal-infos">
-					<div className="client-infos-left-block">
-						<div className="line">
-							<InputField
-								type="text"
-								label="Nom"
-								name="first_name"
-								value={first_name}
-								onChangeHandler={handleChange}
-							/>
-							<InputField
-								type="text"
-								label="Prenom"
-								name="last_name"
-								value={last_name}
-								onChangeHandler={handleChange}
-							/>
-						</div>
-						<InputField
-							type="text"
-							label="Entreprise"
-							name="company"
-							value={company}
-							onChangeHandler={handleChange}
-							fullwidth
-						/>
-						<SelectField
-							label="Nom a afficher"
-							data={displayNames}
-							name="display_name"
-							onChangeHandler={handleChange}
-							fullwidth
-						/>
-					</div>
-					<div className="client-infos-right-block">
-						<InputField
-							type="email"
-							label="Adresse Email"
-							name="email"
-							value={email}
-							onChangeHandler={handleChange}
-							fullwidth
-						/>
-						<div className="line">
-							<InputField
-								type="text"
-								label="Telephone 1"
-								name="phone1"
-								value={phone1}
-								onChangeHandler={handleChange}
-							/>
-							<InputField
-								type="text"
-								label="Telephone 2"
-								name="phone2"
-								value={phone2}
-								onChangeHandler={handleChange}
-							/>
-						</div>
-						<InputField
-							type="text"
-							label="Site web"
-							name="website"
-							value={website}
-							onChangeHandler={handleChange}
-							fullwidth
-						/>
-					</div>
+		<div className="customer-modal" onClick={toogleClientModal}>
+			<div
+				className="customer-modal-content"
+				onClick={(e) => e.stopPropagation()}
+			>
+				<div className="customer-modal-header">
+					<span className="customer-modal-title">Infos sur le client</span>
+					<span
+						className="customer-modal-close-btn"
+						onClick={toogleClientModal}
+					>
+						<AiOutlineClose />
+					</span>
 				</div>
-				<div className="client-modal-other-infos">
-					<div className="client-other-infos-header">
-						<ul className="navigation">
-							<li onClick={() => updateToogleItems(toogleItems[0].id)}>
-								Adresse
-							</li>
-							<li onClick={() => updateToogleItems(toogleItems[1].id)}>
-								Notes
-							</li>
-							<li onClick={() => updateToogleItems(toogleItems[2].id)}>
-								Payment et facturation
-							</li>
-							<li onClick={() => updateToogleItems(toogleItems[3].id)}>
-								Pieces jointes
-							</li>
-						</ul>
-					</div>
-					<div className="client-other-infos-content">
-						{toogleItems[0].active && (
-							<div className="adresse-facturation">
-								<h2>Adresse de facturation</h2>
+				<div className="customer-modal-body">
+					<div className="customer-modal-infos">
+						<div className="customer-infos-left-block">
+							<div className="line">
 								<InputField
 									type="text"
-									placeholder="Rue"
-									name="street"
-									value={street}
+									label="Nom"
+									name="first_name"
+									value={first_name}
 									onChangeHandler={handleChange}
-									fullwidth
 								/>
-								<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+								<InputField
+									type="text"
+									label="Prenom"
+									name="last_name"
+									value={last_name}
+									onChangeHandler={handleChange}
+								/>
+							</div>
+							<InputField
+								type="text"
+								label="Entreprise"
+								name="company"
+								value={company}
+								onChangeHandler={handleChange}
+								fullwidth
+							/>
+							<SelectField
+								label="Nom a afficher"
+								data={displayNames}
+								name="display_name"
+								onChangeHandler={handleChange}
+								fullwidth
+							/>
+						</div>
+						<div className="customer-infos-right-block">
+							<InputField
+								type="email"
+								label="Adresse Email"
+								name="email"
+								value={email}
+								onChangeHandler={handleChange}
+								fullwidth
+							/>
+							<div className="line">
+								<InputField
+									type="text"
+									label="Telephone 1"
+									name="phone1"
+									value={phone1}
+									onChangeHandler={handleChange}
+								/>
+								<InputField
+									type="text"
+									label="Telephone 2"
+									name="phone2"
+									value={phone2}
+									onChangeHandler={handleChange}
+								/>
+							</div>
+							<InputField
+								type="text"
+								label="Site web"
+								name="website"
+								value={website}
+								onChangeHandler={handleChange}
+								fullwidth
+							/>
+						</div>
+					</div>
+					<div className="customer-modal-other-infos">
+						<div className="customer-other-infos-header">
+							<ul className="navigation">
+								<li onClick={() => updateToogleItems(toogleItems[0].id)}>
+									Adresse
+								</li>
+								<li onClick={() => updateToogleItems(toogleItems[1].id)}>
+									Notes
+								</li>
+								<li onClick={() => updateToogleItems(toogleItems[2].id)}>
+									Payment et facturation
+								</li>
+								<li onClick={() => updateToogleItems(toogleItems[3].id)}>
+									Pieces jointes
+								</li>
+							</ul>
+						</div>
+						<div className="customer-other-infos-content">
+							{toogleItems[0].active && (
+								<div className="adresse-facturation">
+									<h2>Adresse de facturation</h2>
 									<InputField
 										type="text"
-										placeholder="Ville"
-										name="town"
-										value={town}
+										placeholder="Rue"
+										name="street"
+										value={street}
+										onChangeHandler={handleChange}
+										fullwidth
+									/>
+									<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+										<InputField
+											type="text"
+											placeholder="Ville"
+											name="town"
+											value={town}
+											onChangeHandler={handleChange}
+										/>
+										<InputField
+											type="text"
+											placeholder="Etat/province"
+											name="state"
+											value={state}
+											onChangeHandler={handleChange}
+										/>
+										<InputField
+											type="text"
+											placeholder="Code postal"
+											name="po_box"
+											value={po_box}
+											onChangeHandler={handleChange}
+										/>
+										<InputField
+											type="text"
+											placeholder="Pays"
+											name="country"
+											value={country}
+											onChangeHandler={handleChange}
+										/>
+									</div>
+								</div>
+							)}
+
+							{toogleItems[1].active && (
+								<div className="notes">
+									<h2>Notes</h2>
+									<TextArea
+										name="notes"
+										value={notes}
+										onChangeHandler={handleChange}
+										fullwidth
+									/>
+								</div>
+							)}
+
+							{toogleItems[2].active && (
+								<div className="payment-facturation">
+									<SelectField
+										label="Mode de paiement par défaut"
+										data={payment_modes}
+										name="payment_mode"
+										value={payment_mode}
 										onChangeHandler={handleChange}
 									/>
-									<InputField
-										type="text"
-										placeholder="Etat/province"
-										name="state"
-										value={state}
+									<SelectField
+										label="Mode d'envoi préféré"
+										data={preferred_shipping_methods}
+										name="preferred_shipping_method"
+										value={preferred_shipping_method}
 										onChangeHandler={handleChange}
 									/>
-									<InputField
-										type="text"
-										placeholder="Code postal"
-										name="po_box"
-										value={po_box}
-										onChangeHandler={handleChange}
-									/>
-									<InputField
-										type="text"
-										placeholder="Pays"
-										name="country"
-										value={country}
+
+									<SelectField
+										label="Conditions"
+										data={conditions}
+										name="condition"
+										value={condition}
 										onChangeHandler={handleChange}
 									/>
 								</div>
-							</div>
-						)}
+							)}
 
-						{toogleItems[1].active && (
-							<div className="notes">
-								<h2>Notes</h2>
-								<TextArea
-									name="notes"
-									value={notes}
-									onChangeHandler={handleChange}
-									fullwidth
-								/>
-							</div>
-						)}
-
-						{toogleItems[2].active && (
-							<div className="payment-facturation">
-								<SelectField
-									label="Mode de paiement par défaut"
-									data={payment_modes}
-									name="payment_mode"
-									value={payment_mode}
-									onChangeHandler={handleChange}
-								/>
-								<SelectField
-									label="Mode d'envoi préféré"
-									data={preferred_shipping_methods}
-									name="preferred_shipping_method"
-									value={preferred_shipping_method}
-									onChangeHandler={handleChange}
-								/>
-
-								<SelectField
-									label="Conditions"
-									data={conditions}
-									name="condition"
-									value={condition}
-									onChangeHandler={handleChange}
-								/>
-							</div>
-						)}
-
-						{toogleItems[3].active && (
-							<div className="pieces-jointer">
-								<h2>Pieces jointes</h2>
-								<InputField
-									type="file"
-									name="attachment"
-									value={attachment}
-									onChangeHandler={handleChange}
-									fullwidth
-								/>
-							</div>
-						)}
+							{toogleItems[3].active && (
+								<div className="pieces-jointer">
+									<h2>Pieces jointes</h2>
+									<InputField
+										type="file"
+										name="attachment"
+										value={attachment}
+										onChangeHandler={handleChange}
+										fullwidth
+									/>
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className="client-modal-footer">
-				<div className="footer-inner">
-					<CustomButton
-						$rounded
-						$hshadow="inset 0 0 0 1px #8D9096"
-						onClick={toogleClientModal}
-					>
-						Annuler
-					</CustomButton>
-					{!Object.keys(prevData).length ? (
-						<CustomButton $rounded $validate onClick={handleSubmit}>
-							Enregistrer
+				<div className="customer-modal-footer">
+					<div className="footer-inner">
+						<CustomButton
+							$rounded
+							$hshadow="inset 0 0 0 1px #8D9096"
+							onClick={toogleClientModal}
+						>
+							Annuler
 						</CustomButton>
-					) : (
-						<CustomButton $rounded $validate onClick={handleUpdate}>
-							Mettre a jour
-						</CustomButton>
-					)}
+						{!Object.keys(prevData).length ? (
+							<CustomButton $rounded $validate onClick={handleSubmit}>
+								Enregistrer
+							</CustomButton>
+						) : (
+							<CustomButton $rounded $validate onClick={handleUpdate}>
+								Mettre a jour
+							</CustomButton>
+						)}
+					</div>
 				</div>
 			</div>
 		</div>
