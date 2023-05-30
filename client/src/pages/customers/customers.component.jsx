@@ -6,7 +6,8 @@ import CustomerModal from './customer-modal/customer-modal.component';
 import './customers.styles.scss';
 
 export default function Customers() {
-	const { hide: hideClientModal, handleHide: toogleClientModal } = useHide();
+	const { hide: hideClientModal, handleHide: toogleClientModal } =
+		useHide(true);
 
 	return (
 		<Fragment>

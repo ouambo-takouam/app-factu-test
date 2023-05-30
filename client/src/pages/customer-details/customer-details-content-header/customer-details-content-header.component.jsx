@@ -8,7 +8,7 @@ export default function CustomerDetailsContentHeader({
 	customer,
 	toogleClientModal,
 }) {
-	const { hide: optionsHide, handleHide: handleOptionsHide } = useHide();
+	const { hide: optionsHide, handleHide: handleOptionsHide } = useHide(true);
 
 	return (
 		<div className="customer-details-header-wrapper">

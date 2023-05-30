@@ -3,7 +3,7 @@ import { BsCaretDownFill } from 'react-icons/bs';
 import './customers-header.styles.scss';
 
 export default function CustomersHeader({ toogleClientModal }) {
-	const { hide: hideImportBtn, handleHide: toogleImportBtn } = useHide();
+	const { hide: hideImportBtn, handleHide: toogleImportBtn } = useHide(true);
 
 	return (
 		<div className="customers-header-wrapper">

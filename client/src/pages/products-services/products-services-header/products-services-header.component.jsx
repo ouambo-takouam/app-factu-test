@@ -1,7 +1,7 @@
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import './products-services-header.styles.scss';
 
-export default function ProductsServicesHeader() {
+export default function ProductsServicesHeader({ onHideHandler }) {
 	return (
 		<div className="products-services-header">
 			<div className="products-services-header-nav-line">
@@ -9,7 +9,7 @@ export default function ProductsServicesHeader() {
 					<h3>Produits et services</h3>
 				</div>
 				<div className="nav-line-right">
-					<CustomButton $validate $rounded>
+					<CustomButton $validate $rounded onClick={onHideHandler}>
 						Nouveau
 					</CustomButton>
 				</div>

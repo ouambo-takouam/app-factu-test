@@ -6,7 +6,7 @@ import OptionsBtnWrapper from '../../../components/ui/options-btn-wrapper/option
 import './customer-row.styles.scss';
 
 export default function CustomerRow({ customer }) {
-	const { hide, handleHide } = useHide();
+	const { hide, handleHide } = useHide(true);
 	const { _id, company, display_name, email, phone1, street, town } = customer;
 
 	return (

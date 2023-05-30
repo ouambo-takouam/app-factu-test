@@ -9,7 +9,7 @@ import './customer-details-content.styles.scss';
 export default function CustomerDetailsContent({ customerId }) {
 	const customer = useSelector(selectOneCustomer(customerId));
 
-	const { hide, handleHide } = useHide();
+	const { hide, handleHide } = useHide(true);
 
 	return (
 		<div className="customer-details-content">

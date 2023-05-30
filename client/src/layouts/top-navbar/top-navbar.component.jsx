@@ -10,7 +10,7 @@ import AccountAvatarModal from './account-avatar-modal/account-avatar-modal.comp
 import './top-navbar.styles.scss';
 
 export default function TopNavbar() {
-	const { hide, handleHide } = useHide();
+	const { hide, handleHide } = useHide(true);
 	const credentials = useSelector(selectUserCredentials);
 
 	return (
