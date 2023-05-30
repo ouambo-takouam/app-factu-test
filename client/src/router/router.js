@@ -7,6 +7,7 @@ import SignUp from '../pages/sign-up/sign-up.component';
 import Dashboard from '../pages/dashboard/dashboard.component';
 import Customers from '../pages/customers/customers.component';
 import CustomerDetails from '../pages/customer-details/customer-details.component';
+import ProductsServices from '../pages/products-services/products-services.component';
 import ShortcutsWrapper from '../components/ui/shortcuts-wrapper/shortcuts-wrapper.component';
 
 /** Checks 'token value' to redirect or not user depending on
@@ -105,7 +106,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: 'produits-et-services',
-				element: <p>Produits et services</p>,
+				element: <ProductsServices />,
 			},
 			{
 				path: 'fournisseurs',

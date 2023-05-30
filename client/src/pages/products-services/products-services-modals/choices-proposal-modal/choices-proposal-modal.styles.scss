@@ -1,0 +1,72 @@
+.choices-proposal-modal {
+	position: fixed;
+	z-index: 15;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: right;
+}
+
+.choices-proposal-modal-content {
+	width: 550px;
+	background: #fff;
+}
+
+.choices-proposal-modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px;
+	border-bottom: 1px solid #d4d7dc;
+	font-weight: bold;
+
+	svg {
+		color: #999;
+		cursor: pointer;
+	}
+}
+
+.proposal {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 105px;
+	padding: 12px;
+	border-bottom: 1px solid #d4d7dc;
+	cursor: pointer;
+
+	&:hover {
+		background: #d4d7dc;
+	}
+
+	.icon-wrapper {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		background: #0077c5;
+	}
+
+	.text {
+		width: 430px;
+		font-size: 15px;
+		line-height: 20px;
+
+		.title {
+			font-weight: 600;
+		}
+	}
+
+	.stock-icon {
+		background: #0077c5 url('../../../../assets/images/png/stock.png') no-repeat;
+		background-position: 14px;
+	}
+
+	.service-icon {
+		background: #0077c5 url('../../../../assets/images/png/services.png')
+			no-repeat;
+		background-position: 14px;
+	}
+}

@@ -1,0 +1,11 @@
+.products-services-header {
+	height: 230px;
+	padding: 24px 30px 0 20px;
+	background-color: #f4f5f8;
+
+	.products-services-header-nav-line {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
