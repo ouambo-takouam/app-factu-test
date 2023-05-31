@@ -38,11 +38,14 @@ export default function ProductsServicesList() {
 	</div>*/}
 				<PageListNav
 					headers={[
-						'client / entreprise',
-						'adressse',
-						'telephone',
-						'e-mail',
-						'solde courant',
+						'nom',
+						'reference',
+						'type',
+						'description de la vente',
+						'prix de vente',
+						'cout',
+						'quantite en stock',
+						'point de commande',
 						'action',
 					]}
 				/>
