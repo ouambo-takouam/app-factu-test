@@ -9,7 +9,8 @@ import useFilterList from '../../../hooks/filter-list.hook';
 import { ExportToExcel } from '../../../utils/export-to-excel.utils';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import InputField from '../../../components/form/input-field/input-field.component';
-import CustomerRow from '../customer-row/customer-row.component';
+import PageListNav from '../../../components/ui/page-list-nav/page-list-nav.component';
+import PageListData from '../../../components/ui/page-list-data/page-list-data.component';
 import './customers-list.styles.scss';
 
 export default function CustomersList() {
@@ -49,23 +50,18 @@ export default function CustomersList() {
 						/>
 					</div>
 				</div>
-				<div className="header-titles">
-					<div className="field-check">
-						<input type="checkbox" />
-					</div>
-					<span>CLIENT / ENTREPRISE</span>
-					<span>ADRESSE</span>
-					<span>TÉLÉPHONE</span>
-					<span>E-MAIL</span>
-					<span>SOLDE COURANT</span>
-					<span>ACTION</span>
-				</div>
+				<PageListNav
+					headers={[
+						'client / entreprise',
+						'adressse',
+						'telephone',
+						'e-mail',
+						'solde courant',
+						'action',
+					]}
+				/>
 			</div>
-			<div className="customers-list-data">
-				{filteredList.map((customer, idx) => (
-					<CustomerRow key={idx} customer={customer} />
-				))}
-			</div>
+			<PageListData filteredList={filteredList} />
 		</div>
 	);
 }
