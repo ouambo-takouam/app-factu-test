@@ -3,6 +3,7 @@ import './select-field.styles.scss';
 
 export default function SelectField({
 	label,
+	width,
 	fullwidth,
 	onChangeHandler,
 	data,
@@ -12,6 +13,7 @@ export default function SelectField({
 		<div className="select-fieldset">
 			{label && <h2>{label}</h2>}
 			<select
+				style={{ width }}
 				onChange={onChangeHandler}
 				className={`${fullwidth ? 'fullwidth' : ''}`}
 				{...otherProps}

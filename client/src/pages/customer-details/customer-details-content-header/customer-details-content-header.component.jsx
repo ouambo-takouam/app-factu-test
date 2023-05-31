@@ -1,5 +1,6 @@
 import useHide from '../../../hooks/hide.hook';
 import { FaRegEnvelope } from 'react-icons/fa';
+import { BsCaretDownFill } from 'react-icons/bs';
 import OptionsBtnWrapper from '../../../components/ui/options-btn-wrapper/options-btn-wrapper.component';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import './customer-details-content-header.styles.scss';
@@ -28,7 +29,7 @@ export default function CustomerDetailsContentHeader({
 						Modifier
 					</CustomButton>
 					<CustomButton $rounded $validate onClick={handleOptionsHide}>
-						Nouvelle operation
+						<span>Nouvelle operation</span> <BsCaretDownFill size={12} />
 					</CustomButton>
 					{!optionsHide && (
 						<div className="field-action-options">

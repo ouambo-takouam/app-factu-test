@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { AiOutlineClose } from 'react-icons/ai';
 import useHide from '../../../../hooks/hide.hook';
-// import useToggleItems from '../../../../hooks/toggle-items.hook';
-import StockFormModal from '../stock-form-modal/stock-form-modal.component';
+import useToggleItems from '../../../../hooks/toggle-items.hook';
+import ProductFormModal from '../product-form-modal/product-form-modal.component';
 import './choices-proposal-modal.styles.scss';
 
 export default function ChoicesProposalModal({ onHideHandler }) {
-	const { hide, handleHide } = useHide(true);
-	// const [toogleItems, updateToogleItems] = useToggleItems({
-	// 	arr: ['stock', 'service'],
-	// });
+	const { hide, handleHide } = useHide(false);
+	const [toogleItems, updateToogleItems] = useToggleItems({
+		arr: ['stock', 'service'],
+	});
 
 	return (
 		<div className="choices-proposal-modal" onClick={onHideHandler}>
@@ -23,7 +23,7 @@ export default function ChoicesProposalModal({ onHideHandler }) {
 				</div>
 
 				<div className="choices-proposal-modal-body">
-					{/*!hide && (
+					{!hide && (
 						<div className="proposal-list">
 							<div
 								className="proposal"
@@ -59,12 +59,22 @@ export default function ChoicesProposalModal({ onHideHandler }) {
 								</div>
 							</div>
 						</div>
-							)*/}
+					)}
 
-					<StockFormModal />
-
-					{/*toogleItems[0].active && <p>Stock form</p>*/}
-					{/*toogleItems[1].active && <p>Service form</p>*/}
+					{toogleItems[0].active && (
+						<ProductFormModal
+							type="stock"
+							handleHide={handleHide}
+							updateToogleItems={updateToogleItems}
+						/>
+					)}
+					{toogleItems[1].active && (
+						<ProductFormModal
+							type="service"
+							handleHide={handleHide}
+							updateToogleItems={updateToogleItems}
+						/>
+					)}
 				</div>
 			</div>
 		</div>
