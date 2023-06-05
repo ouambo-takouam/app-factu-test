@@ -16,17 +16,40 @@ function* fetchUserDataAsync({ payload }) {
 	try {
 		yield put(userFetchRequested());
 
-		const company = yield call(() => postData('POST', 'companies'));
-		console.log(company);
-		const userInfo = yield call(() =>
-			postData('POST', path, { company_id: company._id, ...credentials })
-		); // {credentials, token}
+		// const response = yield call(createGetUserData(payload)); // {credentials, token}
 
-		yield put(userFetchSucceded(userInfo));
+		if (path === 'auth/register') {
+			const company = yield call(() => postData('POST', 'companies'));
+
+			const response = yield call(() =>
+				postData('POST', path, { company_id: company._id, ...credentials })
+			); // {credentials, token}
+
+			yield put(userFetchSucceded(response));
+		} else if (path === 'auth/login') {
+			const response = yield call(() => postData('POST', path, credentials)); // {credentials, token}
+
+			yield put(userFetchSucceded(response));
+		}
 	} catch (error) {
 		yield put(userFetchFailed(error));
 	}
 }
+
+// For register or Login: return new or old user data
+// function* createGetUserData(payload) {
+// 	const { path, credentials } = payload;
+
+// 	if (path === 'auth/register') {
+// 		const company = yield call(() => postData('POST', 'companies'));
+
+// 		return yield call(() =>
+// 			postData('POST', path, { company_id: company._id, ...credentials })
+// 		); // {credentials, token}
+// 	} else if (path === 'auth/login') {
+// 		return yield call(() => postData('POST', path, credentials)); // {credentials, token}
+// 	}
+// }
 
 /** Watcher which gets called everytime the 'USER_FETCH_ASYNC' action type is
  *  triggered !

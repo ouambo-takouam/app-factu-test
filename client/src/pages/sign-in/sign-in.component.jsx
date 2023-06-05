@@ -27,7 +27,7 @@ export default function SignIn() {
 
 		// checks if inputs are all set
 		if (!email || !password) {
-			return alert('All fields are required');
+			return alert('Email et Mot de passe OBLIGATOIRE');
 		}
 
 		/** this action is for displaying the spinnerLoader by toogling the 'isLoading' redux store value
