@@ -16,7 +16,7 @@ async function httpGetAllCustomers(req, res) {
 }
 
 async function httpAddNewCustomer(req, res) {
-	const { company_id } = req.user;
+	const { company_id } = req.user; // {company_id, email}
 	const data = req.body;
 
 	try {

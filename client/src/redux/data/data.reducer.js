@@ -3,6 +3,7 @@ import { addItem, updateItem } from './data.utils';
 
 const initialState = {
 	customers: [],
+	products: [],
 	invoices: [],
 	isLoading: false,
 	error: null,
