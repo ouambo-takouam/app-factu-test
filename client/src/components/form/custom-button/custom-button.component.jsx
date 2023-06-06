@@ -13,7 +13,9 @@ export const CustomButton = styled.button`
 	border-radius: ${({ $radius }) => $radius};
 	color: ${({ $color }) => $color};
 	margin-top: 15px;
+	margin-top: ${({ $mtop }) => $mtop};
 	margin-bottom: 15px;
+	margin-bottom: ${({ $mbottom }) => $mbottom};
 	margin-left: ${({ $mleft }) => $mleft};
 	font-size: 15px;
 	font-weight: ${({ $weight }) => $weight};

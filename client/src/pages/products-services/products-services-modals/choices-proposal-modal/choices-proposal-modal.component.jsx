@@ -66,6 +66,7 @@ export default function ChoicesProposalModal({ onHideHandler }) {
 							type="stock"
 							handleHide={handleHide}
 							updateToogleItems={updateToogleItems}
+							onHideHandler={onHideHandler}
 						/>
 					)}
 					{toogleItems[1].active && (

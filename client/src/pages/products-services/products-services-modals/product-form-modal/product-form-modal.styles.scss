@@ -113,6 +113,13 @@
 		}
 	}
 
+	.save-create-btn-wrapper {
+		position: fixed;
+		right: 50px;
+		bottom: 40px;
+		z-index: 20;
+	}
+
 	.form-modal-footer {
 		position: fixed;
 		bottom: 0;
@@ -122,6 +129,10 @@
 		justify-content: end;
 		background: #fff;
 		border-top: 4px solid #f4f5f8;
-		padding: 0 30px;
+		padding: 10px 20px;
+
+		.submit-btn-wrapper {
+			display: flex;
+		}
 	}
 }

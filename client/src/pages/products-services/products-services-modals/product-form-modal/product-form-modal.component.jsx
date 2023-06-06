@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { capitalizeWords } from '../../../../utils/capitalize-words';
-import { postData } from '../../../../utils/fetch.utils';
+import { BsCaretDownFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import { capitalizeWords } from '../../../../utils/capitalize-words';
+import useHide from '../../../../hooks/hide.hook';
+import { postData } from '../../../../utils/fetch.utils';
 import { selectUserToken } from '../../../../redux/user/user.selectors';
-import {
-	dataAddItem,
-	dataUpdateItem,
-} from '../../../../redux/data/data.actions';
+import { dataAddItem } from '../../../../redux/data/data.actions';
 import useManageInput from '../../../../hooks/manage-input.hook';
 import InputField from '../../../../components/form/input-field/input-field.component';
 import SelectField from '../../../../components/form/select-field/select-field.component';
@@ -17,10 +16,14 @@ export default function ProductFormModal({
 	type,
 	handleHide,
 	updateToogleItems,
+	onHideHandler,
 }) {
 	// react-redux usefull variables !
 	const dispatch = useDispatch();
 	const token = useSelector(selectUserToken);
+
+	const { hide: hideSaveCreateBtn, handleHide: handleHideSaveCreateBtn } =
+		useHide(false);
 
 	const [fields, handleChange] = useManageInput();
 	const { name, qte } = fields;
@@ -31,6 +34,16 @@ export default function ProductFormModal({
 	};
 
 	const handleSubmit = async () => {
+		await submitAndDispatchAction();
+
+		onHideHandler();
+	};
+
+	const handleSubmitAndClear = async () => {
+		await submitAndDispatchAction();
+	};
+
+	const submitAndDispatchAction = async () => {
 		if (!name && !qte) {
 			return alert('Nom quantite du produit obligatoire');
 		}
@@ -134,11 +147,47 @@ export default function ProductFormModal({
 					<SelectField width="200px" label="Fournisseur préféré" />
 				</div>
 			</div>
+
+			{hideSaveCreateBtn && (
+				<div className="save-create-btn-wrapper">
+					<CustomButton
+						$mtop="5px"
+						$mbottom="5px"
+						$padding="5px 18px"
+						onClick={handleSubmitAndClear}
+					>
+						Enregistrer et creer
+					</CustomButton>
+				</div>
+			)}
+
 			<div className="form-modal-footer">
 				<div className="container">
-					<CustomButton onClick={handleSubmit} $validate>
-						Enregistrer et fermer
-					</CustomButton>
+					<div className="submit-btn-wrapper">
+						<CustomButton
+							$validate
+							$height="30px"
+							$padding="8px 16px"
+							$mtop="0"
+							$mbottom="0"
+							$radius="36px 0 0 36px"
+							onClick={handleSubmit}
+						>
+							Enregistrer et fermer
+						</CustomButton>
+						<CustomButton
+							$validate
+							$height="30px"
+							$padding="8px"
+							$mtop="0"
+							$mbottom="0"
+							$radius="0 36px 36px 0"
+							$mleft="1px"
+							onClick={handleHideSaveCreateBtn}
+						>
+							<BsCaretDownFill size={12} />
+						</CustomButton>
+					</div>
 				</div>
 			</div>
 		</div>
