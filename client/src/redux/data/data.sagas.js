@@ -17,7 +17,7 @@ function* fetchDataAsync({ payload }) {
 	try {
 		yield put(dataFetchRequested()); // for optional spinner loader (isLoading === true)
 		const data = yield call(() => getData(path, token)); // getting data
-		yield put(dataFetchSucceded({ type: 'customers', value: data })); // passing data to redux reducer
+		yield put(dataFetchSucceded({ type: path, value: data })); // passing data to redux reducer
 	} catch (error) {
 		yield put(dataFetchFailed(error));
 	}

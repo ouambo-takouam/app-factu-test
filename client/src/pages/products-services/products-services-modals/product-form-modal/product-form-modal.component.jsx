@@ -1,5 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { capitalizeWords } from '../../../../utils/capitalize-words';
+import { postData } from '../../../../utils/fetch.utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserToken } from '../../../../redux/user/user.selectors';
+import {
+	dataAddItem,
+	dataUpdateItem,
+} from '../../../../redux/data/data.actions';
+import useManageInput from '../../../../hooks/manage-input.hook';
 import InputField from '../../../../components/form/input-field/input-field.component';
 import SelectField from '../../../../components/form/select-field/select-field.component';
 import { CustomButton } from '../../../../components/form/custom-button/custom-button.component';
@@ -10,9 +18,32 @@ export default function ProductFormModal({
 	handleHide,
 	updateToogleItems,
 }) {
+	// react-redux usefull variables !
+	const dispatch = useDispatch();
+	const token = useSelector(selectUserToken);
+
+	const [fields, handleChange] = useManageInput();
+	const { name, qte } = fields;
+
 	const handleTypeChange = () => {
 		handleHide();
 		updateToogleItems(0);
+	};
+
+	const handleSubmit = async () => {
+		if (!name && !qte) {
+			return alert('Nom quantite du produit obligatoire');
+		}
+
+		// postData: perform fetch 'POST' type to the server
+		const created = await postData(
+			'POST',
+			'products', // path
+			fields, // data
+			token // token
+		);
+
+		dispatch(dataAddItem({ type: 'products', value: created }));
 	};
 
 	return (
@@ -28,7 +59,13 @@ export default function ProductFormModal({
 				<div className="general-infos-block">
 					<div className="name-references-image">
 						<div className="name-references">
-							<InputField fullwidth label="Nom*" />
+							<InputField
+								fullwidth
+								label="Nom*"
+								name="name"
+								value={name}
+								onChangeHandler={handleChange}
+							/>
 							<InputField fullwidth label="Référence" />
 						</div>
 						<label for="file" className="image"></label>
@@ -49,7 +86,11 @@ export default function ProductFormModal({
 					<div className="stock-quantity-block">
 						<div>
 							<h3>Quantité en stock initiale*</h3>
-							<InputField />
+							<InputField
+								name="qte"
+								value={qte}
+								onChangeHandler={handleChange}
+							/>
 						</div>
 						<div>
 							<div>
@@ -95,7 +136,9 @@ export default function ProductFormModal({
 			</div>
 			<div className="form-modal-footer">
 				<div className="container">
-					<CustomButton $validate>Enregistrer et fermer</CustomButton>
+					<CustomButton onClick={handleSubmit} $validate>
+						Enregistrer et fermer
+					</CustomButton>
 				</div>
 			</div>
 		</div>

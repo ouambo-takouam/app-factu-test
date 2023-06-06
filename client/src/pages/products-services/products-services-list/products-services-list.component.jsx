@@ -3,11 +3,15 @@
 // import { ExportToExcel } from '../../../utils/export-to-excel.utils';
 // import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 // import InputField from '../../../components/form/input-field/input-field.component';
+import { useSelector } from 'react-redux';
+import { selectProducts } from '../../../redux/data/data.selectors';
 import PageListNav from '../../../components/ui/page-list-nav/page-list-nav.component';
 import PageListData from '../../../components/ui/page-list-data/page-list-data.component';
 import './products-services-list.styles.scss';
 
 export default function ProductsServicesList() {
+	const products = useSelector(selectProducts);
+
 	return (
 		<div className="products-services-list-wrapper">
 			<div className="products-services-list-header">
@@ -41,16 +45,16 @@ export default function ProductsServicesList() {
 						'nom',
 						'reference',
 						'type',
-						'description de la vente',
+						'description vente',
 						'prix de vente',
 						'cout',
 						'quantite en stock',
-						'point de commande',
+						'point commande',
 						'action',
 					]}
 				/>
 			</div>
-			<PageListData filteredList={[]} />
+			<PageListData dataType="product" filteredList={products} />
 		</div>
 	);
 }

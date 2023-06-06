@@ -14,7 +14,7 @@ import PageListData from '../../../components/ui/page-list-data/page-list-data.c
 import './customers-list.styles.scss';
 
 export default function CustomersList() {
-	const customers = useSelector(selectOrderedCustomers);
+	const customers = useSelector(selectOrderedCustomers); //[]
 	const customersToExport = useSelector(selectCustomersToExport);
 
 	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
@@ -61,7 +61,7 @@ export default function CustomersList() {
 					]}
 				/>
 			</div>
-			<PageListData filteredList={filteredList} />
+			<PageListData dataType="customer" filteredList={filteredList} />
 		</div>
 	);
 }

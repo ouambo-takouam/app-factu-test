@@ -15,6 +15,7 @@ export default function Dashboard() {
 	 *  to properly make request to server.
 	 */
 	dispatch(dataFetchAsync({ path: 'customers', token }));
+	dispatch(dataFetchAsync({ path: 'products', token }));
 
 	return (
 		<main className="dashboard-wrapper">

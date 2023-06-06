@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import useHide from '../../hooks/hide.hook';
 import CustomersHeader from './customers-header/customers-header.component';
 import CustomersList from './customers-list/customers-list.component';
@@ -10,7 +9,7 @@ export default function Customers() {
 		useHide(true);
 
 	return (
-		<Fragment>
+		<div>
 			<div className="customers-wrapper">
 				<CustomersHeader toogleClientModal={toogleClientModal} />
 				<CustomersList />
@@ -19,6 +18,6 @@ export default function Customers() {
 			{!hideClientModal && (
 				<CustomerModal toogleClientModal={toogleClientModal} />
 			)}
-		</Fragment>
+		</div>
 	);
 }
