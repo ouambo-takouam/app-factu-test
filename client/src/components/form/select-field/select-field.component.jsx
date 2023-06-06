@@ -11,7 +11,7 @@ export default function SelectField({
 }) {
 	return (
 		<div className="select-fieldset">
-			{label && <h2>{label}</h2>}
+			{label && <p>{label}</p>}
 			<select
 				style={{ width }}
 				onChange={onChangeHandler}

@@ -4,10 +4,14 @@ import { FiMail } from 'react-icons/fi';
 import { MdArrowDropDown } from 'react-icons/md';
 import useHide from '../../../hooks/hide.hook';
 import OptionsBtnWrapper from '../options-btn-wrapper/options-btn-wrapper.component';
+import Invoice from '../../../pages/invoice/invoice.component';
 import './page-list-item.styles.scss';
 
 export default function PageListItem({ dataType, item }) {
-	const { hide, handleHide } = useHide(true);
+	const { hide: hidePageItemOptions, handleHide: handleHidePageItemOptions } =
+		useHide(true);
+	const { hide: hideInvoicePage, handleHide: handleHideInvoicePage } =
+		useHide(true);
 
 	const {
 		_id,
@@ -49,11 +53,16 @@ export default function PageListItem({ dataType, item }) {
 					<div className="field-email">{email}</div>
 					<div className="field-solde-courant">XAF0.00</div>
 					<div className="field-action">
-						<Link className="create-invoice-link">Creer une facture</Link>
+						<Link
+							className="create-invoice-link"
+							onClick={handleHideInvoicePage}
+						>
+							Creer une facture
+						</Link>
 						<span className="other-actions">
-							<MdArrowDropDown size={24} onClick={handleHide} />
+							<MdArrowDropDown size={24} onClick={handleHidePageItemOptions} />
 						</span>
-						{!hide && (
+						{!hidePageItemOptions && (
 							<div className="field-action-options">
 								<OptionsBtnWrapper
 									options={[
@@ -83,9 +92,9 @@ export default function PageListItem({ dataType, item }) {
 					<div className="field-action">
 						<Link className="create-invoice-link">Modifier</Link>
 						<span className="other-actions">
-							<MdArrowDropDown size={24} onClick={handleHide} />
+							<MdArrowDropDown size={24} onClick={handleHidePageItemOptions} />
 						</span>
-						{!hide && (
+						{!hidePageItemOptions && (
 							<div className="field-action-options">
 								<OptionsBtnWrapper
 									options={[
@@ -102,6 +111,11 @@ export default function PageListItem({ dataType, item }) {
 				</div>
 			) : (
 				''
+			)}
+
+			{/** Invoice page */}
+			{!hideInvoicePage && (
+				<Invoice onInvoicePageHideHanlder={handleHideInvoicePage} />
 			)}
 		</Fragment>
 	);
