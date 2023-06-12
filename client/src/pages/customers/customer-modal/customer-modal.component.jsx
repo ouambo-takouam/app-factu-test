@@ -14,7 +14,6 @@ import { CustomButton } from '../../../components/form/custom-button/custom-butt
 import './customer-modal.styles.scss';
 
 export default function CustomerModal({ toogleClientModal, prevData = {} }) {
-	// react-redux usefull variables !
 	const dispatch = useDispatch();
 	const token = useSelector(selectUserToken);
 

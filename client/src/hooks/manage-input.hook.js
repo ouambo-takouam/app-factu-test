@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 /**
- * ## This custom hook creates by default an initial empty object `{}` as local state
- * ## 'handleChange' function will used to update that state.
+ * ## Creates an initial empty object `{}` as local state. That initial
+ *  value can be provided by the component which calls the hook.
+ * ## 'handleChange' function will be used to update that state.
  */
 export default function useManageInput(initialData = {}) {
 	const [fields, setFields] = useState(initialData);

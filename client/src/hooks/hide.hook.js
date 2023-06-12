@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
-// custom hook created to display or not a component on the DOM
+/**
+ * ## Creates an initial `boolean` state value provided by the component
+ * ## 'handleHide' function will toogle that state.
+ */
 export default function useHide(initial) {
 	const [hide, setHide] = useState(initial);
 
