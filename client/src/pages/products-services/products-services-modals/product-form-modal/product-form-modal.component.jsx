@@ -135,7 +135,7 @@ export default function ProductFormModal({
 				</div>
 
 				<div className="infos-achat-block">
-					<p>Infos sur l'achat</p>
+					<p className="title">Infos sur l'achat</p>
 					<InputField
 						placeholder="Description sur les formulaires d'achat"
 						fullwidth
