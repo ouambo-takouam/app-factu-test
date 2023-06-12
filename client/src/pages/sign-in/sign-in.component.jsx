@@ -13,16 +13,17 @@ import './sign-in.styles.scss';
 
 // sign-in page
 export default function SignIn() {
-	// this custom hook will be is used to store and update user data
+	/** 'useManageInput' hook: `fields` is initially an empty object {}
+	 * and will get values while user triggered handleChange function by
+	 * typing values inside inputs
+	 */
 	const [fields, handleChange] = useManageInput();
 	const { email, password } = fields;
 
-	/** getting from the store 'isLoading' data. 'dispatch' will be used to dispatch 
-	redux actions */
 	const isLoading = useSelector(selectUserIsLoading);
 	const dispatch = useDispatch();
 
-	// 'handleSubmit' function handles form submition
+	/** Triggered when user clicked on sign-in button */
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
@@ -31,8 +32,13 @@ export default function SignIn() {
 			return alert('Email et Mot de passe OBLIGATOIRE');
 		}
 
-		/** this action is for displaying the spinnerLoader by toogling the 'isLoading' redux store value
-		 *  from false to true
+		/**
+		 * Async redux action which will :
+		 * 1. First toogle `isLoading` value to 'true' (which will display the spinner)
+		 * 2. Pass user credentials to nodejs server and hopefully gets back this
+		 * response `{credentials, token}` that will be save to redux store
+		 * 3. Gets back `isLoading` value to 'false'. Because the token value is no longer
+		 * null, the user is redirected to dashboard
 		 */
 		dispatch(
 			userFetchAsync({

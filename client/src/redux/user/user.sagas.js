@@ -7,7 +7,7 @@ import {
 	userFetchFailed,
 } from './user.actions.js';
 
-/** Saga logic used to fetch user credentials fom remote server and
+/** Saga logic used to fetch user credentials fom nodejs server and
  *  update redux store
  */
 function* fetchUserDataAsync({ payload }) {
@@ -16,18 +16,29 @@ function* fetchUserDataAsync({ payload }) {
 	try {
 		yield put(userFetchRequested());
 
-		// const response = yield call(createGetUserData(payload)); // {credentials, token}
-
 		if (path === 'auth/register') {
+			/**
+			 * creates a new `company` document on mongo atlas cuz this new
+			 * user should belongs to a company.
+			 */
 			const company = yield call(() => postData('POST', 'companies'));
 
+			/**
+			 * creates a new `user` document on mongo atlas. We gets back from server
+			 * this: `{credentials, token}`
+			 */
 			const response = yield call(() =>
 				postData('POST', path, { company_id: company._id, ...credentials })
-			); // {credentials, token}
+			);
 
+			// response data will be saved to redux store
 			yield put(userFetchSucceded(response));
 		} else if (path === 'auth/login') {
-			const response = yield call(() => postData('POST', path, credentials)); // {credentials, token}
+			/**
+			 * nodejs server will check if the user is already registered
+			 * and will return back this: `{credentials, token}`
+			 */
+			const response = yield call(() => postData('POST', path, credentials));
 
 			yield put(userFetchSucceded(response));
 		}

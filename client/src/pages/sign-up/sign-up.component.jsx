@@ -11,16 +11,17 @@ import SpinnerLoader from '../../components/ui/spinner-loader/spinner-loader.com
 
 // sign-up page
 export default function SignUp() {
-	// this custom hook will be is used to store and update user data
+	/** 'useManageInput' hook: `fields` is initially an empty object {}
+	 * and will get values while user triggered handleChange function by
+	 * typing values inside inputs
+	 */
 	const [fields, handleChange] = useManageInput();
 	const { first_name, last_name, email, password, password_confirm } = fields;
 
-	/** getting from the store 'isLoading' data. 'dispatch' will be used to dispatch 
-	redux actions */
 	const isLoading = useSelector(selectUserIsLoading);
 	const dispatch = useDispatch();
 
-	// 'handleSubmit' function handles form submition
+	/** Triggered when user clicked on sign-up button */
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
@@ -29,13 +30,18 @@ export default function SignUp() {
 			return alert('All fields are required');
 		}
 
-		// checks is password and password_confirm are the same
+		// checks is password and password_confirm are not differents
 		if (password !== password_confirm) {
 			return alert("Password aren't identicals");
 		}
 
-		/** this action is for displaying the spinnerLoader by toogling the 'isLoading' redux store value
-		 *  from false to true
+		/**
+		 * Async redux action which will :
+		 * 1. First toogle `isLoading` value to 'true' (which will display the spinner)
+		 * 2. Pass user credentials to nodejs server and hopefully gets back this
+		 * response `{credentials, token}` that will be save to redux store
+		 * 3. Gets back `isLoading` value to 'false'. Because the token value is no longer
+		 * null, the user is redirected to dashboard
 		 */
 		dispatch(
 			userFetchAsync({

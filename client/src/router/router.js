@@ -125,7 +125,7 @@ export const router = createBrowserRouter([
 				element: <p>Une gestion fiscale plus simple et intelligente</p>,
 			},
 
-			/** ---- Taxes ---- */
+			/** ---- App Center ---- */
 			{
 				path: 'appcenter/findapps',
 				element: (
