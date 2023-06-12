@@ -10,29 +10,11 @@ import CustomerDetails from '../pages/customer-details/customer-details.componen
 import ProductsServices from '../pages/products-services/products-services.component';
 import ShortcutsWrapper from '../components/ui/shortcuts-wrapper/shortcuts-wrapper.component';
 
-/** Checks 'token value' to redirect or not user depending on
- *  params passed to the function */
-function RequireAuth({ children, redirectTo, inversed }) {
-	const token = useSelector(selectUserToken);
-	const { pathname } = useLocation();
-
-	if (inversed) {
-		return token ? <Navigate to={redirectTo} state={pathname} /> : children;
-	}
-
-	return token ? children : <Navigate to={redirectTo} state={pathname} />;
-}
-
-/** Browses user on different paths ex: '/', '/sign-in', '/sign-up'
- *  or '/app/mon-entreprise' */
+/** This is the app Router */
 export const router = createBrowserRouter([
 	{
 		path: '/',
-		element: (
-			<RequireAuth redirectTo="/app/tableau-de-bord" inversed>
-				<Homepage />
-			</RequireAuth>
-		),
+		element: <Homepage />,
 	},
 	{
 		path: '/sign-up',
@@ -156,3 +138,21 @@ export const router = createBrowserRouter([
 		],
 	},
 ]);
+
+/**
+ * This function will redirect the user based on token value and
+ * passed params. So:
+ * -- User can access dashboard only after login or register
+ * -- When user is already logged in, he can't go back to login/regiser page
+ * unless he/she logged out first !
+ */
+function RequireAuth({ children, redirectTo, inversed }) {
+	const token = useSelector(selectUserToken);
+	const { pathname } = useLocation();
+
+	if (inversed) {
+		return token ? <Navigate to={redirectTo} state={pathname} /> : children;
+	}
+
+	return token ? children : <Navigate to={redirectTo} state={pathname} />;
+}
