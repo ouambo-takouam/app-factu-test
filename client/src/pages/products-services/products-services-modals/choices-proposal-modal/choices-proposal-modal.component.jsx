@@ -69,6 +69,7 @@ export default function ChoicesProposalModal({ onHideHandler }) {
 							onHideHandler={onHideHandler}
 						/>
 					)}
+
 					{toogleItems[1].active && (
 						<ProductFormModal
 							type="service"

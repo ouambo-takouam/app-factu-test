@@ -28,7 +28,11 @@ function RequireAuth({ children, redirectTo, inversed }) {
 export const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Homepage />,
+		element: (
+			<RequireAuth redirectTo="/app/tableau-de-bord" inversed>
+				<Homepage />
+			</RequireAuth>
+		),
 	},
 	{
 		path: '/sign-up',
