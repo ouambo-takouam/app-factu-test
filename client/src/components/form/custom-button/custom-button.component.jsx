@@ -18,8 +18,10 @@ export const CustomButton = styled.button`
 	margin-bottom: ${({ $mbottom }) => $mbottom};
 	margin-left: ${({ $mleft }) => $mleft};
 	font-size: 15px;
+	font-size: ${({ $fsize }) => $fsize};
 	font-weight: ${({ $weight }) => $weight};
 	background: #fff;
+	background: ${({ $bgcolor }) => $bgcolor};
 	display: flex;
 	justify-content: center;
 	align-items: center;

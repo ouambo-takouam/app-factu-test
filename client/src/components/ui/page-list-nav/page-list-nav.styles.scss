@@ -15,14 +15,14 @@
 		border-left: 1px solid #d4d7dc;
 	}
 
+	.page-list-checkbox {
+		flex: 0.2;
+	}
+
 	input[type='checkbox'] {
 		width: 20px;
 		height: 20px;
 		border: 1px solid #8d9096;
 		border-radius: 2px;
-	}
-
-	.page-list-checkbox {
-		flex: 0.2;
 	}
 }

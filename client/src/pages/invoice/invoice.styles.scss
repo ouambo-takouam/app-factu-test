@@ -6,6 +6,7 @@
 	left: 0;
 	z-index: 15;
 	background: #fff;
+	overflow-y: scroll;
 
 	.invoice-header {
 		background: #f4f5f8;
@@ -46,10 +47,9 @@
 		.invoice-header-details {
 			padding: 20px;
 			display: flex;
+			justify-content: space-between;
 
 			.customer-details {
-				border: 1px solid #6b6c72;
-
 				& > * {
 					display: flex;
 
@@ -57,6 +57,136 @@
 						margin: 8px;
 					}
 				}
+			}
+
+			.invoice-amount {
+				margin-right: 50px;
+				text-align: right;
+
+				.invoice-amount-title {
+					color: #6b6c72;
+					font-size: 14px;
+				}
+
+				.invoice-amount-value {
+					font-weight: 700;
+					line-height: 44px;
+					font-size: 36px;
+					margin: 12px 0 25px 0;
+				}
+			}
+		}
+	}
+
+	.invoice-body {
+		padding: 25px 50px;
+
+		.products-list {
+			.products-list-header,
+			.product-list-item {
+				display: flex;
+				border-bottom: 2px solid #d4d7dc;
+
+				& > * {
+					display: flex;
+					align-items: center;
+					border-left: 1px solid #d4d7dc;
+					padding: 8px;
+					flex: 1;
+					text-transform: uppercase;
+					font-size: 12px;
+					font-weight: bold;
+				}
+
+				.add-entry {
+					border-left: none;
+				}
+
+				.delete-btn {
+					justify-content: center;
+					color: #a1a1a1;
+					cursor: pointer;
+				}
+			}
+
+			.product-list-item {
+				border-bottom-width: 1px;
+			}
+
+			.empty {
+				flex: 0.1;
+			}
+
+			.number {
+				flex: 0.2;
+				justify-content: right;
+			}
+
+			.qte,
+			.price,
+			.total-amount {
+				flex: 0.8;
+			}
+		}
+
+		.invoice-details {
+			display: flex;
+			justify-content: space-between;
+
+			.other-invoice-details {
+				.additional-buttons {
+					display: flex;
+					align-items: center;
+					margin: 12px 0;
+				}
+			}
+
+			.invoice-details-resume {
+				margin: 25px 0;
+				display: flex;
+				font-weight: bold;
+
+				.titles,
+				.values {
+					& > * {
+						height: 40px;
+						display: flex;
+						align-items: center;
+						justify-content: right;
+					}
+				}
+
+				.titles {
+					div {
+						display: flex;
+						align-items: center;
+					}
+				}
+
+				.values {
+					width: 100px;
+				}
+			}
+		}
+	}
+
+	.invoice-footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		padding: 8px 15px;
+		background-color: #393a3d;
+
+		.invoice-footer-save {
+			display: flex;
+
+			.invoice-footer-create {
+				display: flex;
+				align-items: center;
+				padding-left: 15px;
 			}
 		}
 	}

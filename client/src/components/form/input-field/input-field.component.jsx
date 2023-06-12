@@ -3,6 +3,7 @@ import './input-field.styles.scss';
 export default function InputField({
 	label,
 	fullwidth,
+	width,
 	onChangeHandler,
 	...otherProps
 }) {
@@ -10,6 +11,7 @@ export default function InputField({
 		<fieldset className="input-fieldset">
 			{label && <label>{label}</label>}
 			<input
+				style={{ width }}
 				className={`${fullwidth ? 'fullwidth' : ''}`}
 				onChange={onChangeHandler}
 				{...otherProps}

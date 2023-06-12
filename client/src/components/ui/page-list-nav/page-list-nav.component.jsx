@@ -6,6 +6,7 @@ export default function PageListNav({ headers }) {
 			<div className="page-list-checkbox">
 				<input type="checkbox" />
 			</div>
+
 			{headers.map((header, idx) => (
 				<span key={idx}>{header.toUpperCase()}</span>
 			))}

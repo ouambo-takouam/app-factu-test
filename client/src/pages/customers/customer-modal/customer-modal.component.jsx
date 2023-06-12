@@ -173,6 +173,7 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 							<InputField
 								type="email"
 								label="Adresse Email"
+								placeholder="Separer les adresses e-mail par des virgules"
 								name="email"
 								value={email}
 								onChangeHandler={handleChange}
@@ -197,6 +198,7 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 							<InputField
 								type="text"
 								label="Site web"
+								placeholder="ex: www.monsite.com"
 								name="website"
 								value={website}
 								onChangeHandler={handleChange}
@@ -225,13 +227,13 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 							{toogleItems[0].active && (
 								<div className="adresse-facturation">
 									<h2>Adresse de facturation</h2>
-									<InputField
-										type="text"
-										placeholder="Rue"
+									<TextArea
 										name="street"
 										value={street}
+										placeholder="Rue"
 										onChangeHandler={handleChange}
 										fullwidth
+										height="50px"
 									/>
 									<div style={{ display: 'flex', flexWrap: 'wrap' }}>
 										<InputField
@@ -274,6 +276,7 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 										value={notes}
 										onChangeHandler={handleChange}
 										fullwidth
+										height="150px"
 									/>
 								</div>
 							)}

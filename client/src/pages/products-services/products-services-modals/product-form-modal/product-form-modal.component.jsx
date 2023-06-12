@@ -162,32 +162,30 @@ export default function ProductFormModal({
 			)}
 
 			<div className="form-modal-footer">
-				<div className="container">
-					<div className="submit-btn-wrapper">
-						<CustomButton
-							$validate
-							$height="30px"
-							$padding="8px 16px"
-							$mtop="0"
-							$mbottom="0"
-							$radius="36px 0 0 36px"
-							onClick={handleSubmit}
-						>
-							Enregistrer et fermer
-						</CustomButton>
-						<CustomButton
-							$validate
-							$height="30px"
-							$padding="8px"
-							$mtop="0"
-							$mbottom="0"
-							$radius="0 36px 36px 0"
-							$mleft="1px"
-							onClick={handleHideSaveCreateBtn}
-						>
-							<BsCaretDownFill size={12} />
-						</CustomButton>
-					</div>
+				<div className="submit-btn-wrapper">
+					<CustomButton
+						$validate
+						$height="30px"
+						$padding="8px 16px"
+						$mtop="0"
+						$mbottom="0"
+						$radius="36px 0 0 36px"
+						onClick={handleSubmit}
+					>
+						Enregistrer et fermer
+					</CustomButton>
+					<CustomButton
+						$validate
+						$height="30px"
+						$padding="8px"
+						$mtop="0"
+						$mbottom="0"
+						$radius="0 36px 36px 0"
+						$mleft="1px"
+						onClick={handleHideSaveCreateBtn}
+					>
+						<BsCaretDownFill size={12} />
+					</CustomButton>
 				</div>
 			</div>
 		</div>
