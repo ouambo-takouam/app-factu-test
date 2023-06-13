@@ -1,16 +1,23 @@
 import { useState } from 'react';
 
-export default function useToggleItems({ arr, openItem }) {
+/**
+ * ## Receives [data] (data can be any type) and creates [{id, active}, {...}, ..]
+ * as local state.
+ * ## The component uses 'updateToogleItems' to modify that state by passing
+ * the corresponding `id`, that will toggle active property !
+ */
+export default function useToggleItems({ arr, activeId }) {
 	const initialState = arr.reduce((acc, current) => {
-		if (acc.length === openItem) {
-			return [...acc, { id: acc.length + 1, active: true, data: current }];
+		if (activeId === acc.length) {
+			return [...acc, { id: acc.length, active: true }];
 		}
 
-		return [...acc, { id: acc.length + 1, active: false, data: current }];
+		return [...acc, { id: acc.length, active: false }];
 	}, []);
 
 	const [toogleItems, setToogleItems] = useState(initialState);
 
+	// update the matched object on state based on provided `id`
 	const updateToogleItems = (id) => {
 		setToogleItems(
 			toogleItems.map((toogleItem) => {

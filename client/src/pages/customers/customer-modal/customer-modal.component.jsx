@@ -19,8 +19,9 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['toogle_adress', 'toogle_notes', 'toogle_paiement', 'toogle_files'],
-		openItem: 0,
+		activeId: 0,
 	});
+
 	const [fields, handleChange] = useManageInput(prevData);
 	const {
 		first_name,
@@ -78,6 +79,7 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 				]);
 			}
 		};
+
 		generateDisplayNames();
 	}, [first_name, last_name]);
 
@@ -208,18 +210,12 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 					<div className="customer-modal-other-infos">
 						<div className="customer-other-infos-header">
 							<ul className="navigation">
-								<li onClick={() => updateToogleItems(toogleItems[0].id)}>
-									Adresse
-								</li>
-								<li onClick={() => updateToogleItems(toogleItems[1].id)}>
-									Notes
-								</li>
-								<li onClick={() => updateToogleItems(toogleItems[2].id)}>
+								<li onClick={() => updateToogleItems(0)}>Adresse</li>
+								<li onClick={() => updateToogleItems(1)}>Notes</li>
+								<li onClick={() => updateToogleItems(2)}>
 									Payment et facturation
 								</li>
-								<li onClick={() => updateToogleItems(toogleItems[3].id)}>
-									Pieces jointes
-								</li>
+								<li onClick={() => updateToogleItems(3)}>Pieces jointes</li>
 							</ul>
 						</div>
 						<div className="customer-other-infos-content">
