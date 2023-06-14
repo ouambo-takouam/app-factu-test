@@ -1,8 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-export const selectCustomers = (state) => state.data.customers;
+/** CUSTOMERS */
 
-export const selectProducts = (state) => state.data.products;
+export const selectOneCustomer = (customerId) =>
+	createSelector(selectCustomers, (customers) =>
+		customers.find((customer) => customer._id === customerId)
+	);
+
+export const selectCustomers = (state) => state.data.customers;
 
 export const selectCustomersToExport = createSelector(
 	selectCustomers,
@@ -42,11 +47,11 @@ export const selectOrderedCustomers = createSelector(
 			: []
 );
 
-export const selectOneCustomer = (customerId) =>
-	createSelector(selectCustomers, (customers) =>
-		customers.find((customer) => customer._id === customerId)
-	);
+/** PRODUCTS */
+export const selectProducts = (state) => state.data.products;
 
+/** INVOICES */
 export const selectInvoices = (state) => state.data.invoices;
+
 export const selectDataIsLoading = (state) => state.data.isLoading;
 export const selectDataError = (state) => state.data.error;

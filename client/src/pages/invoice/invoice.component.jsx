@@ -1,21 +1,63 @@
+import { useState, useEffect } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { FiSettings } from 'react-icons/fi';
 import { MdOutlineHistory } from 'react-icons/md';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { BsCaretDownFill } from 'react-icons/bs';
-// import { useSelector } from 'react-redux';
-// import useManageInput from '../../hooks/manage-input.hook';
-// import { selectOrderedCustomers } from '../../redux/data/data.selectors';
+import { useSelector } from 'react-redux';
+import { formatDate } from '../../utils/format-date';
+import { generateInvoiceNumber } from '../../utils/random';
+import options from '../../data/customer-select-options.json';
+import {
+	selectOneCustomer,
+	selectOrderedCustomers,
+} from '../../redux/data/data.selectors';
 import InputField from '../../components/form/input-field/input-field.component';
 import SelectField from '../../components/form/select-field/select-field.component';
 import TextArea from '../../components/form/text-area/text-area.component';
 import { CustomButton } from '../../components/form/custom-button/custom-button.component';
 import './invoice.styles.scss';
 
-export default function Invoice({ onInvoicePageHideHanlder, customer_id }) {
-	// const customers = useSelector(selectOrderedCustomers);
-	// const [fields, handleChange] = useManageInput();
-	// const {} = fields;
+export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
+	const [customerId, setCustomerId] = useState(clientId);
+
+	const customers = useSelector(selectOrderedCustomers);
+	const customer = useSelector(selectOneCustomer(customerId));
+
+	/** Definie la date du jour comme date par defaut de facturation et d'echeance */
+	const currentInvoiceDate = formatDate(new Date(), '-');
+	const currentDueDate = formatDate(new Date(), '-');
+	customer.invoice_date = currentInvoiceDate;
+	customer.due_date = currentDueDate;
+
+	/** Invoice number */
+	const invoiceNumber = generateInvoiceNumber();
+	customer.invoice_number = invoiceNumber;
+
+	const [customerFields, setcustomerFields] = useState(customer);
+
+	const { invoice_number, email, street, condition, invoice_date, due_date } =
+		customerFields;
+
+	const getCustomersIds = () =>
+		customers.map(({ _id, display_name }) => ({
+			text: display_name,
+			value: _id,
+		}));
+
+	const handleCustomerChange = (event) => {
+		setCustomerId(event.target.value);
+	};
+
+	const handleCustomerFieldsChange = (event) => {
+		const { name, value } = event.target;
+
+		setcustomerFields({ ...customerFields, [name]: value });
+	};
+
+	useEffect(() => {
+		setcustomerFields(customer);
+	}, [customer, customerId]);
 
 	return (
 		<div className="invoice-wrapper">
@@ -25,7 +67,7 @@ export default function Invoice({ onInvoicePageHideHanlder, customer_id }) {
 						<span className="history-btn">
 							<MdOutlineHistory size={32} />
 						</span>
-						<span className="invoice-title">Facture nº CDH-2023A001192 </span>
+						<span className="invoice-title">Facture nº {invoice_number} </span>
 					</div>
 					<div className="right-bar">
 						<span className="settings-btn">
@@ -42,15 +84,16 @@ export default function Invoice({ onInvoicePageHideHanlder, customer_id }) {
 							<SelectField
 								label="Client"
 								width="200px"
-								// name="customer_id"
-								// onChangeHandler={handleChange}
-								// data={customers.map((customer) => ({
-								// 	text: customer.display_name,
-								// 	value: customer._id,
-								// }))}
+								name="customer_id"
+								value={customerId}
+								onChangeHandler={handleCustomerChange}
+								data={getCustomersIds()}
 							/>
 							<InputField
 								label="Adresse e-mail du client"
+								name="email"
+								value={email}
+								onChangeHandler={handleCustomerFieldsChange}
 								placeholder="Separer les adresses e-mail par des virgules"
 								width="300px"
 							/>
@@ -58,19 +101,48 @@ export default function Invoice({ onInvoicePageHideHanlder, customer_id }) {
 						<div className="second-line">
 							<TextArea
 								label="Adresse de facturation"
+								name="street"
+								value={street}
+								onChangeHandler={handleCustomerFieldsChange}
 								width="200px"
 								height="60px"
 							/>
-							<SelectField label="Conditions" width="200px" />
-							<InputField type="date" label="Date facturation" />
-							<InputField type="date" label="Echeance" />
+							<SelectField
+								label="Conditions"
+								name="condition"
+								value={condition}
+								onChangeHandler={handleCustomerFieldsChange}
+								data={options.conditions}
+								width="200px"
+							/>
+							<InputField
+								type="date"
+								label="Date facturation"
+								name="invoice_date"
+								value={invoice_date}
+								onChangeHandler={handleCustomerFieldsChange}
+								width="150px"
+							/>
+							<InputField
+								type="date"
+								label="Echéance"
+								name="due_date"
+								value={due_date}
+								onChangeHandler={handleCustomerFieldsChange}
+								width="150px"
+							/>
 						</div>
 					</div>
 					<div className="invoice-amount">
 						<p className="invoice-amount-title">SOLDE À PAYER</p>
 						<p className="invoice-amount-value">0,00 XAF</p>
 						<div className="invoice-number">
-							<InputField label="N° de la facture" value="CDH-2023A001192" />
+							<InputField
+								label="N° de la facture"
+								name="invoice_number"
+								value={invoice_number}
+								onChangeHandler={handleCustomerFieldsChange}
+							/>
 						</div>
 					</div>
 				</div>

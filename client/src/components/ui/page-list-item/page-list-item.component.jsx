@@ -115,7 +115,10 @@ export default function PageListItem({ dataType, item }) {
 
 			{/** Invoice page */}
 			{!hideInvoicePage && (
-				<Invoice onInvoicePageHideHanlder={handleHideInvoicePage} />
+				<Invoice
+					onInvoicePageHideHanlder={handleHideInvoicePage}
+					clientId={item._id}
+				/>
 			)}
 		</Fragment>
 	);

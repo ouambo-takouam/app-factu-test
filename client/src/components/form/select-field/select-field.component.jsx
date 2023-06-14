@@ -20,10 +20,10 @@ export default function SelectField({
 			>
 				{data &&
 					data.map((item, idx) => {
-						const { text, value } = item;
+						const { text, value, selected } = item;
 
 						return (
-							<option key={idx} value={value}>
+							<option key={idx} value={value} selected={selected}>
 								{text}
 							</option>
 						);
