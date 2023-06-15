@@ -9,7 +9,7 @@ export default function ChoicesProposalModal({ onHideHandler }) {
 	const { hide, handleHide } = useHide(false);
 	const [toogleItems, updateToogleItems] = useToggleItems({
 		arr: ['stock', 'service'],
-	});
+	}); //[{id, active}]
 
 	return (
 		<div className="choices-proposal-modal" onClick={onHideHandler}>
@@ -29,7 +29,7 @@ export default function ChoicesProposalModal({ onHideHandler }) {
 								className="proposal"
 								onClick={() => {
 									handleHide();
-									updateToogleItems(1);
+									updateToogleItems(0);
 								}}
 							>
 								<div className="icon-wrapper stock-icon"></div>
@@ -45,7 +45,7 @@ export default function ChoicesProposalModal({ onHideHandler }) {
 								className="proposal"
 								onClick={() => {
 									handleHide();
-									updateToogleItems(2);
+									updateToogleItems(1);
 								}}
 							>
 								<div className="icon-wrapper service-icon"></div>

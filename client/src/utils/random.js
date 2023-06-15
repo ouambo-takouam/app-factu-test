@@ -7,4 +7,4 @@ export const getRandomInt = (min, max) => {
 };
 
 export const generateInvoiceNumber = () =>
-	'CDH-' + formatDate(new Date(), '') + getRandomInt(1, 1000);
+	'FACT-' + formatDate(new Date(), '') + getRandomInt(1, 1000);

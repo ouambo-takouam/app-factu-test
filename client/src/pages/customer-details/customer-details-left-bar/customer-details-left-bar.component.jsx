@@ -5,7 +5,7 @@ import { RxPlus } from 'react-icons/rx';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectOrderedCustomers } from '../../../redux/data/data.selectors';
+import { selectDocuments } from '../../../redux/data/data.selectors';
 import useFilterList from '../../../hooks/filter-list.hook';
 import InputField from '../../../components/form/input-field/input-field.component';
 import './customer-details-left-bar.styles.scss';
@@ -14,7 +14,7 @@ export default function CustomerDetailsLeftBar({ customerId, setCustomerId }) {
 	const [activePreviewId, setActivePreviewId] = useState(customerId);
 
 	const navigate = useNavigate();
-	const customers = useSelector(selectOrderedCustomers);
+	const customers = useSelector(selectDocuments('customers'));
 
 	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
 

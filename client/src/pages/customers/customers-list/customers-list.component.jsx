@@ -1,8 +1,5 @@
 import { useSelector } from 'react-redux';
-import {
-	selectOrderedCustomers,
-	selectCustomersToExport,
-} from '../../../redux/data/data.selectors';
+import { selectDocuments } from '../../../redux/data/data.selectors';
 import { BsArrow90DegDown } from 'react-icons/bs';
 import { BiPrinter, BiExport } from 'react-icons/bi';
 import useFilterList from '../../../hooks/filter-list.hook';
@@ -14,8 +11,7 @@ import PageListData from '../../../components/ui/page-list-data/page-list-data.c
 import './customers-list.styles.scss';
 
 export default function CustomersList() {
-	const customers = useSelector(selectOrderedCustomers); //[]
-	const customersToExport = useSelector(selectCustomersToExport);
+	const customers = useSelector(selectDocuments('customers'));
 
 	const [filteredList, handleChange] = useFilterList(customers, 'display_name');
 
@@ -46,7 +42,7 @@ export default function CustomersList() {
 						<BiPrinter size={25} />
 						<BiExport
 							size={25}
-							onClick={() => ExportToExcel(customersToExport, fileNameToExport)}
+							onClick={() => ExportToExcel(customers, fileNameToExport)}
 						/>
 					</div>
 				</div>

@@ -3,6 +3,7 @@ import { BsBookmark } from 'react-icons/bs';
 import './sub-side-navbar.styles.scss';
 
 export default function SubSideNavbar({ activeItem }) {
+	console.log('active item', activeItem);
 	const { data } = activeItem || {};
 	const { title, sections } = data || {};
 

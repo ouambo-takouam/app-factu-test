@@ -23,8 +23,10 @@ export default function PageListItem({ dataType, item }) {
 		street,
 		town,
 		/* product */
+		type,
 		name,
 		qte,
+		price,
 	} = item;
 
 	return (
@@ -83,9 +85,9 @@ export default function PageListItem({ dataType, item }) {
 					</div>
 					<div className="product-name">{name.toUpperCase()}</div>
 					<div className="product-reference"></div>
-					<div className="product-type"></div>
+					<div className="product-type">{type}</div>
 					<div className="product-description"></div>
-					<div className="product-price">0.00</div>
+					<div className="product-price">{price}</div>
 					<div className="product-count"></div>
 					<div className="product-quantity">{qte}</div>
 					<div className="product-point-commande"></div>

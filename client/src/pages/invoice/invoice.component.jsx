@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { FiSettings } from 'react-icons/fi';
 import { MdOutlineHistory } from 'react-icons/md';
-import { RiDeleteBin5Line } from 'react-icons/ri';
 import { BsCaretDownFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { formatDate } from '../../utils/format-date';
 import { generateInvoiceNumber } from '../../utils/random';
 import options from '../../data/customer-select-options.json';
 import {
-	selectOneCustomer,
-	selectOrderedCustomers,
+	selectOneDocument,
+	selectDocuments,
 } from '../../redux/data/data.selectors';
+import ProductListItem from '../../components/ui/product-list-item/product-list-item.component';
 import InputField from '../../components/form/input-field/input-field.component';
 import SelectField from '../../components/form/select-field/select-field.component';
 import TextArea from '../../components/form/text-area/text-area.component';
@@ -21,8 +21,8 @@ import './invoice.styles.scss';
 export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 	const [customerId, setCustomerId] = useState(clientId);
 
-	const customers = useSelector(selectOrderedCustomers);
-	const customer = useSelector(selectOneCustomer(customerId));
+	const customers = useSelector(selectDocuments('customers'));
+	const customer = useSelector(selectOneDocument('customers', customerId));
 
 	/** Definie la date du jour comme date par defaut de facturation et d'echeance */
 	const currentInvoiceDate = formatDate(new Date(), '-');
@@ -34,10 +34,27 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 	const invoiceNumber = generateInvoiceNumber();
 	customer.invoice_number = invoiceNumber;
 
-	const [customerFields, setcustomerFields] = useState(customer);
+	const [invoiceFields, setInvoiceFields] = useState(customer);
 
 	const { invoice_number, email, street, condition, invoice_date, due_date } =
-		customerFields;
+		invoiceFields;
+
+	/** Product list management */
+	const [products, setProducts] = useState([]);
+
+	const updateProducts = (product) => {
+		const { randomId } = product;
+
+		if (!products.length) {
+			setProducts([product]);
+		} else if (products.find((current) => current.randomId === randomId)) {
+			setProducts((prev) =>
+				prev.map((item) => (item.randomId === randomId ? product : item))
+			);
+		} else {
+			setProducts((prev) => [...prev, product]);
+		}
+	};
 
 	const getCustomersIds = () =>
 		customers.map(({ _id, display_name }) => ({
@@ -49,14 +66,14 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 		setCustomerId(event.target.value);
 	};
 
-	const handleCustomerFieldsChange = (event) => {
+	const handleInvoiceFieldsChange = (event) => {
 		const { name, value } = event.target;
 
-		setcustomerFields({ ...customerFields, [name]: value });
+		setInvoiceFields({ ...invoiceFields, [name]: value });
 	};
 
 	useEffect(() => {
-		setcustomerFields(customer);
+		setInvoiceFields(customer);
 	}, [customer, customerId]);
 
 	return (
@@ -93,7 +110,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 								label="Adresse e-mail du client"
 								name="email"
 								value={email}
-								onChangeHandler={handleCustomerFieldsChange}
+								onChangeHandler={handleInvoiceFieldsChange}
 								placeholder="Separer les adresses e-mail par des virgules"
 								width="300px"
 							/>
@@ -103,7 +120,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 								label="Adresse de facturation"
 								name="street"
 								value={street}
-								onChangeHandler={handleCustomerFieldsChange}
+								onChangeHandler={handleInvoiceFieldsChange}
 								width="200px"
 								height="60px"
 							/>
@@ -111,7 +128,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 								label="Conditions"
 								name="condition"
 								value={condition}
-								onChangeHandler={handleCustomerFieldsChange}
+								onChangeHandler={handleInvoiceFieldsChange}
 								data={options.conditions}
 								width="200px"
 							/>
@@ -120,7 +137,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 								label="Date facturation"
 								name="invoice_date"
 								value={invoice_date}
-								onChangeHandler={handleCustomerFieldsChange}
+								onChangeHandler={handleInvoiceFieldsChange}
 								width="150px"
 							/>
 							<InputField
@@ -128,7 +145,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 								label="Echéance"
 								name="due_date"
 								value={due_date}
-								onChangeHandler={handleCustomerFieldsChange}
+								onChangeHandler={handleInvoiceFieldsChange}
 								width="150px"
 							/>
 						</div>
@@ -141,7 +158,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 								label="N° de la facture"
 								name="invoice_number"
 								value={invoice_number}
-								onChangeHandler={handleCustomerFieldsChange}
+								onChangeHandler={handleInvoiceFieldsChange}
 							/>
 						</div>
 					</div>
@@ -160,28 +177,18 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 						<span className="empty"></span>
 					</div>
 					<div className="products-list-content">
-						<div className="product-list-item">
-							<span className="empty add-entry"></span>
-							<span className="number">1</span>
-							<div className="product">
-								<SelectField />
-							</div>
-							<div className="description">
-								<InputField value="Pain au chocolat" />
-							</div>
-							<div className="qte">
-								<InputField value={1} />
-							</div>
-							<div className="price">
-								<InputField value={50000} />
-							</div>
-							<div className="total-amount">
-								<InputField value={50000} />
-							</div>
-							<span className="empty delete-btn">
-								<RiDeleteBin5Line size={20} />
-							</span>
-						</div>
+						<ProductListItem
+							invoiceProducts={products}
+							updateProducts={updateProducts}
+						/>
+						<ProductListItem
+							invoiceProducts={products}
+							updateProducts={updateProducts}
+						/>
+						<ProductListItem
+							invoiceProducts={products}
+							updateProducts={updateProducts}
+						/>
 					</div>
 				</div>
 				<div className="invoice-details">

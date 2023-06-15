@@ -9,10 +9,10 @@ import { useState } from 'react';
 export default function useToggleItems({ arr, activeId }) {
 	const initialState = arr.reduce((acc, current) => {
 		if (activeId === acc.length) {
-			return [...acc, { id: acc.length, active: true }];
+			return [...acc, { id: acc.length, active: true, data: current }];
 		}
 
-		return [...acc, { id: acc.length, active: false }];
+		return [...acc, { id: acc.length, active: false, data: current }];
 	}, []);
 
 	const [toogleItems, setToogleItems] = useState(initialState);

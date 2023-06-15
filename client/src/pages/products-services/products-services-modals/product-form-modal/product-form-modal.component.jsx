@@ -26,11 +26,11 @@ export default function ProductFormModal({
 		useHide(false);
 
 	const [fields, handleChange] = useManageInput();
-	const { name, qte } = fields;
+	const { name, qte, description, price } = fields;
 
 	const handleTypeChange = () => {
 		handleHide();
-		updateToogleItems(0);
+		updateToogleItems(null);
 	};
 
 	const handleSubmit = async () => {
@@ -52,7 +52,7 @@ export default function ProductFormModal({
 		const created = await postData(
 			'POST',
 			'products', // path
-			fields, // data
+			{ ...fields, type }, // data
 			token // token
 		);
 
@@ -125,11 +125,20 @@ export default function ProductFormModal({
 				<div className="description-block">
 					<InputField
 						label="Description"
+						name="description"
+						value={description}
+						onChangeHandler={handleChange}
 						placeholder="Description sur les document commerciaux"
 						fullwidth
 					/>
 					<div className="price">
-						<InputField fullwidth label="Prix de vente" />
+						<InputField
+							fullwidth
+							label="Prix de vente"
+							name="price"
+							value={price}
+							onChangeHandler={handleChange}
+						/>
 						<SelectField fullwidth label="Compte de produits" />
 					</div>
 				</div>

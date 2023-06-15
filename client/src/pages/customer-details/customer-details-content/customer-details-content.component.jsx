@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectOneCustomer } from '../../../redux/data/data.selectors';
+import { selectOneDocument } from '../../../redux/data/data.selectors';
 import useHide from '../../../hooks/hide.hook';
 import CustomerModal from '../../customers/customer-modal/customer-modal.component';
 import CustomerDetailsContentHeader from '../customer-details-content-header/customer-details-content-header.component';
@@ -7,7 +7,7 @@ import CustomerDetailsContentData from '../customer-details-content-data/custome
 import './customer-details-content.styles.scss';
 
 export default function CustomerDetailsContent({ customerId }) {
-	const customer = useSelector(selectOneCustomer(customerId));
+	const customer = useSelector(selectOneDocument('customers', customerId));
 
 	const { hide, handleHide } = useHide(true);
 
