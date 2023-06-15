@@ -19,12 +19,13 @@ import { CustomButton } from '../../components/form/custom-button/custom-button.
 import './invoice.styles.scss';
 
 export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
+	// -- Debut -- : Logic pour la manipulation les donnees client
 	const [customerId, setCustomerId] = useState(clientId);
 
 	const customers = useSelector(selectDocuments('customers'));
 	const customer = useSelector(selectOneDocument('customers', customerId));
 
-	/** Definie la date du jour comme date par defaut de facturation et d'echeance */
+	/** Invoice date & Due date */
 	const currentInvoiceDate = formatDate(new Date(), '-');
 	const currentDueDate = formatDate(new Date(), '-');
 	customer.invoice_date = currentInvoiceDate;
@@ -38,23 +39,6 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 
 	const { invoice_number, email, street, condition, invoice_date, due_date } =
 		invoiceFields;
-
-	/** Product list management */
-	const [products, setProducts] = useState([]);
-
-	const updateProducts = (product) => {
-		const { randomId } = product;
-
-		if (!products.length) {
-			setProducts([product]);
-		} else if (products.find((current) => current.randomId === randomId)) {
-			setProducts((prev) =>
-				prev.map((item) => (item.randomId === randomId ? product : item))
-			);
-		} else {
-			setProducts((prev) => [...prev, product]);
-		}
-	};
 
 	const getCustomersIds = () =>
 		customers.map(({ _id, display_name }) => ({
@@ -75,6 +59,34 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 	useEffect(() => {
 		setInvoiceFields(customer);
 	}, [customer, customerId]);
+
+	// -- Fin --
+
+	// -- debut -- Logique gestion produits facture !
+	const [products, setProducts] = useState([]);
+	const [randomIds, setRandomIds] = useState([Math.random()]);
+
+	const handleRandomIds = () => {
+		setRandomIds((prev) => [...prev, Math.random()]);
+	};
+
+	const removeRandomIds = (id) => {
+		setRandomIds((prev) => prev.filter((randomId) => randomId !== id));
+	};
+
+	const updateProducts = (product) => {
+		const { randomId } = product;
+
+		if (!products.length) {
+			setProducts([product]);
+		} else if (products.find((current) => current.randomId === randomId)) {
+			setProducts((prev) =>
+				prev.map((item) => (item.randomId === randomId ? product : item))
+			);
+		} else {
+			setProducts((prev) => [...prev, product]);
+		}
+	};
 
 	return (
 		<div className="invoice-wrapper">
@@ -177,18 +189,16 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 						<span className="empty"></span>
 					</div>
 					<div className="products-list-content">
-						<ProductListItem
-							invoiceProducts={products}
-							updateProducts={updateProducts}
-						/>
-						<ProductListItem
-							invoiceProducts={products}
-							updateProducts={updateProducts}
-						/>
-						<ProductListItem
-							invoiceProducts={products}
-							updateProducts={updateProducts}
-						/>
+						{randomIds &&
+							randomIds.map((randomId, idx) => (
+								<ProductListItem
+									key={idx}
+									randomId={randomId}
+									updateProducts={updateProducts}
+									handleRandomIds={handleRandomIds}
+									removeRandomIds={removeRandomIds}
+								/>
+							))}
 					</div>
 				</div>
 				<div className="invoice-details">
