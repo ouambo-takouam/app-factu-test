@@ -49,6 +49,8 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 
 	const [displayNames, setDisplayNames] = useState([]);
 
+	const [activeToggleItem, setActiveToggleItem] = useState('address');
+
 	// generate display names options for the form
 	useEffect(() => {
 		const generateDisplayNames = () => {
@@ -210,12 +212,42 @@ export default function CustomerModal({ toogleClientModal, prevData = {} }) {
 					<div className="customer-modal-other-infos">
 						<div className="customer-other-infos-header">
 							<ul className="navigation">
-								<li onClick={() => updateToogleItems(0)}>Adresse</li>
-								<li onClick={() => updateToogleItems(1)}>Notes</li>
-								<li onClick={() => updateToogleItems(2)}>
+								<li
+									className={activeToggleItem === 'address' && 'active'}
+									onClick={() => {
+										updateToogleItems(0);
+										setActiveToggleItem('address');
+									}}
+								>
+									Adresse
+								</li>
+								<li
+									className={activeToggleItem === 'notes' && 'active'}
+									onClick={() => {
+										updateToogleItems(1);
+										setActiveToggleItem('notes');
+									}}
+								>
+									Notes
+								</li>
+								<li
+									className={activeToggleItem === 'payment' && 'active'}
+									onClick={() => {
+										updateToogleItems(2);
+										setActiveToggleItem('payment');
+									}}
+								>
 									Payment et facturation
 								</li>
-								<li onClick={() => updateToogleItems(3)}>Pieces jointes</li>
+								<li
+									className={activeToggleItem === 'attachment' && 'active'}
+									onClick={() => {
+										updateToogleItems(3);
+										setActiveToggleItem('attachment');
+									}}
+								>
+									Pieces jointes
+								</li>
 							</ul>
 						</div>
 						<div className="customer-other-infos-content">

@@ -20,6 +20,7 @@ export default function CustomerDetailsContent({ customerId }) {
 			<CustomerDetailsContentData
 				customer={customer}
 				toogleClientModal={handleHide}
+				active={{ id: 1, title: 'infos-client' }}
 			/>
 
 			{!hide && (

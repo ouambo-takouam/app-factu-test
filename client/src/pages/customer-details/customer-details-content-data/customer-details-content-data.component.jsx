@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useToggleItems from '../../../hooks/toggle-items.hook';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
 import './customer-details-content-data.styles.scss';
@@ -5,14 +6,11 @@ import './customer-details-content-data.styles.scss';
 export default function CustomerDetailsContentData({
 	customer,
 	toogleClientModal,
+	active,
 }) {
 	const [toogleItems, updateToogleItems] = useToggleItems({
-		arr: [
-			'toogle_list_operations',
-			'toogle_statements',
-			'toogle_infos_clients',
-		],
-		openItem: 2,
+		arr: ['toogle_list_operations', 'toogle_infos_clients'],
+		activeId: active.id,
 	});
 	const {
 		display_name,
@@ -26,32 +24,33 @@ export default function CustomerDetailsContentData({
 		condition,
 	} = customer;
 
+	const [activeHeader, setActiveHeader] = useState(active.title);
+
 	return (
 		<div className="customer-details-content-data">
 			<div className="header">
 				<div
-					className="title"
-					onClick={() => updateToogleItems(toogleItems[0].id)}
+					className={`${activeHeader === 'operations' ? 'active' : ''} title`}
+					onClick={() => {
+						updateToogleItems(toogleItems[0].id);
+						setActiveHeader('operations');
+					}}
 				>
-					Liste d'opérations
+					<span className="left">Liste d'opérations</span>
 				</div>
 				<div
-					className="title dotted"
-					onClick={() => updateToogleItems(toogleItems[1].id)}
+					className={`${activeHeader === 'infos-client' ? 'active' : ''} title`}
+					onClick={() => {
+						updateToogleItems(toogleItems[1].id);
+						setActiveHeader('infos-client');
+					}}
 				>
-					Statements
-				</div>
-				<div
-					className="title"
-					onClick={() => updateToogleItems(toogleItems[2].id)}
-				>
-					Infos sur le client
+					<span>Infos sur le client</span>
 				</div>
 			</div>
 			<div className="content">
 				{toogleItems[0].active && <p>Liste des operations</p>}
-				{toogleItems[1].active && <p>Liste de statements</p>}
-				{toogleItems[2].active && (
+				{toogleItems[1].active && (
 					<div className="content-customer">
 						<div className="content-customer-header">
 							<CustomButton

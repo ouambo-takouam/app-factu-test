@@ -4,19 +4,30 @@
 	.header {
 		display: flex;
 		padding-top: 25px;
-		padding-bottom: 15px;
-		border-bottom: 5px groove #e5e5e5;
+		border-bottom: 3px solid #e5e5e5;
 
 		.title {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			font-weight: 400;
 			background-color: transparent;
 			color: #6b6c72;
-			padding: 6px 30px;
+			padding-top: 15px;
+			padding-bottom: 15px;
 			cursor: pointer;
 
-			&.dotted {
-				border-left: 1px dotted #6b6c72;
-				border-right: 1px dotted #6b6c72;
+			&.active {
+				border-bottom: 4px solid #2ca01c;
+				font-weight: 600;
+			}
+
+			span {
+				padding: 0 30px;
+
+				&.left {
+					border-right: 1px dotted #6b6c72;
+				}
 			}
 		}
 	}
