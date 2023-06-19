@@ -19,7 +19,7 @@ import { CustomButton } from '../../components/form/custom-button/custom-button.
 import './invoice.styles.scss';
 
 export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
-	// -- Debut -- : Logic pour la manipulation les donnees client
+	// -- Debut -- : Logic pour la manipulation les donnees client (header)
 	const [customerId, setCustomerId] = useState(clientId);
 
 	const customers = useSelector(selectDocuments('customers'));
@@ -32,7 +32,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 	customer.due_date = currentDueDate;
 
 	/** Invoice number */
-	const invoiceNumber = generateInvoiceNumber();
+	const [invoiceNumber] = useState(generateInvoiceNumber());
 	customer.invoice_number = invoiceNumber;
 
 	const [invoiceFields, setInvoiceFields] = useState(customer);
@@ -65,6 +65,13 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 	// -- debut -- Logique gestion produits facture !
 	const [products, setProducts] = useState([]);
 	const [randomIds, setRandomIds] = useState([Math.random()]);
+	const [sousTotal, setSousTotal] = useState(0);
+
+	useEffect(() => {
+		setSousTotal(
+			products.reduce((acc, curr) => acc + curr.qte * curr.price, 0)
+		);
+	}, [products]);
 
 	const handleRandomIds = () => {
 		setRandomIds((prev) => [...prev, Math.random()]);
@@ -72,20 +79,23 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 
 	const removeRandomIds = (id) => {
 		setRandomIds((prev) => prev.filter((randomId) => randomId !== id));
+		setProducts((state) => state.filter((product) => product.randomId !== id));
 	};
 
-	const updateProducts = (product) => {
-		const { randomId } = product;
-
-		if (!products.length) {
-			setProducts([product]);
-		} else if (products.find((current) => current.randomId === randomId)) {
-			setProducts((prev) =>
-				prev.map((item) => (item.randomId === randomId ? product : item))
-			);
-		} else {
-			setProducts((prev) => [...prev, product]);
-		}
+	const updateProducts = (productToUpdate) => {
+		setProducts((state) => {
+			if (
+				state.find((product) => product.randomId === productToUpdate.randomId)
+			) {
+				return state.map((product) =>
+					product.randomId === productToUpdate.randomId
+						? productToUpdate
+						: product
+				);
+			} else {
+				return [...state, productToUpdate];
+			}
+		});
 	};
 
 	return (
@@ -190,13 +200,13 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 					</div>
 					<div className="products-list-content">
 						{randomIds &&
-							randomIds.map((randomId, idx) => (
+							randomIds.map((randomId) => (
 								<ProductListItem
-									key={idx}
+									key={randomId}
 									randomId={randomId}
-									updateProducts={updateProducts}
 									handleRandomIds={handleRandomIds}
 									removeRandomIds={removeRandomIds}
+									updateProducts={updateProducts}
 								/>
 							))}
 					</div>
@@ -204,7 +214,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 				<div className="invoice-details">
 					<div className="other-invoice-details">
 						<div className="additional-buttons">
-							<CustomButton
+							{/*<CustomButton
 								$fsize="13px"
 								$hcolor="rgba(107,108,114,.25)"
 								$padding="5px 14px"
@@ -219,7 +229,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 								$radius="4px"
 							>
 								Supprimer toutes les lignes
-							</CustomButton>
+							</CustomButton>*/}
 						</div>
 						<TextArea
 							label="Message sur la facture"
@@ -245,7 +255,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 							<p>Solde a payer</p>
 						</div>
 						<div className="values">
-							<p>6000</p>
+							<p>{sousTotal}</p>
 							<p>0</p>
 							<p>6000</p>
 							<p>6000</p>

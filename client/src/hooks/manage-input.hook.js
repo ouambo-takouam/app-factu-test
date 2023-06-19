@@ -15,5 +15,9 @@ export default function useManageInput(initialData = {}) {
 		setFields((prev) => ({ ...prev, [name]: value }));
 	};
 
-	return [fields, handleChange];
+	const updateField = (name, value) => {
+		setFields((prev) => ({ ...prev, [name]: value }));
+	};
+
+	return [fields, handleChange, updateField];
 }

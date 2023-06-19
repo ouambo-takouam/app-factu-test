@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
+import useManageInput from '../../../hooks/manage-input.hook';
 import {
 	selectDocuments,
 	selectOneDocument,
@@ -11,39 +12,27 @@ import InputField from '../../form/input-field/input-field.component';
 
 export default function ProductListItem({
 	randomId,
-	updateProducts,
 	handleRandomIds,
 	removeRandomIds,
+	updateProducts,
 }) {
+	console.log('randomID', randomId);
 	const products = useSelector(selectDocuments('products'));
 
 	const [productId, setProductId] = useState(products[0]._id);
 
 	const product = useSelector(selectOneDocument('products', productId));
 
-	const [inputFields, setInputFields] = useState(product);
-	const { description, price } = inputFields;
+	const [fields, handleChange, updateField] = useManageInput({
+		description: product.description,
+		price: product.price,
+		qte: 1,
+	});
 
-	const [qte, setQte] = useState(1);
-
-	const [totalAmount, setTotalAmount] = useState(price);
-
-	useEffect(() => {
-		setTotalAmount(price * qte);
-	}, [price, qte]);
-
-	const handleQte = (event) => {
-		setQte(event.target.value);
-	};
+	const { description, price, qte } = fields;
 
 	const handleProductIdChange = (event) => {
 		setProductId(event.target.value);
-	};
-
-	const handleInputChange = (event) => {
-		const { name, value } = event.target;
-
-		setInputFields({ ...inputFields, [name]: value });
 	};
 
 	const generateProductsNames = () => {
@@ -55,7 +44,11 @@ export default function ProductListItem({
 
 	// modify le produit a la selection
 	useEffect(() => {
-		setInputFields(product);
+		const updateProduct = () => {
+			updateField('description', product.description);
+			updateField('price', product.price);
+		};
+		updateProduct();
 	}, [product, productId]);
 
 	useEffect(() => {
@@ -70,8 +63,8 @@ export default function ProductListItem({
 
 	return (
 		<div className="product-list-item">
-			<span className="empty add-entry">
-				<AiFillPlusCircle size={18} onClick={handleRandomIds} />
+			<span className="empty add-entry" onClick={handleRandomIds}>
+				<AiFillPlusCircle size={18} />
 			</span>
 			<span className="number">#</span>
 			<div className="product">
@@ -86,7 +79,7 @@ export default function ProductListItem({
 				<InputField
 					name="description"
 					value={description}
-					onChangeHandler={handleInputChange}
+					onChangeHandler={handleChange}
 				/>
 			</div>
 			<div className="qte">
@@ -94,21 +87,20 @@ export default function ProductListItem({
 					type="number"
 					name="qte"
 					value={qte}
-					onChangeHandler={handleQte}
+					onChangeHandler={handleChange}
 				/>
 			</div>
 			<div className="price">
-				<InputField
-					name="price"
-					value={price}
-					onChangeHandler={handleInputChange}
-				/>
+				<InputField name="price" value={price} onChangeHandler={handleChange} />
 			</div>
 			<div className="total-amount">
-				<InputField name="total_amount" value={totalAmount} />
+				<InputField name="total_amount" value={qte * price} />
 			</div>
-			<span className="empty delete-btn">
-				<RiDeleteBin5Line size={20} onClick={() => removeRandomIds(randomId)} />
+			<span
+				className="empty delete-btn"
+				onClick={() => removeRandomIds(randomId)}
+			>
+				<RiDeleteBin5Line size={20} />
 			</span>
 		</div>
 	);
