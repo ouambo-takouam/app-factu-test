@@ -37,8 +37,16 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 
 	const [invoiceFields, setInvoiceFields] = useState(customer);
 
-	const { invoice_number, email, street, condition, invoice_date, due_date } =
-		invoiceFields;
+	const {
+		invoice_number,
+		email,
+		street,
+		condition,
+		invoice_date,
+		due_date,
+		delivery_value,
+		delivery_type,
+	} = invoiceFields;
 
 	const getCustomersIds = () =>
 		customers.map(({ _id, display_name }) => ({
@@ -66,12 +74,26 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 	const [products, setProducts] = useState([]);
 	const [randomIds, setRandomIds] = useState([Math.random()]);
 	const [sousTotal, setSousTotal] = useState(0);
+	const [delivery, setDelivery] = useState(0);
 
 	useEffect(() => {
 		setSousTotal(
 			products.reduce((acc, curr) => acc + curr.qte * curr.price, 0)
 		);
 	}, [products]);
+
+	useEffect(() => {
+		const calculateDelivery = () => {
+			return !delivery_type && delivery_value
+				? (sousTotal * delivery_value) / 100
+				: delivery_type === 'percentage'
+				? (sousTotal * delivery_value) / 100
+				: delivery_type === 'value'
+				? delivery_value
+				: 0;
+		};
+		setDelivery(calculateDelivery());
+	}, [delivery_type, delivery_value, sousTotal]);
 
 	const handleRandomIds = () => {
 		setRandomIds((prev) => [...prev, Math.random()]);
@@ -237,28 +259,35 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 							width="350px"
 							height="90px"
 						/>
-						<TextArea
-							label="Message sur le relevé de situation"
-							placeholder="Lorsque vous envoyez des relevés de situation à vos clients, ce message s’affichera comme description de la facture."
-							width="350px"
-							height="70px"
-						/>
 					</div>
 					<div className="invoice-details-resume">
 						<div className="titles">
 							<p>Sous-total</p>
 							<div>
-								<SelectField />
-								<InputField width="70px" />
+								<SelectField
+									name="delivery_type"
+									value={delivery_type}
+									onChangeHandler={handleInvoiceFieldsChange}
+									data={[
+										{ text: 'Remise (%)', value: 'percentage' },
+										{ text: 'Remise (valeur)', value: 'value' },
+									]}
+								/>
+								<InputField
+									name="delivery_value"
+									value={delivery_value}
+									onChangeHandler={handleInvoiceFieldsChange}
+									width="70px"
+								/>
 							</div>
 							<p>Total TTC</p>
 							<p>Solde a payer</p>
 						</div>
 						<div className="values">
 							<p>{sousTotal}</p>
-							<p>0</p>
-							<p>6000</p>
-							<p>6000</p>
+							<p>{delivery}</p>
+							<p>{sousTotal - delivery}</p>
+							<p>{sousTotal - delivery}</p>
 						</div>
 					</div>
 				</div>
