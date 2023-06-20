@@ -16,7 +16,6 @@ export default function ProductListItem({
 	removeRandomIds,
 	updateProducts,
 }) {
-	console.log('randomID', randomId);
 	const products = useSelector(selectDocuments('products'));
 
 	const [productId, setProductId] = useState(products[0]._id);

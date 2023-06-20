@@ -3,14 +3,18 @@ import { GrClose } from 'react-icons/gr';
 import { FiSettings } from 'react-icons/fi';
 import { MdOutlineHistory } from 'react-icons/md';
 import { BsCaretDownFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { formatDate } from '../../utils/format-date';
+import { postData } from '../../utils/fetch.utils';
 import { generateInvoiceNumber } from '../../utils/random';
 import options from '../../data/customer-select-options.json';
+import { selectUserToken } from '../../redux/user/user.selectors';
 import {
 	selectOneDocument,
 	selectDocuments,
 } from '../../redux/data/data.selectors';
+import { dataAddItem } from '../../redux/data/data.actions';
 import ProductListItem from '../../components/ui/product-list-item/product-list-item.component';
 import InputField from '../../components/form/input-field/input-field.component';
 import SelectField from '../../components/form/select-field/select-field.component';
@@ -22,6 +26,10 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 	// -- Debut -- : Logic pour la manipulation les donnees client (header)
 	const [customerId, setCustomerId] = useState(clientId);
 
+	const dispatch = useDispatch();
+	// const navigate = useNavigate();
+
+	const token = useSelector(selectUserToken);
 	const customers = useSelector(selectDocuments('customers'));
 	const customer = useSelector(selectOneDocument('customers', customerId));
 
@@ -44,8 +52,8 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 		condition,
 		invoice_date,
 		due_date,
-		delivery_value,
 		delivery_type,
+		delivery_value,
 	} = invoiceFields;
 
 	const getCustomersIds = () =>
@@ -118,6 +126,34 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 				return [...state, productToUpdate];
 			}
 		});
+	};
+
+	// -- Fin -- Logique gestion produits facture !
+
+	const handleSubmit = async () => {
+		// postData: perform fetch 'POST' type to the server
+		const fields = {
+			customer_id: customerId,
+			invoice_number: invoiceNumber,
+			email,
+			address: street,
+			invoice_date,
+			due_date,
+			delivery_type,
+			delivery_value,
+			products,
+		};
+
+		const created = await postData(
+			'POST',
+			'invoices', // path
+			fields, // data
+			token // token
+		);
+
+		dispatch(dataAddItem({ type: 'invoices', value: created }));
+
+		onInvoicePageHideHanlder();
 	};
 
 	return (
@@ -308,6 +344,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 						$color="#fff"
 						$hcolor="#2A2B2D"
 						$rounded
+						onClick={handleSubmit}
 					>
 						Enregistrer
 					</CustomButton>

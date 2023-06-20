@@ -16,6 +16,7 @@ export default function Dashboard() {
 	 */
 	dispatch(dataFetchAsync({ path: 'customers', token }));
 	dispatch(dataFetchAsync({ path: 'products', token }));
+	dispatch(dataFetchAsync({ path: 'invoices', token }));
 
 	return (
 		<main className="dashboard-wrapper">
