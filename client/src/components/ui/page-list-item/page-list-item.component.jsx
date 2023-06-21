@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMail } from 'react-icons/fi';
 import { MdArrowDropDown } from 'react-icons/md';
+import { jsPDF } from 'jspdf';
 import useHide from '../../../hooks/hide.hook';
-import jsPDF from 'jspdf';
 import OptionsBtnWrapper from '../options-btn-wrapper/options-btn-wrapper.component';
 import Invoice from '../../../pages/invoice/invoice.component';
 import InvoiceDisplay from '../../../pages/invoice-display/invoice-display.component';
@@ -37,11 +37,19 @@ export default function PageListItem({ dataType, item }) {
 		invoice_number,
 	} = item;
 
-	/** Invoice handles */
-	const handleInvoicePdf = () => {
+	const Page = () => `<html><head></head><body><h1>Heloooooo</h1></body><html>`;
+
+	const handlePrint = () => {
+		// Default export is a4 paper, portrait, using millimeters for units
 		const doc = new jsPDF();
-		doc.text('Hello World!', 10, 10);
-		doc.save('myDocument.pdf');
+
+		doc.html(`${(<Page />)}`, {
+			callback: function (doc) {
+				doc.save();
+			},
+			x: 10,
+			y: 10,
+		});
 	};
 
 	return (
@@ -141,17 +149,16 @@ export default function PageListItem({ dataType, item }) {
 					<div>0.00 XFA</div>
 					<div>Ferme</div>
 					<div className="field-action">
-						<Link className="create-invoice-link">Modifier</Link>
+						<Link className="create-invoice-link" onClick={handlePrint}>
+							Imprimer
+						</Link>
 						<span className="other-actions">
 							<MdArrowDropDown size={24} onClick={handleHidePageItemOptions} />
 						</span>
 						{!hidePageItemOptions && (
 							<div className="field-action-options">
 								<OptionsBtnWrapper
-									options={[
-										{ onClickHandler: handleInvoicePdf, title: 'Imprimer' },
-										{ onClickHandler: () => {}, title: 'Envoyer' },
-									]}
+									options={[{ onClickHandler: () => {}, title: 'Envoyer' }]}
 								/>
 							</div>
 						)}

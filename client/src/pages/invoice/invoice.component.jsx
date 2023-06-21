@@ -137,6 +137,7 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 			invoice_number: invoiceNumber,
 			email,
 			address: street,
+			condition,
 			invoice_date,
 			due_date,
 			delivery_type,
