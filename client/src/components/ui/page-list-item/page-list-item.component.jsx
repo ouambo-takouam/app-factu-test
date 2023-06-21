@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom';
 import { FiMail } from 'react-icons/fi';
 import { MdArrowDropDown } from 'react-icons/md';
 import useHide from '../../../hooks/hide.hook';
+import jsPDF from 'jspdf';
 import OptionsBtnWrapper from '../options-btn-wrapper/options-btn-wrapper.component';
 import Invoice from '../../../pages/invoice/invoice.component';
+import InvoiceDisplay from '../../../pages/invoice-display/invoice-display.component';
 import './page-list-item.styles.scss';
 
 export default function PageListItem({ dataType, item }) {
 	const { hide: hidePageItemOptions, handleHide: handleHidePageItemOptions } =
 		useHide(true);
 	const { hide: hideInvoicePage, handleHide: handleHideInvoicePage } =
+		useHide(true);
+	const { hide: hideInvoiceDisplay, handleHide: handleHideInvoiceDisplay } =
 		useHide(true);
 
 	const {
@@ -27,7 +31,18 @@ export default function PageListItem({ dataType, item }) {
 		name,
 		qte,
 		price,
+		/* invoice */
+		invoice_date,
+		due_date,
+		invoice_number,
 	} = item;
+
+	/** Invoice handles */
+	const handleInvoicePdf = () => {
+		const doc = new jsPDF();
+		doc.text('Hello World!', 10, 10);
+		doc.save('myDocument.pdf');
+	};
 
 	return (
 		<Fragment>
@@ -78,7 +93,7 @@ export default function PageListItem({ dataType, item }) {
 						)}
 					</div>
 				</div>
-			) : 'product' ? (
+			) : dataType === 'product' ? (
 				<div className="page-list-item-row">
 					<div className="field-check">
 						<input type="checkbox" />
@@ -111,15 +126,54 @@ export default function PageListItem({ dataType, item }) {
 						)}
 					</div>
 				</div>
+			) : dataType === 'invoice' ? (
+				<div className="page-list-item-row">
+					<div className="field-check">
+						<input type="checkbox" />
+					</div>
+					<div className="operation-date">{invoice_date}</div>
+					<div className="operation-type" onClick={handleHideInvoiceDisplay}>
+						Facture
+					</div>
+					<div className="operation_number">{invoice_number}</div>
+					<div className="due-date">{due_date}</div>
+					<div>0.00 XFA</div>
+					<div>0.00 XFA</div>
+					<div>Ferme</div>
+					<div className="field-action">
+						<Link className="create-invoice-link">Modifier</Link>
+						<span className="other-actions">
+							<MdArrowDropDown size={24} onClick={handleHidePageItemOptions} />
+						</span>
+						{!hidePageItemOptions && (
+							<div className="field-action-options">
+								<OptionsBtnWrapper
+									options={[
+										{ onClickHandler: handleInvoicePdf, title: 'Imprimer' },
+										{ onClickHandler: () => {}, title: 'Envoyer' },
+									]}
+								/>
+							</div>
+						)}
+					</div>
+				</div>
 			) : (
 				''
+			)}
+
+			{/** Invoice Display */}
+			{!hideInvoiceDisplay && (
+				<InvoiceDisplay
+					onInvoicePageHideHanlder={handleHideInvoiceDisplay}
+					invoice={item}
+				/>
 			)}
 
 			{/** Invoice page */}
 			{!hideInvoicePage && (
 				<Invoice
 					onInvoicePageHideHanlder={handleHideInvoicePage}
-					clientId={item._id}
+					clientId={_id}
 				/>
 			)}
 		</Fragment>

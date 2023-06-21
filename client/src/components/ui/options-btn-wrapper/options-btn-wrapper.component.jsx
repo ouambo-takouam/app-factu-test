@@ -5,9 +5,14 @@ export default function OptionsBtnWrapper({ options }) {
 	return (
 		<div className={`options-btn-wrapper`}>
 			{options.map((option, idx) => {
-				const { path, title } = option;
+				const { onClickHandler, title } = option;
+				console.log(onClickHandler);
 
-				return <OptionsBtn key={idx} /* path={path} */>{title}</OptionsBtn>;
+				return (
+					<OptionsBtn key={idx} onClickHandler={onClickHandler}>
+						{title}
+					</OptionsBtn>
+				);
 			})}
 		</div>
 	);

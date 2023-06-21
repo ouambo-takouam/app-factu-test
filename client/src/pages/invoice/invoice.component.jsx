@@ -144,6 +144,14 @@ export default function Invoice({ onInvoicePageHideHanlder, clientId }) {
 			products,
 		};
 
+		if (!delivery_type) {
+			fields.delivery_type = 'percentage';
+		}
+
+		if (!delivery_value) {
+			fields.delivery_value = 0;
+		}
+
 		const created = await postData(
 			'POST',
 			'invoices', // path

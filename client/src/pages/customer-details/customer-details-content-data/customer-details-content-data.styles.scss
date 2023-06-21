@@ -33,6 +33,45 @@
 	}
 
 	.content {
+		.customer-operations {
+			.customer-operations-header {
+				margin-top: 15px;
+
+				.header-options {
+					display: flex;
+					justify-content: space-between;
+
+					.options-left {
+						display: flex;
+						align-items: center;
+						margin-left: 20px;
+
+						& > * {
+							margin-right: 15px !important;
+						}
+
+						.input-fieldset {
+							margin: 0;
+						}
+					}
+
+					.options-right {
+						display: flex;
+						align-items: center;
+						color: #babec5;
+
+						& > * {
+							margin-left: 10px;
+							cursor: pointer;
+
+							&:hover {
+								color: #929292;
+							}
+						}
+					}
+				}
+			}
+		}
 		.content-customer {
 			.content-customer-header {
 				display: flex;

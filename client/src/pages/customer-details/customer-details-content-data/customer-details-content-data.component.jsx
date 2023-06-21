@@ -1,6 +1,12 @@
 import { useState } from 'react';
+import { BsArrow90DegDown, BsCaretDownFill } from 'react-icons/bs';
+import { BiPrinter, BiExport } from 'react-icons/bi';
+import { useSelector } from 'react-redux';
+import { selectDocuments } from '../../../redux/data/data.selectors';
 import useToggleItems from '../../../hooks/toggle-items.hook';
 import { CustomButton } from '../../../components/form/custom-button/custom-button.component';
+import PageListNav from '../../../components/ui/page-list-nav/page-list-nav.component';
+import PageListData from '../../../components/ui/page-list-data/page-list-data.component';
 import './customer-details-content-data.styles.scss';
 
 export default function CustomerDetailsContentData({
@@ -18,6 +24,7 @@ export default function CustomerDetailsContentData({
 		phone1,
 		phone2,
 		website,
+		street,
 		notes,
 		payment_mode,
 		preferred_shipping_method,
@@ -25,6 +32,11 @@ export default function CustomerDetailsContentData({
 	} = customer;
 
 	const [activeHeader, setActiveHeader] = useState(active.title);
+
+	const invoices = useSelector(selectDocuments('invoices'));
+	const filteredList = invoices.filter(
+		(invoice) => invoice.customer_id === customer._id
+	);
 
 	return (
 		<div className="customer-details-content-data">
@@ -49,7 +61,45 @@ export default function CustomerDetailsContentData({
 				</div>
 			</div>
 			<div className="content">
-				{toogleItems[0].active && <p>Liste des operations</p>}
+				{toogleItems[0].active && (
+					<div className="customer-operations">
+						<div className="customer-operations-header">
+							<div className="header-options">
+								<div className="options-left">
+									<BsArrow90DegDown />
+									<CustomButton
+										$rounded
+										$padding="8px 25px"
+										$bcolor="#000"
+										$hcolor="rgba(107,108,114,.25)"
+									>
+										<span>Actions groupees</span> <BsCaretDownFill size={12} />
+									</CustomButton>
+								</div>
+								<div className="options-right">
+									<BiPrinter size={25} />
+									<BiExport
+										size={25}
+										// onClick={() => ExportToExcel(customers, fileNameToExport)}
+									/>
+								</div>
+							</div>
+							<PageListNav
+								headers={[
+									'date',
+									'type',
+									'n0',
+									'echance',
+									'solde',
+									'total',
+									'etat',
+									'action',
+								]}
+							/>
+						</div>
+						<PageListData dataType="invoice" filteredList={filteredList} />
+					</div>
+				)}
 				{toogleItems[1].active && (
 					<div className="content-customer">
 						<div className="content-customer-header">
@@ -91,7 +141,7 @@ export default function CustomerDetailsContentData({
 							<div className="right-block">
 								<div className="line">
 									<strong>Adresse facturation</strong>
-									<span></span>
+									<span>{street}</span>
 								</div>
 								<div className="line">
 									<strong>Adresse d'expedition</strong>

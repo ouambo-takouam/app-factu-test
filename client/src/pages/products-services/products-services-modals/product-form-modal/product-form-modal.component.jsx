@@ -81,7 +81,7 @@ export default function ProductFormModal({
 							/>
 							<InputField fullwidth label="Référence" />
 						</div>
-						<label for="file" className="image"></label>
+						<label htmlFor="file" className="image"></label>
 						<input id="file" type="file" />
 					</div>
 					<SelectField
