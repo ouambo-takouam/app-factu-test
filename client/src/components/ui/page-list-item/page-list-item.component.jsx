@@ -2,6 +2,8 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMail } from 'react-icons/fi';
 import { MdArrowDropDown } from 'react-icons/md';
+import { useSelector } from 'react-redux';
+import { selectOneDocument } from '../../../redux/data/data.selectors';
 import { jsPDF } from 'jspdf';
 import useHide from '../../../hooks/hide.hook';
 import OptionsBtnWrapper from '../options-btn-wrapper/options-btn-wrapper.component';
@@ -37,20 +39,114 @@ export default function PageListItem({ dataType, item }) {
 		invoice_number,
 	} = item;
 
-	const Page = () => `<html><head></head><body><h1>Heloooooo</h1></body><html>`;
+	/** START: Code for invoice management */
+	const customer = useSelector(
+		selectOneDocument('customers', item.customer_id)
+	);
+
+	const generateData = (products) =>
+		products.reduce(
+			(acc, current) => [
+				...acc,
+				{
+					date: invoice_date,
+					description: current.description,
+					qte: current.qte,
+					price: current.price,
+					total: `${current.qte * current.price}`,
+				},
+			],
+			[]
+		);
+
+	const calculateInvoiceTotal = (products) =>
+		products.reduce((acc, current) => acc + current.qte * current.price, 0);
+
+	const separator = () =>
+		item.products.length === 1 ? 0 : item.products.length * 7;
+
+	function createHeaders(keys) {
+		const result = [];
+
+		for (let i = 0; i < keys.length; i += 1) {
+			result.push({
+				id: keys[i],
+				name: keys[i],
+				prompt: keys[i],
+				width: 65,
+				align: 'center',
+				padding: 0,
+			});
+		}
+
+		return result;
+	}
+
+	var headers = createHeaders(['date', 'description', 'qte', 'price', 'total']);
 
 	const handlePrint = () => {
-		// Default export is a4 paper, portrait, using millimeters for units
 		const doc = new jsPDF();
 
-		doc.html(`${(<Page />)}`, {
-			callback: function (doc) {
-				doc.save();
-			},
-			x: 10,
-			y: 10,
+		/** Invoic customer infos */
+		doc.setFontSize(12);
+		doc.text('VIDEODECOMPTA', 20, 20);
+		doc.text('+240222633279', 20, 30);
+		doc.text(item.email, 20, 36);
+
+		/** Invoic HEADER */
+		doc.setFontSize(18);
+		doc.text('FACTURE', 20, 65);
+
+		/** LEFT */
+		doc.setFontSize(12);
+		doc.text('FACTURER À', 20, 76);
+		doc.setFontSize(11);
+		doc.text(customer.display_name, 20, 81);
+		doc.setFontSize(10);
+		doc.text(customer.country, 22, 86);
+
+		/** RIGHT */
+		// Titles
+		doc.setFontSize(12);
+		doc.text('Nº DE FACTURE', 127, 76);
+		doc.text('DATE', 148, 82);
+		doc.text('ECHEANCE', 136, 88);
+		doc.text('CONDITIONS', 133, 94);
+
+		// Infos
+		doc.setFontSize(11);
+		doc.text(invoice_number, 162, 76);
+		doc.text(invoice_date, 162, 82);
+		doc.text(due_date, 162, 88);
+		doc.text('Net 30', 162, 94);
+
+		doc.setLineWidth(0.1);
+		doc.setDrawColor(0, 0, 0);
+
+		// doc.setLineDash([2.5]);
+		doc.line(20, 104, 195, 104);
+
+		/** Invoice products */
+
+		doc.table(20, 115, generateData(item.products), headers, {
+			autoSize: true,
 		});
+
+		/** Invoice resume */
+		doc.setLineDash([1, 1.5, 1, 1.5, 1, 1.5, 3, 2, 3, 2, 3, 2]);
+		doc.line(20, 142 + separator(), 145, 142 + separator());
+
+		// titles
+		doc.text('PAIEMENT', 20, 150 + separator());
+		doc.text('SOLDE À PAYER', 20, 155 + separator());
+
+		// data
+		doc.text(`${calculateInvoiceTotal(item.products)}`, 80, 150 + separator());
+		doc.text('0,00 XAF', 80, 155 + separator());
+		doc.save();
 	};
+
+	/** END: Invoice management */
 
 	return (
 		<Fragment>

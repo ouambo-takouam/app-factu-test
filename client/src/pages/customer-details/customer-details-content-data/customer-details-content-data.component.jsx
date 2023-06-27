@@ -34,7 +34,7 @@ export default function CustomerDetailsContentData({
 	const [activeHeader, setActiveHeader] = useState(active.title);
 
 	const invoices = useSelector(selectDocuments('invoices'));
-	const filteredList = invoices.filter(
+	const customerInvoices = invoices.filter(
 		(invoice) => invoice.customer_id === customer._id
 	);
 
@@ -97,7 +97,7 @@ export default function CustomerDetailsContentData({
 								]}
 							/>
 						</div>
-						<PageListData dataType="invoice" filteredList={filteredList} />
+						<PageListData dataType="invoice" filteredList={customerInvoices} />
 					</div>
 				)}
 				{toogleItems[1].active && (
