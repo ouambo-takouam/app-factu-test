@@ -2,9 +2,11 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMail } from 'react-icons/fi';
 import { MdArrowDropDown } from 'react-icons/md';
-import { useSelector } from 'react-redux';
-import { selectOneDocument } from '../../../redux/data/data.selectors';
 import { jsPDF } from 'jspdf';
+import { useSelector } from 'react-redux';
+import { selectUserToken } from '../../../redux/user/user.selectors';
+import { selectOneDocument } from '../../../redux/data/data.selectors';
+import { postData } from '../../../utils/fetch.utils';
 import useHide from '../../../hooks/hide.hook';
 import OptionsBtnWrapper from '../options-btn-wrapper/options-btn-wrapper.component';
 import Invoice from '../../../pages/invoice/invoice.component';
@@ -18,6 +20,8 @@ export default function PageListItem({ dataType, item }) {
 		useHide(true);
 	const { hide: hideInvoiceDisplay, handleHide: handleHideInvoiceDisplay } =
 		useHide(true);
+
+	const token = useSelector(selectUserToken);
 
 	const {
 		_id,
@@ -146,6 +150,10 @@ export default function PageListItem({ dataType, item }) {
 		doc.save();
 	};
 
+	const handleMailer = async () => {
+		console.log('email sent!');
+	};
+
 	/** END: Invoice management */
 
 	return (
@@ -254,7 +262,12 @@ export default function PageListItem({ dataType, item }) {
 						{!hidePageItemOptions && (
 							<div className="field-action-options">
 								<OptionsBtnWrapper
-									options={[{ onClickHandler: () => {}, title: 'Envoyer' }]}
+									options={[
+										{
+											onClickHandler: handleMailer,
+											title: 'Envoyer',
+										},
+									]}
 								/>
 							</div>
 						)}
